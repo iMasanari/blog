@@ -3,5 +3,6 @@ export interface Post {
   id: number
   title: string
   slug: string
+  tags: string[]
   contents: string
 }

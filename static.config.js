@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import path from 'path'
 import { reloadRoutes } from 'react-static/node'
 import jdown from 'jdown'
@@ -21,6 +20,10 @@ export default {
     /** @type {{about: any, posts: any[]}} */
     const { about, posts } = await jdown('content')
 
+    const tags = Array.from(new Set(
+      posts.reduce((acc, post) => [...acc, ...post.tags], [])
+    ))
+
     return [{
       path: '/',
       component: 'src/containers/Posts',
@@ -36,6 +39,17 @@ export default {
         path: `/${post.slug}`,
         component: 'src/containers/Post',
         getData: () => ({ post }),
+      })),
+    }, {
+      path: '/tags',
+      redirect: '/',
+      children: tags.map((tag) => ({
+        path: `/${tag}`,
+        component: 'src/containers/SearchPost',
+        getData: () => ({
+          tag,
+          posts: posts.filter(post => post.tags.includes(tag))
+        }),
       })),
     }, {
       is404: true,

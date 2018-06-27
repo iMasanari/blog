@@ -4,15 +4,14 @@ import { Post } from '../types'
 import PostThumb from '../components/PostThumb'
 
 interface Props {
+  tag: string
   posts: Post[]
 }
 
 export default withRouteData(
-  ({ posts }: Props) =>
+  ({ tag, posts }: Props) =>
     <div>
-      <h1>It's blog time.</h1>
-      <br />
-      All Posts:
+      <p>「{tag}」の検索結果</p>
       <ul>
         {posts.map((post) =>
           <li key={post.slug}>
