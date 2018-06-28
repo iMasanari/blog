@@ -2,6 +2,7 @@ import React from 'react'
 import path from 'path'
 import { reloadRoutes } from 'react-static/node'
 import jdown from 'jdown'
+import marked from 'marked'
 import chokidar from 'chokidar'
 
 // Paths Aliases defined through tsconfig.json
@@ -18,7 +19,7 @@ export default {
   }),
   getRoutes: async () => {
     /** @type {{about: any, posts: any[]}} */
-    const { about, posts } = await jdown('content')
+    const { about, posts } = await jdown('content', { breaks: true })
 
     const tags = Array.from(new Set(
       posts.reduce((acc, post) => [...acc, ...post.tags], [])
