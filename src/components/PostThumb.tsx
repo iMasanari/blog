@@ -9,6 +9,7 @@ interface Props {
 
 export default ({ post }: Props) =>
   <article>
+    <span>{post.date}</span>
     <h1>
       <Link to={`/blog/${post.slug}`}>
         {post.title}

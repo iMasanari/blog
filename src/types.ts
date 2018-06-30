@@ -5,4 +5,5 @@ export interface Post {
   slug: string
   tags: string[]
   contents: string
+  date: string
 }

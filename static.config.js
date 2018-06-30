@@ -8,8 +8,17 @@ import chokidar from 'chokidar'
 // Paths Aliases defined through tsconfig.json
 const typescriptWebpackPaths = require('./webpack.config.js')
 
-chokidar.watch('content').on('all', () => reloadRoutes())
+// 日付の整形
+const formatDate = (date) => {
+  const year = date.getFullYear()
+  const month = `${date.getMonth() + 1}`.padStart(2, '0')
+  const date_ = `${date.getDate()}`.padStart(2, '0')
 
+  return `${year}-${month}-${date_}`
+}
+
+// markdownの変更を検知し、更新する
+chokidar.watch('content').on('all', () => reloadRoutes())
 
 export default {
   preact: true,
@@ -20,6 +29,12 @@ export default {
   getRoutes: async () => {
     /** @type {{about: any, posts: any[]}} */
     const { about, posts } = await jdown('content', { breaks: true })
+
+    posts.sort((a, b) => a.date < b.date ? 1 : -1)
+
+    posts.forEach(v => {
+      v.date = formatDate(new Date(v.date))
+    })
 
     const tags = Array.from(new Set(
       posts.reduce((acc, post) => [...acc, ...post.tags], [])

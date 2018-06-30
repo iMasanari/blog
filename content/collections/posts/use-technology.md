@@ -2,6 +2,7 @@
 title: ブログで使用した技術
 slug: use-technology
 tags: [blog, React, preact, TypeScript, ReactStatic]
+date: 2018-06-30T14:52:29.225Z
 ---
 
 ## 使用した技術

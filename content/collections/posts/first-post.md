@@ -2,6 +2,7 @@
 title: react-strictでブログ作成しました
 slug: first-post
 tags: [blog]
+date: 2018-06-28T17:08:02.166Z
 ---
 
 iMasanariです。
