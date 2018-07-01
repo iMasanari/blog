@@ -43,7 +43,9 @@ export default {
     return [{
       path: '/',
       component: 'src/containers/PostList',
-      getData: () => ({ posts }),
+      getData: () => ({
+        posts: posts.map(({ contents, ...post }) => post),
+      }),
     }, {
       path: '/about',
       component: 'src/containers/About',
@@ -72,7 +74,7 @@ export default {
         path: `/${tag}`,
         component: 'src/containers/SearchedPostList',
         getData: () => ({
-          posts: posts.filter(post => post.tags.includes(tag)),
+          posts: posts.filter(post => post.tags.includes(tag)).map(({ contents, ...post }) => post),
           tag,
         }),
       })),
