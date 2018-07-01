@@ -1,0 +1,19 @@
+.PostPager {
+  display: table;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.PostPager-item {
+  box-sizing: border-box;
+  display: table-cell;
+  width: 33.3%;
+  padding: 0.5rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.PostPager-item:nth-child(2) {
+  border-left: 1px solid #6c6c6c;
+  border-right: 1px solid #6c6c6c;
+}

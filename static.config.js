@@ -51,10 +51,19 @@ export default {
     }, {
       path: '/blog',
       redirect: '/',
-      children: posts.map((post) => ({
+      children: posts.map((post, i) => ({
         path: `/${post.slug}`,
         component: 'src/containers/Post',
-        getData: () => ({ post }),
+        getData: () => {
+          const prev = posts[i - 1]
+          const next = posts[i + 1]
+
+          return {
+            post,
+            prev: prev && { title: prev.title, slug: prev.slug },
+            next: next && { title: next.title, slug: next.slug },
+          }
+        },
       })),
     }, {
       path: '/tags',

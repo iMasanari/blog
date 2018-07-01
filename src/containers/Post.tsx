@@ -4,20 +4,26 @@ import { Post } from '../types'
 import convert from 'htmr'
 import PostTags from '../components/PostTags'
 import { title } from '../constants'
+import PostPager from '../components/PostPager'
 
 interface Props {
   post: Post
+  prev?: Pick<Post, 'title' | 'slug'>
+  next?: Pick<Post, 'title' | 'slug'>
 }
 
 export default withRouteData(
-  ({ post }: Props) =>
-    <article>
+  ({ post, prev, next }: Props) =>
+    <React.Fragment>
       <Head>
         <title>{post.title} - {title}</title>
       </Head>
-      <span>{post.date}</span>
-      <h1>{post.title}</h1>
-      <PostTags tags={post.tags} />
-      {convert(post.contents)}
-    </article>
+      <article>
+        <span>{post.date}</span>
+        <h1>{post.title}</h1>
+        <PostTags tags={post.tags} />
+        {convert(post.contents)}
+      </article>
+      <PostPager prev={prev} next={next} />
+    </React.Fragment>
 )
