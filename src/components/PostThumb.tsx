@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-static'
 import { Post } from '../types'
 import PostTags from './PostTags'
+import './PostThumb.css'
 
 interface Props {
   post: Post
@@ -10,7 +11,7 @@ interface Props {
 export default ({ post }: Props) =>
   <article>
     <span>{post.date}</span>
-    <h1>
+    <h1 className="PostThumb-title">
       <Link to={`/blog/${post.slug}`}>
         {post.title}
       </Link>

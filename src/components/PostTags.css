@@ -1,0 +1,17 @@
+.PostTags {
+  padding: 0;
+  margin: 0;
+}
+
+.PostTags::before {
+  content: "tags: "
+}
+
+.PostTags-li {
+  display: inline;
+  padding: 0;
+}
+
+.PostTags-Link {
+  color: #6c6c6c;
+}
