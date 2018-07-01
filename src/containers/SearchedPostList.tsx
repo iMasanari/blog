@@ -1,6 +1,7 @@
 import React from 'react'
-import { withRouteData, Link } from 'react-static'
+import { withRouteData, Link, Head } from 'react-static'
 import Posts from '../components/Posts'
+import { title } from '../constants'
 import { Post } from '../types'
 
 interface Props {
@@ -11,6 +12,9 @@ interface Props {
 export default withRouteData(
   ({ posts, tag }: Props) =>
     <div>
+      <Head>
+        <title>「{tag}」タグの一覧 - {title}</title>
+      </Head>
       <div>
         <Link to="/">TOP</Link>
         {' > '}
