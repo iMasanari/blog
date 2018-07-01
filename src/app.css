@@ -31,3 +31,17 @@ nav a {
 .content {
   padding: 1rem;
 }
+
+.PostTags {
+  padding: 0;
+  margin: 0;
+}
+
+.PostTags-li {
+  display: inline;
+  padding: 0;
+}
+
+.PostTags-Link {
+  color: #6c6c6c;
+}

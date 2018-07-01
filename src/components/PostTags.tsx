@@ -6,8 +6,11 @@ interface Props {
 }
 
 export default ({ tags }: Props) =>
-  <ul>
+  <ul className="PostTags">
     {tags.map((tag) =>
-      [<Link key={tag} to={`/tags/${tag}`}>{tag}</Link>, ' ']
+      <li key={tag} className="PostTags-li">
+        <Link className="PostTags-Link" to={`/tags/${tag}`}>{tag}</Link>
+        {' '}
+      </li>
     )}
   </ul>
