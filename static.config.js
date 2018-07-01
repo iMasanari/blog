@@ -61,10 +61,10 @@ export default {
       redirect: '/',
       children: tags.map((tag) => ({
         path: `/${tag}`,
-        component: 'src/containers/SearchPost',
+        component: 'src/containers/Posts',
         getData: () => ({
+          posts: posts.filter(post => post.tags.includes(tag)),
           tag,
-          posts: posts.filter(post => post.tags.includes(tag))
         }),
       })),
     }, {
