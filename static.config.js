@@ -42,7 +42,7 @@ export default {
 
     return [{
       path: '/',
-      component: 'src/containers/Posts',
+      component: 'src/containers/PostList',
       getData: () => ({ posts }),
     }, {
       path: '/about',
@@ -61,7 +61,7 @@ export default {
       redirect: '/',
       children: tags.map((tag) => ({
         path: `/${tag}`,
-        component: 'src/containers/Posts',
+        component: 'src/containers/SearchedPostList',
         getData: () => ({
           posts: posts.filter(post => post.tags.includes(tag)),
           tag,
