@@ -3,6 +3,7 @@ import path from 'path'
 import { reloadRoutes } from 'react-static/node'
 import jdown from 'jdown'
 import marked from 'marked'
+import hljs from 'highlight.js'
 import chokidar from 'chokidar'
 
 // Paths Aliases defined through tsconfig.json
@@ -20,6 +21,18 @@ const formatDate = (date) => {
 // markdownの変更を検知し、更新する
 chokidar.watch('content').on('all', () => reloadRoutes())
 
+const renderer = new class extends marked.Renderer {
+  code(code, lang, escaped) {
+    /** @type {string} */
+    const output = super.code(code, lang, escaped)
+
+    const className = ['hljs', lang && this.options.langPrefix + escape(lang, true)]
+      .filter(Boolean).join(' ')
+
+    return output.replace(/<code\s.*?>/, `<code class="${className}">`)
+  }
+}
+
 export default {
   preact: true,
   entry: path.join(__dirname, 'src', 'index.tsx'),
@@ -28,7 +41,11 @@ export default {
   }),
   getRoutes: async () => {
     /** @type {{about: any, posts: any[]}} */
-    const { about, posts } = await jdown('content', { breaks: true })
+    const { about, posts } = await jdown('content', {
+      breaks: true,
+      highlight: (code, lang) => hljs.highlightAuto(code, [lang]).value,
+      renderer,
+    })
 
     posts.sort((a, b) => a.date < b.date ? 1 : -1)
 

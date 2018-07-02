@@ -1,10 +1,10 @@
 import React from 'react'
 import { withRouteData, Head } from 'react-static'
 import { Post } from '../types'
-import convert from 'htmr'
 import PostTags from '../components/PostTags'
 import { title } from '../constants'
 import PostPager from '../components/PostPager'
+import 'highlight.js/styles/github-gist.css'
 
 interface Props {
   post: Post
@@ -22,7 +22,7 @@ export default withRouteData(
         <span>{post.date}</span>
         <h1>{post.title}</h1>
         <PostTags tags={post.tags} />
-        {convert(post.contents)}
+        <div dangerouslySetInnerHTML={{ __html: post.contents }} />
       </article>
       <PostPager prev={prev} next={next} />
     </React.Fragment>

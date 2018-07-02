@@ -3,6 +3,7 @@ title: GitHub PagesのUser Pageにdistフォルダをデプロイする
 slug: deploy-to-github-pages-user-page
 tags: [GitHubPages]
 date: 2018-07-01T15:11:38.719Z
+update: 2018-07-02T13:49:48.876Z
 ---
 
 ## User Pageにはmasterブランチしか指定できない
@@ -23,7 +24,7 @@ GitHubは今までProject Pageしか使っていなかったので、`gh-pages`�
 
 手順通りに作業し、残るはpushのみ…
 
-```sh
+```shell
 $ git subtree push --prefix dist/ origin master
 git push using:  origin master
 No new revisions were found
@@ -43,7 +44,7 @@ No new revisions were found
 実は`gh-pages`ブランチにpushした時はこれを使ったんですけど、subtreeをpushする方法を調べた時にアンインストールしてしまっていたんですね。
 再インストールして、以下のコマンドを叩きます。
 
-```sh
+```shell
 $ npx gh-pages -d dist -b master
 ```
 
