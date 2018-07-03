@@ -1,5 +1,6 @@
 {
-  "name": "react-static-typescript-enabled",
+  "name": "tech-sandbox",
+  "private": true,
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

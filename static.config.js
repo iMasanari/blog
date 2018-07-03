@@ -36,9 +36,6 @@ const renderer = new class extends marked.Renderer {
 export default {
   preact: true,
   entry: path.join(__dirname, 'src', 'index.tsx'),
-  getSiteData: () => ({
-    title: 'React Static',
-  }),
   getRoutes: async () => {
     /** @type {{about: any, posts: any[]}} */
     const { about, posts } = await jdown('content', {
