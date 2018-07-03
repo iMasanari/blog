@@ -7,7 +7,9 @@
   "scripts": {
     "start": "react-static start",
     "stage": "react-static build --staging",
-    "build": "react-static build",
+    "build": "npm run build:react-static && npm run build:uglifyjs",
+    "build:react-static": "react-static build",
+    "build:uglifyjs": "uglifyjs dist/static.*.js -o `find dist -name static.\\*.js`",
     "serve": "serve dist -p 3000",
     "gh-pages": "gh-pages -d dist -b master"
   },
@@ -35,7 +37,8 @@
     "marked": "^0.4.0",
     "serve": "^6.5.3",
     "ts-loader": "^3.5.0",
-    "typescript": "^2.7.2"
+    "typescript": "^2.7.2",
+    "uglifyjs": "^2.4.11"
   },
   "prettier": {
     "semi": false,
