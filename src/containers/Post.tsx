@@ -4,7 +4,7 @@ import { Post } from '../types'
 import PostTags from '../components/PostTags'
 import { title } from '../constants'
 import PostPager from '../components/PostPager'
-import 'highlight.js/styles/github-gist.css'
+import 'prismjs/themes/prism.css'
 
 interface Props {
   post: Post

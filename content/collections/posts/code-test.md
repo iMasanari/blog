@@ -11,7 +11,7 @@ date: 2018-07-03T11:47:13.910Z
 サンプルは開発中(`npm run start`)では問題はないが、プロダクションビルド(`npm run build`)するとエラーになるのでその対処法をメモして置く。
 
 
-```shell
+```bash
 $ npm run build
 # ...
 Error: Module build failed: Error: "extract-text-webpack-plugin" loader is used 

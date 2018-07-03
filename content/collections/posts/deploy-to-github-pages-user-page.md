@@ -24,7 +24,7 @@ GitHubは今までProject Pageしか使っていなかったので、`gh-pages`�
 
 手順通りに作業し、残るはpushのみ…
 
-```shell
+```bash
 $ git subtree push --prefix dist/ origin master
 git push using:  origin master
 No new revisions were found
@@ -44,7 +44,7 @@ No new revisions were found
 実は`gh-pages`ブランチにpushした時はこれを使ったんですけど、subtreeをpushする方法を調べた時にアンインストールしてしまっていたんですね。
 再インストールして、以下のコマンドを叩きます。
 
-```shell
+```bash
 $ npx gh-pages -d dist -b master
 ```
 

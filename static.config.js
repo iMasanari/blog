@@ -4,6 +4,8 @@ import { reloadRoutes } from 'react-static/node'
 import jdown from 'jdown'
 import marked from 'marked'
 import hljs from 'highlight.js'
+import Prism from 'prismjs'
+import loadLanguages from 'prismjs/components/'
 import chokidar from 'chokidar'
 
 // 日付の整形
@@ -20,13 +22,12 @@ chokidar.watch('content').on('all', () => reloadRoutes())
 
 const renderer = new class extends marked.Renderer {
   code(code, lang, escaped) {
-    /** @type {string} */
-    const output = super.code(code, lang, escaped)
+    var out = this.options.highlight(code, lang)
+    var classMap = this.options.langPrefix + lang
 
-    const className = ['hljs', lang && this.options.langPrefix + escape(lang, true)]
-      .filter(Boolean).join(' ')
-
-    return output.replace(/<code\s.*?>/, `<code class="${className}">`)
+    return lang
+      ? `<pre class="${classMap}"><code class="${classMap}">${out}\n</code></pre>`
+      : `<pre><code>${out}\n</code></pre>`
   }
 }
 
@@ -37,8 +38,18 @@ export default {
     /** @type {{about: any, posts: any[]}} */
     const { about, posts } = await jdown('content', {
       breaks: true,
-      highlight: (code, lang) => hljs.highlightAuto(code, [lang]).value,
       renderer,
+      langPrefix: 'language-',
+      highlight: function (code, lang) {
+        const language = !lang || lang === 'html' ? 'markup' : lang;
+
+        if (!Prism.languages[language]) {
+          loadLanguages([language])
+        }
+
+        return Prism.languages[language]
+          ? Prism.highlight(code, Prism.languages[language]) : code;
+      }
     })
 
     posts.sort((a, b) => a.date < b.date ? 1 : -1)
