@@ -6,9 +6,6 @@ import marked from 'marked'
 import hljs from 'highlight.js'
 import chokidar from 'chokidar'
 
-// Paths Aliases defined through tsconfig.json
-const typescriptWebpackPaths = require('./webpack.config.js')
-
 // 日付の整形
 const formatDate = (date) => {
   const year = date.getFullYear()
@@ -108,8 +105,6 @@ export default {
   ),
   webpack: (config, { defaultLoaders }) => {
     config.resolve.extensions.push('.ts', '.tsx')
-
-    config.resolve.alias = typescriptWebpackPaths.resolve.alias
 
     config.module.rules[0].oneOf.unshift({
       test: /\.(js|jsx|ts|tsx)$/,

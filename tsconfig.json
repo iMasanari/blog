@@ -14,15 +14,6 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@myPathAlias/*": [
-        "src/path-alias-example/*"
-      ]
-    },
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
     "lib": [
       "dom",
       "es2015",
