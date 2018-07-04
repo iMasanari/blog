@@ -21,6 +21,21 @@ const formatDate = (date) => {
 chokidar.watch('content').on('all', () => reloadRoutes())
 
 const renderer = new class extends marked.Renderer {
+  link(href, title, text) {
+    const attrs = {
+      href,
+      title,
+      target: href.startsWith('http') && '_blank',
+      rel: href.startsWith('http') && 'noopener noreferrer',
+    }
+
+    const attrsStr = Object.keys(attrs)
+      .filter(key => attrs[key])
+      .map(key => `${key}=${attrs[key]}`)
+      .join(' ')
+
+    return `<a ${attrsStr}>${text}</a>`
+  }
   code(code, lang, escaped) {
     var out = this.options.highlight(code, lang)
     var classMap = this.options.langPrefix + lang
