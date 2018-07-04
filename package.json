@@ -14,15 +14,12 @@
     "gh-pages": "gh-pages -d dist -b master"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "htmr": "^0.7.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
     "react-static": "^5.9.7"
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
     "@types/node": "^9.4.7",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
