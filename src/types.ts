@@ -1,7 +1,6 @@
 export interface Post {
-  body: string
-  id: number
   title: string
+  description: string
   slug: string
   tags: string[]
   contents: string

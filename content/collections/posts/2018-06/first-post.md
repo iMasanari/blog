@@ -1,5 +1,6 @@
 ---
 title: react-strictでブログ作成しました
+description: この技術ブログを作った理由を書きました。ブログの制作とともに、その内容を記事にしていきたいと思います。
 slug: first-post
 tags: [blog]
 date: 2018-06-28T17:08:02.166Z

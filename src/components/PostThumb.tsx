@@ -5,8 +5,10 @@ import PostTags from './PostTags'
 import { blogUrl } from '../constants'
 import './PostThumb.css'
 
+export type PostThumb = Pick<Post, 'title' | 'slug' | 'date' | 'tags'>
+
 interface Props {
-  post: Post
+  post: PostThumb
 }
 
 export default ({ post }: Props) =>

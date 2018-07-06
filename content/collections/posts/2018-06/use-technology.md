@@ -1,5 +1,6 @@
 ---
 title: ブログで使用した技術
+description: この技術ブログで使用したライブラリやツールを紹介していきます。選定理由についても書きました。
 slug: use-technology
 tags: [blog, React, preact, TypeScript, ReactStatic]
 date: 2018-06-30T14:52:29.225Z

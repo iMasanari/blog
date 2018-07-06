@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouteData, Head } from 'react-static'
 import { Post } from '../types'
 import PostTags from '../components/PostTags'
-import { title } from '../constants'
+import { title, blogUrl, siteRoot } from '../constants'
 import PostPager from '../components/PostPager'
 import 'prismjs/themes/prism.css'
 
@@ -17,6 +17,11 @@ export default withRouteData(
     <React.Fragment>
       <Head>
         <title>{post.title} - {title}</title>
+        <meta name="twitter:card" content="summary" />
+        <meta property="og:title" content={`${post.title} - ${title}`} />
+        <meta property="og:description" content={post.description} />
+        <meta property="og:url" content={`${siteRoot}${blogUrl}${post.slug}`} />
+        <meta property="og:image" content={`${siteRoot}/images/icon.jpg`} />
       </Head>
       <article>
         <span>{post.date}</span>

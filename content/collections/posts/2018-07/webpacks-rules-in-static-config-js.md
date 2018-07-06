@@ -1,5 +1,6 @@
 ---
 title: React StaticでTypeScriptを使用した時のエラー対処法
+description: static.config.jsのwebpack設定を変更することで起こるエラーの対処法。
 slug: webpacks-rules-in-static-config-js
 tags: [ReactStatic, TypeScript, webpack]
 date: 2018-07-03T11:47:13.910Z

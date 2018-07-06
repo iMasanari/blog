@@ -1,10 +1,9 @@
 import React from 'react'
-import PostThumb from '../components/PostThumb'
-import { Post } from '../types'
+import PostThumb, { PostThumb as PostThumbType } from '../components/PostThumb'
 import './Posts.css'
 
 interface Props {
-  posts: Post[]
+  posts: PostThumbType[]
 }
 
 export default ({ posts }: Props) =>

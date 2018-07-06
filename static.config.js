@@ -80,7 +80,8 @@ export default {
       path: '/',
       component: 'src/containers/PostList',
       getData: () => ({
-        posts: posts.map(({ contents, ...post }) => post),
+        posts: posts
+          .map(({ title, slug, date, tags }) => ({ title, slug, date, tags })),
       }),
     }, {
       path: '/about',
@@ -110,7 +111,9 @@ export default {
         path: `/${tag}`,
         component: 'src/containers/SearchedPostList',
         getData: () => ({
-          posts: posts.filter(post => post.tags.includes(tag)).map(({ contents, ...post }) => post),
+          posts: posts
+            .filter(post => post.tags.includes(tag))
+            .map(({ title, slug, date, tags }) => ({ title, slug, date, tags })),
           tag,
         }),
       })),

@@ -1,5 +1,6 @@
 ---
 title: GitHub PagesのUser Pageにdistフォルダをデプロイする
+description: User Pageにはmasterブランチしか指定できないようです。そこに任意のフォルダの中身をデプロイする方法を書きました。
 slug: deploy-to-github-pages-user-page
 tags: [GitHubPages]
 date: 2018-07-01T15:11:38.719Z
