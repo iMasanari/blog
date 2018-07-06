@@ -1,1 +1,1 @@
-{"path":"tags/React","templateID":3,"sharedPropsHashes":{},"localProps":{"posts":[{"title":"ブログで使用した技術","slug":"use-technology","tags":["blog","React","preact","TypeScript","ReactStatic"],"date":"2018-06-30"}],"tag":"React"}}
+{"path":"tags/React","templateID":3,"sharedPropsHashes":{},"localProps":{"posts":[{"title":"ブログで使用した技術","slug":"use-technology","date":"2018-06-30","tags":["blog","React","preact","TypeScript","ReactStatic"]}],"tag":"React"}}
