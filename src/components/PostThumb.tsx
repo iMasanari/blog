@@ -15,7 +15,7 @@ export default ({ post }: Props) =>
   <article>
     <span>{post.date}</span>
     <h1 className="PostThumb-title">
-      <Link to={`${blogUrl}/${post.slug}`}>
+      <Link to={`${blogUrl}/${post.slug}/`}>
         {post.title}
       </Link>
     </h1>
