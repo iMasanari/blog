@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-static'
+import { h } from 'hyperapp'
+import { Link } from '@hyperapp/router'
 import './PostTags.css'
 
 interface Props {
@@ -7,10 +7,10 @@ interface Props {
 }
 
 export default ({ tags }: Props) =>
-  <ul className="PostTags">
+  <ul class="PostTags">
     {tags.map((tag) =>
-      <li key={tag} className="PostTags-li">
-        <Link className="PostTags-Link" to={`/tags/${tag}/`}>{tag}</Link>
+      <li key={tag} class="PostTags-li">
+        <Link class="PostTags-Link" to={`/tags/${tag}/`}>{tag}</Link>
         {' '}
       </li>
     )}

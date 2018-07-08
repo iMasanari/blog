@@ -1,11 +1,11 @@
-import React from 'react'
-import { Link } from 'react-static'
+import { h } from 'hyperapp'
+import { Link } from '@hyperapp/router'
 import { title } from '../constants'
 import './Header.css'
 
 export default () =>
-  <header className="Header">
-    <h1 className="Header-title">
-      <Link exact to="/">{title}</Link>
+  <header class="Header">
+    <h1 class="Header-title">
+      <Link to="/">{title}</Link>
     </h1>
   </header>

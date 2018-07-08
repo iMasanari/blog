@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-static'
+import { h } from 'hyperapp'
+import { Link } from '@hyperapp/router'
 import { blogUrl } from '../constants'
 import { Post } from '../types'
 import './PostPager.css'
@@ -10,14 +10,14 @@ interface Props {
 }
 
 export default ({ prev, next }: Props) =>
-  <div className="PostPager">
-    <div className="PostPager-item">
+  <div class="PostPager">
+    <div class="PostPager-item">
       {prev ? <Link to={`${blogUrl}/${prev.slug}/`}>{prev.title}</Link> : null}
     </div>
-    <div className="PostPager-item">
+    <div class="PostPager-item">
       <Link to="/">HOME</Link>
     </div>
-    <div className="PostPager-item">
+    <div class="PostPager-item">
       {next ? <Link to={`${blogUrl}/${next.slug}/`}>{next.title}</Link> : null}
     </div>
   </div>

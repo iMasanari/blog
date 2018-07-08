@@ -1,19 +1,36 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-
-// Your top level component
+import { app } from 'hyperapp'
+import { location as routerLocation } from '@hyperapp/router'
 import App from './App'
+import 'prismjs/themes/prism.css'
 
-// Export your top level component as JSX (for static rendering)
-export default App
+const state = {
+  location: routerLocation.state,
+  data: (window as any).__data || {},
+}
 
-// Render your app
-if (typeof document !== 'undefined') {
-  const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate || ReactDOM.render
-  const render = (Comp: any) => {
-    renderMethod(<Comp />, document.getElementById('root'))
+export type State = typeof state
+
+const actions = {
+  location: routerLocation.actions,
+  setData: (data: any) => (state: State) => ({ ...state, data }),
+}
+
+const main: any = app(state, actions, App, document.body)
+
+// const unsubscribe = 
+routerLocation.subscribe(main.location)
+
+const handleLocationChange = () => {
+  const xhr = new XMLHttpRequest()
+
+  xhr.open('get', `${location.pathname}index.json`)
+
+  xhr.onload = () => {
+    main.setData(JSON.parse(xhr.responseText))
   }
 
-  // Render!
-  render(App)
+  xhr.send()
 }
+
+addEventListener("pushstate", handleLocationChange)
+addEventListener("popstate", handleLocationChange)

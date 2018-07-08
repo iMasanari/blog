@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-static'
+import { h } from 'hyperapp'
+import { Link } from '@hyperapp/router'
 import { Post } from '../types'
 import PostTags from './PostTags'
 import { blogUrl } from '../constants'
@@ -14,7 +14,7 @@ interface Props {
 export default ({ post }: Props) =>
   <article>
     <span>{post.date}</span>
-    <h1 className="PostThumb-title">
+    <h1 class="PostThumb-title">
       <Link to={`${blogUrl}/${post.slug}/`}>
         {post.title}
       </Link>

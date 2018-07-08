@@ -1,4 +1,4 @@
-import React from 'react'
+import { h } from 'hyperapp'
 import PostThumb, { PostThumb as PostThumbType } from '../components/PostThumb'
 import './Posts.css'
 
@@ -7,9 +7,9 @@ interface Props {
 }
 
 export default ({ posts }: Props) =>
-  <ul className="Posts">
+  <ul class="Posts">
     {posts.map((post) =>
-      <li key={post.slug} className="Posts-li">
+      <li key={post.slug} class="Posts-li">
         <PostThumb post={post} />
       </li>
     )}

@@ -1,8 +1,8 @@
-import React from 'react'
+import { h } from 'hyperapp'
 import './Footer.css'
 
 export default () =>
-  <footer className="Footer">
+  <footer class="Footer">
     <p>
       Author: <a href="https://github.com/iMasanari">iMasanari</a>
     </p>
