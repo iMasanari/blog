@@ -34,7 +34,8 @@ const main = async () => {
   const Template = await requireWithRollup('./src/Template.tsx', config)
 
   routes.forEach((route) => {
-    const props = route.getData()
+    const props = unwarpFn(route.data) || {}
+    const meta = unwarpFn(route.meta) || {}
 
     const data = {
       component: componentMapping[route.component],
@@ -58,6 +59,7 @@ const main = async () => {
       inlineData: data,
       script: `/${outputFileBaseNameNoExt}.js`,
       css: `/${outputFileBaseNameNoExt}.css`,
+      meta
     }))
 
     createFile(`dist${route.path}/index.html`, `<!DOCTYPE html>${html}`)

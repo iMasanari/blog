@@ -9,7 +9,14 @@ export default (function () {
     render: function (props) {
       return function (state) {
         var Component = routes[state.data.component];
-        return h(Component, __assign({}, (state.data.props), { key: props.location.pathname }));
+
+        if (typeof document === 'object' && state.data.props) {
+          document.title = state.data.props.title;
+        }
+
+        return h(Component, __assign({}, (state.data.props), {
+          key: props.location.pathname
+        }))
       };
     }
   }));

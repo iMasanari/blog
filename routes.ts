@@ -5,6 +5,7 @@ import marked from 'marked'
 import Prism from 'prismjs'
 import loadLanguages from 'prismjs/components/'
 import { Post } from './src/types'
+import { title } from './src/constants'
 
 // 日付の整形
 const formatDate = (date: Date) => {
@@ -74,37 +75,46 @@ export default async () => {
     {
       path: '/',
       component: 'src/containers/PostList',
-      getData: () => ({
+      data: {
+        title: title,
         posts: posts
           .map(({ title, slug, date, tags }) => ({ title, slug, date, tags })),
-      }),
+      },
+      meta: {
+        description: 'iMasanariの技術ブログ',
+      }
     },
     // TODO: Redirect
     // { path: '/blog', redirect: '/' },
-    ...posts.map((post, i) => ({
-      path: `/blog/${post.slug}`,
-      component: 'src/containers/Post',
-      getData: () => {
-        const prev = posts[i - 1]
-        const next = posts[i + 1]
+    ...posts.map((post, i) => {
+      const prev = posts[i - 1]
+      const next = posts[i + 1]
 
-        return {
+      return {
+        path: `/blog/${post.slug}`,
+        component: 'src/containers/Post',
+        data: {
+          title: `${post.title} - ${title}`,
           post,
           prev: prev && { title: prev.title, slug: prev.slug },
           next: next && { title: next.title, slug: next.slug },
+        },
+        meta: {
+          description: post.description
         }
-      },
-    })),
+      }
+    }),
     // { path: '/tags', redirect: '/' },
     ...tags.map((tag) => ({
       path: `/tags/${tag}`,
       component: 'src/containers/SearchedPostList',
-      getData: () => ({
+      data: {
+        title: `「${tag}」タグの一覧 - ${title}`,
         posts: posts
           .filter(post => post.tags.includes(tag))
           .map(({ title, slug, date, tags }) => ({ title, slug, date, tags })),
         tag,
-      }),
+      },
     })),
     // { is404: true, component: 'src/containers/404' }
   ]
