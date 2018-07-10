@@ -3,6 +3,7 @@ import { location as routerLocation } from '@hyperapp/router'
 import App from './App'
 import 'prismjs/themes/prism.css'
 import { GA_TRACKING_ID } from './constants';
+import smoothScroll from './util/smoothScroll';
 
 const state = {
   location: routerLocation.state,
@@ -21,11 +22,17 @@ const main: any = app(state, actions, App, document.body)
 // const unsubscribe = 
 routerLocation.subscribe(main.location)
 
-const handleLocationChange = () => {
+const handleLocationChange = (e: Event) => {
+  if (e.type === 'pushstate') {
+    smoothScroll()
+  }
+  
+  // Google アナリティクスに送信
   (window as any).gtag('config', GA_TRACKING_ID, {
     page_path: location.pathname
   })
 
+  // ページデータを取得
   const xhr = new XMLHttpRequest()
 
   xhr.open('get', `${location.pathname}index.json`)
