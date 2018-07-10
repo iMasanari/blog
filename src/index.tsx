@@ -2,6 +2,7 @@ import { app } from 'hyperapp'
 import { location as routerLocation } from '@hyperapp/router'
 import App from './App'
 import 'prismjs/themes/prism.css'
+import { GA_TRACKING_ID } from './constants';
 
 const state = {
   location: routerLocation.state,
@@ -21,6 +22,10 @@ const main: any = app(state, actions, App, document.body)
 routerLocation.subscribe(main.location)
 
 const handleLocationChange = () => {
+  (window as any).gtag('config', GA_TRACKING_ID, {
+    page_path: location.pathname
+  })
+
   const xhr = new XMLHttpRequest()
 
   xhr.open('get', `${location.pathname}index.json`)
