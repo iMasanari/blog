@@ -1,0 +1,21 @@
+{
+  "component": 2,
+  "props": {
+    "title": "「React」タグの一覧 - Tech SANDBOX",
+    "posts": [
+      {
+        "title": "ブログで使用した技術",
+        "slug": "use-technology",
+        "date": "2018-06-30",
+        "tags": [
+          "blog",
+          "React",
+          "preact",
+          "TypeScript",
+          "ReactStatic"
+        ]
+      }
+    ],
+    "tag": "React"
+  }
+}

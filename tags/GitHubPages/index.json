@@ -1,0 +1,17 @@
+{
+  "component": 2,
+  "props": {
+    "title": "「GitHubPages」タグの一覧 - Tech SANDBOX",
+    "posts": [
+      {
+        "title": "GitHub PagesのUser Pageにdistフォルダをデプロイする",
+        "slug": "deploy-to-github-pages-user-page",
+        "date": "2018-07-02",
+        "tags": [
+          "GitHubPages"
+        ]
+      }
+    ],
+    "tag": "GitHubPages"
+  }
+}

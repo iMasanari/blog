@@ -1,0 +1,19 @@
+{
+  "component": 2,
+  "props": {
+    "title": "「webpack」タグの一覧 - Tech SANDBOX",
+    "posts": [
+      {
+        "title": "React StaticでTypeScriptを使用した時のエラー対処法",
+        "slug": "webpacks-rules-in-static-config-js",
+        "date": "2018-07-03",
+        "tags": [
+          "ReactStatic",
+          "TypeScript",
+          "webpack"
+        ]
+      }
+    ],
+    "tag": "webpack"
+  }
+}
