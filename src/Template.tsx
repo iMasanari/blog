@@ -6,7 +6,6 @@ import { State } from '.';
 interface Props {
   script?: string
   css?: string
-  inlineData?: string
   meta: {
     description?: string
   }
@@ -31,7 +30,7 @@ export default (props: Props) => (state: State) =>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-      <title>{state.data.props.title || title}</title>
+      <title>{state.data.title || title}</title>
       {props.css ? <link rel="stylesheet" href={props.css} /> : null}
 
       {/* Twitter Card */}
@@ -43,7 +42,7 @@ export default (props: Props) => (state: State) =>
     </head>
     <body>
       <App />
-      {props.inlineData ? <script innerHTML={`var __data = ${JSON.stringify(props.inlineData)}`} /> : null}
+      {state.data ? <script innerHTML={`var __data = ${JSON.stringify(state.data)}`} /> : null}
       {props.script ? <script src={props.script} /> : null}
     </body>
   </html>

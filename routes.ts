@@ -75,8 +75,8 @@ export default async () => {
     {
       path: '/',
       component: 'src/containers/PostList',
+      title: title,
       data: {
-        title: title,
         posts: posts
           .map(({ title, slug, date, tags }) => ({ title, slug, date, tags })),
       },
@@ -93,8 +93,8 @@ export default async () => {
       return {
         path: `/blog/${post.slug}`,
         component: 'src/containers/Post',
+        title: `${post.title} - ${title}`,
         data: {
-          title: `${post.title} - ${title}`,
           post,
           prev: prev && { title: prev.title, slug: prev.slug },
           next: next && { title: next.title, slug: next.slug },
@@ -108,8 +108,8 @@ export default async () => {
     ...tags.map((tag) => ({
       path: `/tags/${tag}`,
       component: 'src/containers/SearchedPostList',
+      title: `「${tag}」タグの一覧 - ${title}`,
       data: {
-        title: `「${tag}」タグの一覧 - ${title}`,
         posts: posts
           .filter(post => post.tags.includes(tag))
           .map(({ title, slug, date, tags }) => ({ title, slug, date, tags })),

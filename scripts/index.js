@@ -39,6 +39,7 @@ const main = async () => {
 
     const data = {
       component: componentMapping[route.component],
+      title: route.title,
       props: props,
     }
 
@@ -56,10 +57,9 @@ const main = async () => {
     }
 
     const html = withRender(app)(state, {}, () => h(Template, {
-      inlineData: data,
       script: `/${outputFileBaseNameNoExt}.js`,
       css: `/${outputFileBaseNameNoExt}.css`,
-      meta
+      meta,
     }))
 
     createFile(`dist${route.path}/index.html`, `<!DOCTYPE html>${html}`)

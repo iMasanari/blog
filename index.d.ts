@@ -1,3 +1,8 @@
+interface Window {
+  gtag: any
+  __data: any
+}
+
 declare module 'site-route'
 
 declare module '*.png'
