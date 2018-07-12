@@ -24,12 +24,12 @@ const renderer = new class extends marked.Renderer {
       href,
       title,
       target: href.startsWith('http') && '_blank',
-      rel: href.startsWith('http') && 'noopener noreferrer',
+      rel: href.startsWith('http') && 'noopener',
     }
 
     const attrsStr = (Object.keys(attrs) as (keyof typeof attrs)[])
       .filter(key => attrs[key])
-      .map(key => `${key}=${attrs[key]}`)
+      .map(key => `${key}="${attrs[key]}"`)
       .join(' ')
 
     return `<a ${attrsStr}>${text}</a>`
