@@ -12,16 +12,6 @@ interface Props {
 
 export default ({ post, prev, next }: Props) =>
   <div>
-    {/* // TODO: ページごとのHeader対応
-    <Head>
-      <title>{post.title} - {title}</title>
-      <meta name="twitter:card" content="summary" />
-      <meta property="og:title" content={`${post.title} - ${title}`} />
-      <meta property="og:description" content={post.description} />
-      <meta property="og:url" content={`${siteRoot}${blogUrl}${post.slug}`} />
-      <meta property="og:image" content={`${siteRoot}/images/icon.jpg`} />
-    </Head>
-    */}
     <article>
       <span>{post.date}</span>
       <h1>{post.title}</h1>
