@@ -1,7 +1,7 @@
 {
   "component": 2,
+  "title": "「preact」タグの一覧 - Tech SANDBOX",
   "props": {
-    "title": "「preact」タグの一覧 - Tech SANDBOX",
     "posts": [
       {
         "title": "ブログで使用した技術",

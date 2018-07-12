@@ -1,8 +1,17 @@
 {
   "component": 0,
+  "title": "Tech SANDBOX",
   "props": {
-    "title": "Tech SANDBOX",
     "posts": [
+      {
+        "title": "【書き途中】ブログをHyperappベースの自作ジェネレータに変更した話",
+        "slug": "use-hyperapp",
+        "date": "2018-07-12",
+        "tags": [
+          "blog",
+          "Hyperapp"
+        ]
+      },
       {
         "title": "React StaticでTypeScriptを使用した時のエラー対処法",
         "slug": "webpacks-rules-in-static-config-js",

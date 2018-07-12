@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="ja-JP"><head><script async src="https://www.googletagmanager.com/gtag/js?id=UA-74494516-4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',"UA-74494516-4");</script><link rel="preload" href="/bundle.jjijqf8h.js" as="script"/><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="ie=edge"/><title>【書き途中】ブログをHyperappベースの自作ジェネレータに変更した話 - Tech SANDBOX</title><link rel="stylesheet" href="/bundle.jjijqf8h.css"/><meta name="twitter:card" content="summary"/><meta property="og:title" content="Tech SANDBOX"/><meta property="og:description" content="Hyperappという軽量なVDOMライブラリでブログを書き換えたので試験運用します。"/><meta property="og:url" content="https://imasanari.github.io/blog/use-hyperapp"/><meta property="og:image" content="https://imasanari.github.io/images/icon.jpg"/></head><body><div class="App"><header class="Header"><h1 class="Header-title"><a href="/">Tech SANDBOX</a></h1></header><div class="content"><div><article><span>2018-07-12</span><h1>【書き途中】ブログをHyperappベースの自作ジェネレータに変更した話</h1><ul class="PostTags"><li class="PostTags-li"><a class="PostTags-Link" href="/tags/blog/">blog</a> </li><li class="PostTags-li"><a class="PostTags-Link" href="/tags/Hyperapp/">Hyperapp</a> </li></ul><div><h2>はじめに</h2>
+<p>作ったばかりのこのブログだが、<a href="https://github.com/hyperapp/hyperapp" target="_blank" rel="noopener">Hyperapp</a>で動くstaticでSPAなサイトに変更した。<br><a href="react-static">React Static</a>を使用していた時とは違って、HTMLの書き出しなどは自分で処理を行っている。まだ未完成な機能もあるが、ビルド後のJavaScriptが約8KBと軽量で気に入っている。</p>
+<h2>なぜ変更したのか</h2>
+<ul>
+<li><a href="/blog/use-technology">ブログで使用した技術</a>の通り<ul>
+<li><a href="https://github.com/hyperapp/hyperapp" target="_blank" rel="noopener">Hyperapp</a>があるじゃんとなったのがきっかけ</li>
+</ul>
+</li>
+<li>ブログではstateやactionがページ遷移関係でしか使っていないことに気づいた<ul>
+<li>全て<a href="react-static">React Static</a>に隠されている</li>
+</ul>
+</li>
+<li>車輪の再発明が好き</li>
+</ul>
+<h2>移行について</h2>
+<ul>
+<li>jsxが流用できた<ul>
+<li>もともとSFCのみでクラスコンポーネントがほぼなかった</li>
+<li>メインコンテンツである記事はmarkdown管理</li>
+</ul>
+</li>
+<li>変換スクリプトはなんとかなる<ul>
+<li>なんとかなった</li>
+</ul>
+</li>
+</ul>
+<h2>TODO</h2>
+<p>後で書く</p>
+</div></article><div class="PostPager"><div class="PostPager-item"></div><div class="PostPager-item"><a href="/">HOME</a></div><div class="PostPager-item"><a href="/blog/webpacks-rules-in-static-config-js/">React StaticでTypeScriptを使用した時のエラー対処法</a></div></div></div></div><footer class="Footer"><p>Author: <a href="https://github.com/iMasanari">iMasanari</a></p><small><a href="https://github.com/iMasanari/imasanari.github.io/">&gt; Blog Repository &lt;</a></small></footer></div><script>var __data = {"component":1,"title":"【書き途中】ブログをHyperappベースの自作ジェネレータに変更した話 - Tech SANDBOX","props":{"post":{"title":"【書き途中】ブログをHyperappベースの自作ジェネレータに変更した話","description":"Hyperappという軽量なVDOMライブラリでブログを書き換えたので試験運用します。","slug":"use-hyperapp","tags":["blog","Hyperapp"],"date":"2018-07-12","contents":"<h2>はじめに</h2>\n<p>作ったばかりのこのブログだが、<a href=\"https://github.com/hyperapp/hyperapp\" target=\"_blank\" rel=\"noopener\">Hyperapp</a>で動くstaticでSPAなサイトに変更した。<br><a href=\"react-static\">React Static</a>を使用していた時とは違って、HTMLの書き出しなどは自分で処理を行っている。まだ未完成な機能もあるが、ビルド後のJavaScriptが約8KBと軽量で気に入っている。</p>\n<h2>なぜ変更したのか</h2>\n<ul>\n<li><a href=\"/blog/use-technology\">ブログで使用した技術</a>の通り<ul>\n<li><a href=\"https://github.com/hyperapp/hyperapp\" target=\"_blank\" rel=\"noopener\">Hyperapp</a>があるじゃんとなったのがきっかけ</li>\n</ul>\n</li>\n<li>ブログではstateやactionがページ遷移関係でしか使っていないことに気づいた<ul>\n<li>全て<a href=\"react-static\">React Static</a>に隠されている</li>\n</ul>\n</li>\n<li>車輪の再発明が好き</li>\n</ul>\n<h2>移行について</h2>\n<ul>\n<li>jsxが流用できた<ul>\n<li>もともとSFCのみでクラスコンポーネントがほぼなかった</li>\n<li>メインコンテンツである記事はmarkdown管理</li>\n</ul>\n</li>\n<li>変換スクリプトはなんとかなる<ul>\n<li>なんとかなった</li>\n</ul>\n</li>\n</ul>\n<h2>TODO</h2>\n<p>後で書く</p>\n"},"next":{"title":"React StaticでTypeScriptを使用した時のエラー対処法","slug":"webpacks-rules-in-static-config-js"}}}</script><script src="/bundle.jjijqf8h.js"></script></body></html>

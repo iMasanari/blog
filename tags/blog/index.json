@@ -1,8 +1,17 @@
 {
   "component": 2,
+  "title": "「blog」タグの一覧 - Tech SANDBOX",
   "props": {
-    "title": "「blog」タグの一覧 - Tech SANDBOX",
     "posts": [
+      {
+        "title": "【書き途中】ブログをHyperappベースの自作ジェネレータに変更した話",
+        "slug": "use-hyperapp",
+        "date": "2018-07-12",
+        "tags": [
+          "blog",
+          "Hyperapp"
+        ]
+      },
       {
         "title": "ブログで使用した技術",
         "slug": "use-technology",

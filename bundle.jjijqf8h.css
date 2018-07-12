@@ -58,6 +58,21 @@ h2 {
   text-align: center;
   background: #eee;
 }
+.Posts {
+  list-style: none;
+  padding: 0;
+}
+
+.Posts-li {
+  border: 1px solid #6c6c6c;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.PostThumb-title {
+  margin: 0.5rem 0;
+}
+
 .PostTags {
   padding: 0;
   margin: 0;
@@ -74,17 +89,6 @@ h2 {
 
 .PostTags-Link {
   color: #6c6c6c;
-}
-
-.Posts {
-  list-style: none;
-  padding: 0;
-}
-
-.Posts-li {
-  border: 1px solid #6c6c6c;
-  padding: 1rem;
-  margin: 1rem 0;
 }
 
 .PostPager {
@@ -105,10 +109,6 @@ h2 {
 .PostPager-item:nth-child(2) {
   border-left: 1px solid #6c6c6c;
   border-right: 1px solid #6c6c6c;
-}
-
-.PostThumb-title {
-  margin: 0.5rem 0;
 }
 
 /**
