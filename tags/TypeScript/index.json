@@ -4,6 +4,16 @@
   "props": {
     "posts": [
       {
+        "title": "【ES.next】Objectから任意のキーを削除した新しいObjectを作成する",
+        "slug": "remove-object-key",
+        "date": "2018-07-12",
+        "tags": [
+          "JavaScript",
+          "Babel",
+          "TypeScript"
+        ]
+      },
+      {
         "title": "React StaticでTypeScriptを使用した時のエラー対処法",
         "slug": "webpacks-rules-in-static-config-js",
         "date": "2018-07-03",

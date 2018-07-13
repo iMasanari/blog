@@ -4,6 +4,16 @@
   "props": {
     "posts": [
       {
+        "title": "【ES.next】Objectから任意のキーを削除した新しいObjectを作成する",
+        "slug": "remove-object-key",
+        "date": "2018-07-12",
+        "tags": [
+          "JavaScript",
+          "Babel",
+          "TypeScript"
+        ]
+      },
+      {
         "title": "【書き途中】ブログをHyperappベースの自作ジェネレータに変更した話",
         "slug": "use-hyperapp",
         "date": "2018-07-12",
