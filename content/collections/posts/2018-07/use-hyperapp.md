@@ -22,19 +22,68 @@ date: 2018-07-12T12:45:07.379Z
 
 ## 移行について
 
-- jsxが流用できた
-  - もともとSFCのみでクラスコンポーネントがほぼなかった
-  - メインコンテンツである記事はmarkdown管理
-- 変換スクリプトはなんとかなる
-  - なんとかなった
+### View部分
+
+jsxが流用できたのでView部分は楽だった。もともとSFCのみでクラスコンポーネントがほぼない。メインコンテンツである記事はmarkdown管理なので問題なし。
+
+```diff
+-import React from 'react'
+-import { Link } from 'react-static'
++import { h } from 'hyperapp'
++import { Link } from '@hyperapp/router'
+
+ // 中略
+
+-export default withRouteData(
+-  ({ posts }: Props) =>
+-    <div className="">
++export default ({ posts }: Props) =>
++  <div class="">
+
+ // 後略
+```
+
+コンポーネントで実際に変更したのはこのくらい。
+
+### ビルドスクリプトはなんとかなる
+
+なんとかなった。
+
+`requireWithRollup`関数を作れたのが大きい。
+
+```js
+// rollupのpluginを適用してrequireできる
+const Template = await requireWithRollup('./src/Template.tsx', rollupConfig)
+```
+
+実装は[ここ](requireWithRollup)。rollup.jsが自身の設定ファイルを読み込む方法を参考にした。
+
+## ルーティング、およびページ遷移部分
+
+ここが一番苦労している。エントリーポイントのindex.tsxがごちゃごちゃしてしまった。書き直すならここ。
+
+
+## 未実装部分
+
+ページ遷移周りが適当
+
+- ページプリキャッシュ部分
+  - 現在はリンククリック時にjson読み込み
+  - prefetchやpreloadで先読み？ それともServise Workerを使う？
+  - スクリプトが軽いのでいっそJSで雑に先読みしちゃうのもありかも
+- iPhoneでスワイプして戻るとちらつく
+  - 前画面のデータをキャッシュしててもダメ
+  - [React Static](react-static)の時には起こらなかった
 
 
 ## TODO
 
-後で書く
+もうちょこっと何か書く
 
 
-[use-technology]: /blog/use-technology
+[use-technology]: /blog/use-technology/
+
+[requireWithRollup]: https://github.com/iMasanari/imasanari.github.io/blob/use-hyperapp/scripts/requireWithRollup.js
 
 [react-static]: https://github.com/nozzle/react-static
 [react]: https://github.com/facebook/react
