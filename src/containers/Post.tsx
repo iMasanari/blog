@@ -16,7 +16,20 @@ export default ({ post, prev, next }: Props) =>
       <span>{post.date}</span>
       <h1>{post.title}</h1>
       <PostTags tags={post.tags} />
-      <div innerHTML={post.contents} oncreate={(el: Element) => { el.innerHTML = post.contents }} />
+      <div
+        innerHTML={post.contents}
+        oncreate={(el: Element) => {
+          el.innerHTML = post.contents
+          el.addEventListener('click', (e) => {
+            const target = e.target
+
+            if (target instanceof HTMLAnchorElement && !/$http/.test(target.href)) {
+              e.preventDefault()
+              history.pushState(location.pathname, '', target.href)
+            }
+          })
+        }}
+      />
     </article>
     <PostPager prev={prev} next={next} />
   </div>
