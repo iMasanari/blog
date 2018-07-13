@@ -35,8 +35,8 @@ export default (props: Props) => (state: State) =>
 
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary" />
-      <meta property="og:title" content={state.data.props.title || title} />
-      <meta property="og:description" content={props.meta.description || state.data.props.title || title} />
+      <meta property="og:title" content={state.data.title || title} />
+      <meta property="og:description" content={props.meta.description || state.data.title || title} />
       <meta property="og:url" content={siteRoot + state.location.pathname} />
       <meta property="og:image" content={`${siteRoot}/images/icon.jpg`} />
     </head>
