@@ -4,7 +4,7 @@
   "props": {
     "post": {
       "title": "【書き途中】ブログをHyperappベースの自作ジェネレータに変更した話",
-      "description": "作ったばかりのこのブログだが、Hyperappで動くstaticでSPAなサイトに変更した。React Staticを使用していた時とは違って、HTMLの書き出しなどは自分で処理を行っている。まだ未完成な機能もあるが、ビルド後のJavaScriptが約8KBと軽量で気に入っている。",
+      "description": "Hyperappという軽量なVDOMライブラリでブログを書き換えたので試験運用します。",
       "slug": "use-hyperapp",
       "tags": [
         "blog",
