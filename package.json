@@ -6,10 +6,11 @@
   "license": "MIT",
   "scripts": {
     "build": "node scripts",
-    "build-prod": "NODE_ENV=production node scripts",
+    "build-prod": "npm run clean && NODE_ENV=production node scripts",
     "clean": "rm -r dist/*",
     "serve": "serve dist -p 3000",
-    "gh-pages": "gh-pages -d dist -b master"
+    "gh-pages": "gh-pages -d dist -b master",
+    "deploy": "npm run build-prod && npm run gh-pages"
   },
   "dependencies": {
     "@hyperapp/router": "^0.7.0",
