@@ -1,7 +1,7 @@
 import { h } from 'hyperapp'
 import Posts from '../components/Posts'
 import { PostThumb } from '../components/PostThumb'
-import { Link } from '@hyperapp/router'
+import { Link } from '../routing/Link'
 
 interface Props {
   posts: PostThumb[]

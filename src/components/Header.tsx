@@ -1,5 +1,5 @@
 import { h } from 'hyperapp'
-import { Link } from '@hyperapp/router'
+import { Link } from '../routing/Link'
 import { title } from '../constants'
 import './Header.css'
 

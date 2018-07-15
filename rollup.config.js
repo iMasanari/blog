@@ -11,7 +11,11 @@ export default {
     typescript({
       abortOnError: false
     }),
-    commonjs(),
+    commonjs({
+      namedExports: {
+        'node_modules/@hyperapp/router/dist/router.js': ['location', 'Link']
+      }
+    }),
     nodeResolve(),
     postcss({
       extract: true

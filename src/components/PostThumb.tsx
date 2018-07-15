@@ -1,5 +1,5 @@
 import { h } from 'hyperapp'
-import { Link } from '@hyperapp/router'
+import { Link } from '../routing/Link'
 import { Post } from '../types'
 import PostTags from './PostTags'
 import { blogUrl } from '../constants'

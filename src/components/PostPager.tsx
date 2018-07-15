@@ -1,5 +1,5 @@
 import { h } from 'hyperapp'
-import { Link } from '@hyperapp/router'
+import { Link } from '../routing/Link'
 import { blogUrl } from '../constants'
 import { Post } from '../types'
 import './PostPager.css'

@@ -1,11 +1,12 @@
 import { app } from 'hyperapp'
-import { location as routerLocation } from '@hyperapp/router'
+import { location as routerLocation } from './routing/Link'
 import App from './App'
-import 'prismjs/themes/prism.css'
 import { GA_TRACKING_ID } from './constants'
 import smoothScroll from './util/smoothScroll'
+import { load } from './routing/preload'
+import 'prismjs/themes/prism.css'
 
-interface Data {
+export interface Data {
   component: number
   title: string
   props: any
@@ -20,7 +21,11 @@ export type State = typeof state
 
 const actions = {
   location: routerLocation.actions,
-  setData: (data: any) => (state: State) => ({ ...state, data }),
+  setData: (data: Data) => (state: State) => {
+    document.title = data.title
+
+    return { ...state, data }
+  },
 }
 
 const main: any = app(state, actions, App, document.body)
@@ -39,19 +44,7 @@ const handleLocationChange = (e: Event) => {
   })
 
   // ページデータを取得
-  const xhr = new XMLHttpRequest()
-
-  xhr.open('get', `${location.pathname}index.json`)
-
-  xhr.onload = () => {
-    const data = JSON.parse(xhr.responseText) as Data
-    
-    document.title = data.title
-
-    main.setData(data)
-  }
-
-  xhr.send()
+  load(location.pathname, (data) => { main.setData(data) })
 }
 
 addEventListener("pushstate", handleLocationChange)
