@@ -76,4 +76,6 @@ const main = async () => {
   });
 }
 
-main().catch(e => { throw e })
+main().catch((e) => {
+  setImmediate(() => { throw e })
+})
