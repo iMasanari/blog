@@ -71,19 +71,26 @@ export default async () => {
     posts.reduce((acc, post) => [...acc, ...post.tags], [])
   ))
 
+  const pagerRow = 5
+
   return [
-    {
-      path: '/',
+    ...Array(Math.ceil(posts.length / pagerRow)).fill(null).map((_, i) => ({
+      path: i ? `/p${i + 1}/` : '/',
       component: 'src/containers/PostList',
       title: title,
       data: {
         posts: posts
+          .slice(i * pagerRow, (i + 1) * pagerRow)
           .map(({ title, slug, date, tags }) => ({ title, slug, date, tags })),
+        pager: {
+          page: i + 1,
+          max: Math.ceil(posts.length / pagerRow),
+        },
       },
       meta: {
         description: 'iMasanariの技術ブログ',
       }
-    },
+    })),
     // TODO: Redirect
     // { path: '/blog', redirect: '/' },
     ...posts.map((post, i) => {
