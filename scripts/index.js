@@ -12,6 +12,8 @@ const createFile = require('./createFile')
 
 const path = require('path')
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 const unwarpFn = (config, arg) =>
   typeof config === 'function' ? config(arg) : config
 
@@ -45,7 +47,7 @@ const main = async () => {
 
     createFile(
       `dist${route.path}/index.json`,
-      JSON.stringify(data, null, 2),
+      JSON.stringify(data, null, isProduction ? null : 2),
     )
 
     const state = {
