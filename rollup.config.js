@@ -18,7 +18,8 @@ export default {
     }),
     nodeResolve(),
     postcss({
-      extract: true
+      extract: true,
+      minimize: isProduction,
     }),
     isProduction && uglify(),
   ],
