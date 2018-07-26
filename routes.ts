@@ -107,7 +107,8 @@ export default async () => {
           next: next && { title: next.title, slug: next.slug },
         },
         meta: {
-          description: post.description
+          description: post.description,
+          image: post.image,
         }
       }
     }),

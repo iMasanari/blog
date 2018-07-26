@@ -1,8 +1,9 @@
 ---
 title: 【書き途中】ブログをHyperappベースの自作ジェネレータに変更した話
-description: Hyperappという軽量なVDOMライブラリでブログを書き換えたので試験運用します。
+description: 作ったばかりのこのブログだが、Hyperappで動くstaticでSPAなサイトに変更した。React Staticを使用していた時とは違って、HTMLの書き出しなどは自分で処理を行っている。まだ未完成な機能もあるが、ビルド後のJavaScriptが約8KBと軽量で気に入っている。
 slug: use-hyperapp
 tags: [blog, Hyperapp]
+image: /images/hyperapp.png
 date: 2018-07-12T12:45:07.379Z
 ---
 
@@ -58,6 +59,9 @@ const Template = await requireWithRollup('./src/Template.tsx', rollupConfig)
 
 実装は[ここ](requireWithRollup)。rollup.jsが自身の設定ファイルを読み込む方法を参考にした。
 
+設定ファイルやビルド方法は[React Static](react-static)を<s>パクった</s>かなり参考にした。
+
+
 ## ルーティング、およびページ遷移部分
 
 ここが一番苦労している。エントリーポイントのindex.tsxがごちゃごちゃしてしまった。書き直すならここ。
@@ -71,14 +75,15 @@ const Template = await requireWithRollup('./src/Template.tsx', rollupConfig)
   - 現在はリンククリック時にjson読み込み
   - prefetchやpreloadで先読み？ それともServise Workerを使う？
   - スクリプトが軽いのでいっそJSで雑に先読みしちゃうのもありかも
+    - 【追記】この方法で仮実装
 - iPhoneでスワイプして戻るとちらつく
   - 前画面のデータをキャッシュしててもダメ
   - [React Static](react-static)の時には起こらなかった
 
 
-## TODO
+## やるかどうかわからない
 
-もうちょこっと何か書く
+ジェネレータ部分を分離
 
 
 [use-technology]: /blog/use-technology/

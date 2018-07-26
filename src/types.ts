@@ -5,4 +5,5 @@ export interface Post {
   tags: string[]
   contents: string
   date: string
+  image?: string
 }

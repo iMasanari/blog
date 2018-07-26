@@ -8,6 +8,7 @@ interface Props {
   css?: string
   meta: {
     description?: string
+    image?: string
   }
 }
 
@@ -20,7 +21,7 @@ gtag('config',${JSON.stringify(GA_TRACKING_ID)});
 `.replace(/\n/g, '')
 
 export default (props: Props) => (state: State) =>
-  <html lang="ja-JP">
+  <html lang="ja-JP" prefix="og: http://ogp.me/ns#">
     <head>
       {/* Global site tag (gtag.js) - Google Analytics */}
       {process.env.NODE_ENV === 'production' ? <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} /> : null}
@@ -33,12 +34,13 @@ export default (props: Props) => (state: State) =>
       <title>{state.data.title || title}</title>
       {props.css ? <link rel="stylesheet" href={props.css} /> : null}
 
-      {/* Twitter Card */}
-      <meta name="twitter:card" content="summary" />
+      {/* OGPタグ */}
       <meta property="og:title" content={state.data.title || title} />
+      <meta property="og:type" content={state.data.title ? 'article' : 'blog'} />
       <meta property="og:description" content={props.meta.description || state.data.title || title} />
       <meta property="og:url" content={siteRoot + state.location.pathname} />
-      <meta property="og:image" content={`${siteRoot}/images/icon.jpg`} />
+      <meta property="og:image" content={`${siteRoot}${props.meta.image || '/images/icon.jpg'}`} />
+      <meta name="twitter:card" content="summary" />
     </head>
     <body>
       <App />
