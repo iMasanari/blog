@@ -5,8 +5,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "node scripts",
-    "build-prod": "npm run clean && NODE_ENV=production node scripts",
+    "build": "npm run build:copy && npm run build:script",
+    "build:copy": "cp -r ./public/* ./dist",
+    "build:script": "node ./scripts",
+    "build-prod": "npm run clean && NODE_ENV=production npm run build",
     "clean": "rm -r dist/*",
     "serve": "serve dist -p 3000",
     "gh-pages": "gh-pages -d dist -b master",
