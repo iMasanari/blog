@@ -38,11 +38,6 @@ h2 {
   margin: 2rem auto;
 }
 
-.Footer {
-  padding: 1rem;
-  text-align: center;
-  background: #eee;
-}
 .Header {
   background: #108db8;
   box-shadow: 0px 5px 15px -5px rgba(0,0,0,0.8);
@@ -58,17 +53,6 @@ h2 {
   color: white;
 }
 
-.PostListPager {
-  text-align: center
-}
-
-.PostListPager-item {
-  display: inline-block;
-  padding: 0.5em 1em;
-  margin: 2px;
-  border: 1px solid #eee;
-}
-
 .Posts {
   list-style: none;
   padding: 0;
@@ -80,24 +64,11 @@ h2 {
   margin: 1rem 0;
 }
 
-.PostTags {
-  padding: 0;
-  margin: 0;
+.Footer {
+  padding: 1rem;
+  text-align: center;
+  background: #eee;
 }
-
-.PostTags::before {
-  content: "tags: "
-}
-
-.PostTags-li {
-  display: inline;
-  padding: 0;
-}
-
-.PostTags-Link {
-  color: #6c6c6c;
-}
-
 .PostPager {
   display: table;
   width: 100%;
@@ -116,6 +87,35 @@ h2 {
 .PostPager-item:nth-child(2) {
   border-left: 1px solid #6c6c6c;
   border-right: 1px solid #6c6c6c;
+}
+
+.PostListPager {
+  text-align: center
+}
+
+.PostListPager-item {
+  display: inline-block;
+  padding: 0.5em 1em;
+  margin: 2px;
+  border: 1px solid #eee;
+}
+
+.PostTags {
+  padding: 0;
+  margin: 0;
+}
+
+.PostTags::before {
+  content: "tags: "
+}
+
+.PostTags-li {
+  display: inline;
+  padding: 0;
+}
+
+.PostTags-Link {
+  color: #6c6c6c;
 }
 
 .PostThumb-title {
