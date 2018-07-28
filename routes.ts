@@ -2,6 +2,7 @@ import './inject-window'
 
 import jdown from 'jdown'
 import marked from 'marked'
+import { minify } from 'html-minifier'
 import Prism from 'prismjs'
 import loadLanguages from 'prismjs/components/'
 import { Post } from './src/types'
@@ -65,6 +66,17 @@ export default async () => {
 
   posts.forEach(v => {
     v.date = formatDate(new Date(v.date))
+
+    v.contents = minify(v.contents, {
+      collapseBooleanAttributes: true,
+      collapseInlineTagWhitespace: true,
+      collapseWhitespace: true,
+      quoteCharacter: `'`,
+      removeAttributeQuotes: true,
+      removeRedundantAttributes: true,
+      sortAttributes: true,
+      sortClassName: true,
+    })
   })
 
   const tags = Array.from(new Set(

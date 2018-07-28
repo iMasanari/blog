@@ -13,12 +13,12 @@ interface Props {
 }
 
 const gtag = `
-window.dataLayer=window.dataLayer||[];
+window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());
+gtag('js', new Date());
 
-gtag('config',${JSON.stringify(GA_TRACKING_ID)});
-`.replace(/\n/g, '')
+gtag('config', ${JSON.stringify(GA_TRACKING_ID)});
+`
 
 export default (props: Props) => (state: State) =>
   <html lang="ja-JP" prefix="og: http://ogp.me/ns#">
@@ -44,7 +44,7 @@ export default (props: Props) => (state: State) =>
     </head>
     <body>
       <App />
-      {state.data ? <script innerHTML={`var __data = ${JSON.stringify(state.data)}`} /> : null}
+      {state.data ? <script innerHTML={`\nvar __data = ${JSON.stringify(state.data, null, 2)};\n`} /> : null}
       {props.script ? <script src={props.script} /> : null}
     </body>
   </html>

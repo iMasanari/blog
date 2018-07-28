@@ -5,6 +5,7 @@ const rollupAlias = require('rollup-plugin-alias')
 
 const { app, h } = require('hyperapp')
 const { withRender } = require('@hyperapp/render')
+const { minify } = require('html-minifier')
 
 const requireWithRollup = require('./requireWithRollup')
 const createSiteRoutes = require('./createSiteRoute')
@@ -17,6 +18,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 const unwarpFn = (config, arg) =>
   typeof config === 'function' ? config(arg) : config
 
+const render = withRender(app)
 
 const main = async () => {
   const outputFileBaseNameNoExt = `bundle.${Date.now().toString(36)}`
@@ -58,11 +60,19 @@ const main = async () => {
       data,
     }
 
-    const html = withRender(app)(state, {}, () => h(Template, {
+    const code = render(state, {}, () => h(Template, {
       script: `/${outputFileBaseNameNoExt}.js`,
       css: `/${outputFileBaseNameNoExt}.css`,
       meta,
-    }))
+    })).toString()
+
+    const html = isProduction ? minify(code, {
+      minifyCSS: true,
+      minifyJS: true,
+      removeAttributeQuotes: true,
+      sortAttributes: true,
+      sortClassName: true,
+    }) : code
 
     createFile(`dist${route.path}/index.html`, `<!DOCTYPE html>${html}`)
   })
@@ -74,8 +84,8 @@ const main = async () => {
 
   bundle.write({
     file: `./dist/${outputFileBaseNameNoExt}.js`,
-    format: 'iife'
-  });
+    format: 'iife',
+  })
 }
 
 main().catch((e) => {
