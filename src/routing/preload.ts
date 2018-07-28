@@ -14,7 +14,6 @@ const loadQue = () => {
   xhr.open('get', `${path}index.json`)
 
   xhr.onload = () => {
-    console.log('preload', path)
     const data = JSON.parse(xhr.responseText) as Data
     cache[path] = data
 
@@ -37,7 +36,6 @@ export const preload = (path: string) => {
 
 export const load = (path: string, callback: (data: Data) => void) => {
   if (cache[path]) {
-    console.log('cache', path)
     callback(cache[path])
     return
   }
@@ -47,7 +45,6 @@ export const load = (path: string, callback: (data: Data) => void) => {
   xhr.open('get', `${path}index.json`)
 
   xhr.onload = () => {
-    console.log('load', path)
     const data = JSON.parse(xhr.responseText) as Data
 
     cache[path] = data
