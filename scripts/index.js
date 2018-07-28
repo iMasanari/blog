@@ -11,6 +11,7 @@ const requireWithRollup = require('./requireWithRollup')
 const createSiteRoutes = require('./createSiteRoute')
 const createFile = require('./createFile')
 
+const crypto = require('crypto')
 const path = require('path')
 
 const isProduction = process.env.NODE_ENV === 'production'
@@ -21,8 +22,6 @@ const unwarpFn = (config, arg) =>
 const render = withRender(app)
 
 const main = async () => {
-  const outputFileBaseNameNoExt = `bundle.${Date.now().toString(36)}`
-
   const config = await unwarpFn(await requireWithRollup('./rollup.config.js'))
   const routes = await unwarpFn(await requireWithRollup('./routes.ts', config), {})
 
@@ -34,6 +33,27 @@ const main = async () => {
     rollupAlias({ 'site-route': path.join(process.cwd(), 'dist', 'site-route.js') }),
     ...config.plugins || [],
   ]
+
+
+  // jsのビルド
+
+  const bundle = await rollup({
+    ...config,
+    input: 'src/index.tsx',
+  })
+
+  const { code } = await bundle.generate({ format: 'iife' })
+
+  const hash = crypto.createHash('sha512').update(code).digest('hex')
+  const outputFileBaseNameNoExt = `bundle.${hash.slice(0, 10)}`
+
+  bundle.write({
+    file: `./dist/${outputFileBaseNameNoExt}.js`,
+    format: 'iife',
+  })
+
+
+  // htmlのビルド
 
   const Template = await requireWithRollup('./src/Template.tsx', config)
 
@@ -47,10 +67,7 @@ const main = async () => {
       props: props,
     }
 
-    createFile(
-      `dist${route.path}/index.json`,
-      JSON.stringify(data, null, isProduction ? null : 2),
-    )
+    createFile(`dist${route.path}/index.json`, JSON.stringify(data, null, isProduction ? null : 2))
 
     const state = {
       location: {
@@ -75,16 +92,6 @@ const main = async () => {
     }) : code
 
     createFile(`dist${route.path}/index.html`, `<!DOCTYPE html>${html}`)
-  })
-
-  const bundle = await rollup({
-    ...config,
-    input: 'src/index.tsx',
-  })
-
-  bundle.write({
-    file: `./dist/${outputFileBaseNameNoExt}.js`,
-    format: 'iife',
   })
 }
 
