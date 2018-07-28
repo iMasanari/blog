@@ -10,7 +10,7 @@ date: 2018-07-12T12:45:07.379Z
 ## はじめに
 
 作ったばかりのこのブログだが、[Hyperapp][hyperapp]で動くstaticでSPAなサイトに変更した。
-[React Static](react-static)を使用していた時とは違って、HTMLの書き出しなどは自分で処理を行っている。まだ未完成な機能もあるが、ビルド後のJavaScriptが約8KBと軽量で気に入っている。
+[React Static][react-static]を使用していた時とは違って、HTMLの書き出しなどは自分で処理を行っている。まだ未完成な機能もあるが、ビルド後のJavaScriptが約8KBと軽量で気に入っている。
 
 
 ## なぜ変更したのか
@@ -18,7 +18,7 @@ date: 2018-07-12T12:45:07.379Z
 - [ブログで使用した技術][use-technology]の通り
   - [Hyperapp][hyperapp]があるじゃんとなったのがきっかけ
 - ブログではstateやactionがページ遷移関係でしか使っていないことに気づいた
-  - 全て[React Static](react-static)に隠されている
+  - 全て[React Static][react-static]に隠されている
 - 車輪の再発明が好き
 
 ## 移行について
@@ -57,9 +57,9 @@ jsxが流用できたのでView部分は楽だった。もともとSFCのみで�
 const Template = await requireWithRollup('./src/Template.tsx', rollupConfig)
 ```
 
-実装は[ここ](requireWithRollup)。rollup.jsが自身の設定ファイルを読み込む方法を参考にした。
+実装は[ここ][requireWithRollup]。rollup.jsが自身の設定ファイルを読み込む方法を参考にした。
 
-設定ファイルやビルド方法は[React Static](react-static)を<s>パクった</s>かなり参考にした。
+設定ファイルやビルド方法は[React Static][react-static]を<s>パクった</s>かなり参考にした。
 
 
 ## ルーティング、およびページ遷移部分
@@ -78,7 +78,7 @@ const Template = await requireWithRollup('./src/Template.tsx', rollupConfig)
     - 【追記】この方法で仮実装
 - iPhoneでスワイプして戻るとちらつく
   - 前画面のデータをキャッシュしててもダメ
-  - [React Static](react-static)の時には起こらなかった
+  - [React Static][react-static]の時には起こらなかった
 
 
 ## やるかどうかわからない
