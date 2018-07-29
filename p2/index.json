@@ -1,1 +1,1 @@
-{"component":0,"title":"Tech SANDBOX","props":{"posts":[{"title":"react-strictでブログ作成しました","slug":"first-post","date":"2018-06-29","tags":["blog"]}],"pager":{"page":2,"max":2}}}
+{"component":0,"title":"Tech SANDBOX","props":{"posts":[{"title":"ブログで使用した技術","slug":"use-technology","date":"2018-06-30","tags":["blog","React","preact","TypeScript","ReactStatic"]},{"title":"react-strictでブログ作成しました","slug":"first-post","date":"2018-06-29","tags":["blog"]}],"pager":{"page":2,"max":2}}}
