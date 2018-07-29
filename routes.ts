@@ -69,10 +69,11 @@ export default async () => {
 
     v.contents = minify(v.contents, {
       collapseBooleanAttributes: true,
-      collapseInlineTagWhitespace: true,
+      // collapseInlineTagWhitespace: true,
       collapseWhitespace: true,
       quoteCharacter: `'`,
       removeAttributeQuotes: true,
+      removeComments: true,
       removeRedundantAttributes: true,
       sortAttributes: true,
       sortClassName: true,
@@ -87,7 +88,7 @@ export default async () => {
 
   return [
     ...Array(Math.ceil(posts.length / pagerRow)).fill(null).map((_, i) => ({
-      path: i ? `/p${i + 1}/` : '/',
+      path: i ? `/p${i + 1}` : '',
       component: 'src/containers/PostList',
       title: title,
       data: {
