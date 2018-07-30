@@ -6,6 +6,7 @@ const rollupAlias = require('rollup-plugin-alias')
 const { app, h } = require('hyperapp')
 const { withRender } = require('@hyperapp/render')
 const { minify } = require('html-minifier')
+const critical = require('critical')
 
 const requireWithRollup = require('./requireWithRollup')
 const createSiteRoutes = require('./createSiteRoute')
@@ -47,7 +48,7 @@ const main = async () => {
   const hash = crypto.createHash('sha512').update(code).digest('hex')
   const outputFileBaseNameNoExt = `bundle.${hash.slice(0, 10)}`
 
-  bundle.write({
+  await bundle.write({
     file: `./dist/${outputFileBaseNameNoExt}.js`,
     format: 'iife',
   })
@@ -57,7 +58,7 @@ const main = async () => {
 
   const Template = await requireWithRollup('./src/Template.tsx', config)
 
-  routes.forEach((route) => {
+  for (const route of routes) {
     const props = unwarpFn(route.data) || {}
     const meta = unwarpFn(route.meta) || {}
 
@@ -77,22 +78,34 @@ const main = async () => {
       data,
     }
 
-    const code = render(state, {}, () => h(Template, {
+    const html = `<!DOCTYPE html>${render(state, {}, () => h(Template, {
       script: `/${outputFileBaseNameNoExt}.js`,
       css: `/${outputFileBaseNameNoExt}.css`,
       meta,
-    })).toString()
+    }))}`
 
-    const html = isProduction ? minify(code, {
-      minifyCSS: true,
-      minifyJS: true,
-      removeAttributeQuotes: true,
-      sortAttributes: true,
-      sortClassName: true,
-    }) : code
+    if (isProduction) {
+      const minifyCode = minify(html, {
+        minifyCSS: true,
+        minifyJS: true,
+        removeAttributeQuotes: true,
+        sortAttributes: true,
+        sortClassName: true,
+      })
 
-    createFile(`dist${route.path}/index.html`, `<!DOCTYPE html>${html}`)
-  })
+      // 並行して行うとスタックオーバーフローしたのでawaitで1つずつ処理
+      await critical.generate({
+        inline: true,
+        base: 'dist/',
+        html: minifyCode,
+        folder: `.${route.path}/`,
+        dest: `.${route.path}/index.html`,
+      }, undefined)
+    }
+    else {
+      createFile(`dist${route.path}/index.html`, html)
+    }
+  }
 }
 
 main().catch((e) => {
