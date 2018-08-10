@@ -1,6 +1,6 @@
 ---
 title: 私の必要最低限な環境構築
-description: 
+description: macOS Mojaveのダークモードに憧れ、Macbookのサブパーテーションにパブリックベータをインストールした。メインのパーテーションに入れるかを検討するため、しばらくはこちらを使用していこうと思う。このパーテーションはHigh Sierraのパブリックベータからのアップデートのため新規インストールではないが、一通り開発できる環境を整え、それをまとめることにする。
 slug: environment-construction
 tags: [macOS]
 date: 2018-08-09T15:46:41.052Z
