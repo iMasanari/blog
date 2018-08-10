@@ -49,6 +49,7 @@ export default (props: Props) => (state: State) => {
           <link rel="stylesheet" href={props.css} />
         </If>
 
+        <meta name="description" content={description} />
         {/* OGPタグ */}
         <meta property="og:title" content={title} />
         <meta property="og:type" content={state.data.title ? 'article' : 'blog'} />
