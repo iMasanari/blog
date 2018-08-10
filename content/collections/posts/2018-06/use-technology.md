@@ -21,7 +21,7 @@ ReactはViewだけのシンプルなライブラリで、よく他のライブ�
 #### その他View系ライブラリ
 
 - [Vue.js](https://github.com/vuejs/vue)
-  悪くはないけど、良さを活かせそうでもなかった。今回はReactのSFCで十分そう。
+  悪くはないけど、良さを活かせるというわけでもなさそう。今回はReactのSFCで十分。
 - [Angular](https://github.com/angular/angular)
   重そう。機能過多っぽそう。
 - [Hyperapp](https://github.com/hyperapp/hyperapp)

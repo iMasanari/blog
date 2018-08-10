@@ -9,7 +9,7 @@ date: 2018-07-12T12:45:07.379Z
 
 ## はじめに
 
-作ったばかりのこのブログだが、[Hyperapp][hyperapp]で動くstaticでSPAなサイトに変更した。
+作ったばかりのこのブログだが、[Hyperapp][hyperapp]ベースのstaticでSPAなサイトに変更した。
 [React Static][react-static]を使用していた時とは違って、HTMLの書き出しなどは自分で処理を行っている。まだ未完成な機能もあるが、ビルド後のJavaScriptが約8KBと軽量で気に入っている。
 
 
@@ -73,7 +73,7 @@ const Template = await requireWithRollup('./src/Template.tsx', rollupConfig)
 
 - ページプリキャッシュ部分
   - 現在はリンククリック時にjson読み込み
-  - prefetchやpreloadで先読み？ それともServise Workerを使う？
+  - prefetchやpreloadで先読み？　それともServise Workerを使う？
   - スクリプトが軽いのでいっそJSで雑に先読みしちゃうのもありかも
     - 【追記】この方法で仮実装
 - iPhoneでスワイプして戻るとちらつく

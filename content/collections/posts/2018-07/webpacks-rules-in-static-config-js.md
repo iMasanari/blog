@@ -9,7 +9,7 @@ date: 2018-07-03T11:47:13.910Z
 ## rulesを変更して`npm run build`するとエラーに
 
 このブログはReact StaticのTypeScriptのexsampleがベースになっている。
-サンプルは開発中(`npm run start`)では問題はないが、プロダクションビルド(`npm run build`)するとエラーになるのでその対処法をメモして置く。
+サンプルは開発中（`npm run start`）では問題はないが、プロダクションビルド（`npm run build`）するとエラーになるのでその対処法をメモして置く。
 
 
 ```bash
@@ -42,7 +42,7 @@ export default {
 }
 ```
 
-デフォルトとは一体...
+デフォルトとは一体…
 
 `config.module.rules`を変更しない場合は問題なくビルドすることができる。
 `defaultLoaders.cssLoader`が悪さをしているようだ。

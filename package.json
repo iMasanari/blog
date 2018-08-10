@@ -8,7 +8,9 @@
     "build": "npm run build:copy && npm run build:script",
     "build:copy": "cp -r ./public/* ./dist",
     "build:script": "node ./scripts",
-    "build-prod": "npm run clean && NODE_ENV=production npm run build",
+    "build-prod": "npm test && npm run clean && NODE_ENV=production npm run build",
+    "test": "npm run test:textlint",
+    "test:textlint": "textlint ./content",
     "clean": "rm -r dist/*",
     "serve": "serve dist -p 3000",
     "gh-pages": "gh-pages -d dist -b master",
@@ -40,6 +42,9 @@
     "rollup-plugin-uglify": "^4.0.0",
     "rollup-watch": "^4.3.1",
     "serve": "^9.2.0",
+    "textlint": "^11.0.0",
+    "textlint-rule-preset-japanese": "^4.0.0",
+    "textlint-rule-preset-jtf-style": "^2.3.1",
     "tslib": "^1.9.3",
     "typescript": "^2.9.2"
   }
