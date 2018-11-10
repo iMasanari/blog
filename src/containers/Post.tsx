@@ -1,7 +1,9 @@
 import { h } from 'hyperapp'
+import page from 'page'
 import { Post } from '../types'
 import PostTags from '../components/PostTags'
 import PostPager from '../components/PostPager'
+import smoothScroll from '../util/smoothScroll'
 // import 'prismjs/themes/prism.css'
 
 interface Props {
@@ -11,13 +13,12 @@ interface Props {
 }
 
 const clickHandler = (e: Event) => {
-  if (e.target instanceof HTMLAnchorElement) {
-    const href = e.target.getAttribute('href')
-
-    if (!/^http/.test(href)) {
-      e.preventDefault()
-      history.pushState(location.pathname, '', href)
-    }
+  const el = e.target as HTMLElement
+  
+  if (el.tagName.toLowerCase() === 'a' && !/^http/.test(el.getAttribute('href'))) {
+    e.preventDefault()
+    page((el as HTMLAnchorElement).href)
+    smoothScroll()
   }
 }
 
