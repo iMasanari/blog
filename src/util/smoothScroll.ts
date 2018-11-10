@@ -1,15 +1,15 @@
 export default () => {
-  const targetY = 0
-  const scrollY = document.documentElement.scrollTop || document.body.scrollTop
   let loopCount = 10
-  const scrollby = (targetY - scrollY) / loopCount
 
   const loop = () => {
-    scrollTo(0, Math.floor(targetY - scrollby * loopCount))
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      const scroll = loopCount ? Math.floor(scrollTop / loopCount) : 0
 
-    if (loopCount--) {
-      requestAnimationFrame(loop)
-    }
+      scrollTo(0, scrollTop - scroll)
+
+      if (loopCount-- && scroll) {
+          requestAnimationFrame(loop)
+      }
   }
 
   loop()
