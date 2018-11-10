@@ -4,6 +4,7 @@ import { title as siteTitle, siteRoot, GA_TRACKING_ID } from './constants'
 import { State } from '.';
 
 interface Props {
+  path?: string
   script?: string
   css?: string
   meta: {
@@ -54,7 +55,7 @@ export default (props: Props) => (state: State) => {
         <meta property="og:title" content={title} />
         <meta property="og:type" content={state.data.title ? 'article' : 'blog'} />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content={siteRoot + state.location.pathname} />
+        <meta property="og:url" content={`${siteRoot}${props.path}/`} />
         <meta property="og:image" content={`${siteRoot}${props.meta.image || '/images/icon.jpg'}`} />
         <meta name="twitter:card" content="summary" />
       </head>

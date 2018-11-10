@@ -79,6 +79,7 @@ const main = async () => {
     }
 
     const html = `<!DOCTYPE html>${render(state, {}, () => h(Template, {
+      path: route.path,
       script: `/${outputFileBaseNameNoExt}.js`,
       css: `/${outputFileBaseNameNoExt}.css`,
       meta,

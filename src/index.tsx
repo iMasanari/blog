@@ -1,8 +1,7 @@
 import { app } from 'hyperapp'
-import { location as routerLocation } from './routing/Link'
+import page from 'page'
 import App from './App'
 import { GA_TRACKING_ID } from './constants'
-import smoothScroll from './util/smoothScroll'
 import { load } from './routing/preload'
 import 'prismjs/themes/prism.css'
 
@@ -13,39 +12,27 @@ export interface Data {
 }
 
 const state = {
-  location: routerLocation.state,
   data: (window.__data || {}) as Data,
 }
 
 export type State = typeof state
 
 const actions = {
-  location: routerLocation.actions,
-  setData: (data: Data) => (state: State) => {
+  setData: (data: Data) => {
     document.title = data.title
 
-    return { ...state, data }
+    return { data }
   },
 }
 
-const main: any = app(state, actions, App, document.body)
+const main = app(state, actions, App, document.body) as any
 
-// const unsubscribe = 
-routerLocation.subscribe(main.location)
+page('*', (ctx) => {
+  load(ctx.pathname, main.setData)
 
-const handleLocationChange = (e: Event) => {
-  if (e.type === 'pushstate') {
-    smoothScroll()
+    // Google アナリティクスに送信
+  if (ctx.pathname !== location.pathname) {
+    window.gtag('config', GA_TRACKING_ID, { page_path: ctx.pathname })
   }
-
-  // Google アナリティクスに送信
-  window.gtag('config', GA_TRACKING_ID, {
-    page_path: location.pathname
-  })
-
-  // ページデータを取得
-  load(location.pathname, (data) => { main.setData(data) })
-}
-
-addEventListener("pushstate", handleLocationChange)
-addEventListener("popstate", handleLocationChange)
+})
+page.start()

@@ -1,1 +1,1 @@
-(global as any).window = { location: {} };
+(global as any).window = undefined;
