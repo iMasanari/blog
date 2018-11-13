@@ -1,5 +1,3 @@
-import './inject-window'
-
 import jdown from 'jdown'
 import marked from 'marked'
 import { minify } from 'html-minifier'

@@ -11,11 +11,7 @@ export default {
     typescript({
       abortOnError: false
     }),
-    commonjs({
-      namedExports: {
-        'node_modules/@hyperapp/router/dist/router.js': ['location', 'Link']
-      }
-    }),
+    commonjs(),
     nodeResolve(),
     postcss({
       extract: true,
@@ -23,4 +19,5 @@ export default {
     }),
     isProduction && uglify(),
   ],
+  context: 'void 0',
 }
