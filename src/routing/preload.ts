@@ -1,7 +1,11 @@
 import { Data } from '../'
 
 const loading = {} as Record<string, boolean>
-export const cache = {} as Record<string, Data>
+const cache = {} as Record<string, Data>
+
+if (typeof window === 'object') {
+  cache[location.pathname] = window.__data
+}
 
 let que = [] as string[]
 
