@@ -17,8 +17,7 @@
     "deploy": "npm run build-prod && npm run gh-pages"
   },
   "dependencies": {
-    "hyperapp": "^1.2.6",
-    "page": "^1.11.1"
+    "hyperapp": "^1.2.6"
   },
   "devDependencies": {
     "@hyperapp/render": "^2.0.0",

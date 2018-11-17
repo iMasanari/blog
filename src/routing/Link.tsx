@@ -1,7 +1,6 @@
 import { h, VNode } from 'hyperapp'
-import page from 'page'
 import { preload } from './preload'
-import smoothScroll from '../util/smoothScroll'
+import { State, Actions } from '..';
 
 interface Props {
   [key: string]: any
@@ -17,16 +16,8 @@ const updateHandler = (el: HTMLAnchorElement) => {
   }
 }
 
-const clickHandler = (e: Event) => {
-  const el = e.currentTarget as HTMLAnchorElement
-  if (!/$http/.test(el.getAttribute('href'))) {
-    e.preventDefault()
-    page(el.href)
-    smoothScroll()
-  }
-}
-
-export const Link = ({ to, ...props }: Props, childlen?: VNode): VNode<Props> =>
-  <a {...props} href={to} onclick={clickHandler} oncreate={updateHandler} onupdate={updateHandler}  >
-    {childlen}
-  </a>
+export const Link = ({ to, ...props }: Props, childlen?: VNode) =>
+  (_state: State, actions: Actions) =>
+    <a {...props} href={to} onclick={actions.linkHandler} oncreate={updateHandler} onupdate={updateHandler}  >
+      {childlen}
+    </a>

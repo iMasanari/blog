@@ -1,9 +1,9 @@
 import { app } from 'hyperapp'
-import page from 'page'
 import App from './App'
 import { GA_TRACKING_ID } from './constants'
 import { load } from './routing/preload'
 import 'prismjs/themes/prism.css'
+import smoothScroll from './util/smoothScroll';
 
 export interface Data {
   component: number
@@ -15,24 +15,53 @@ const state = {
   data: (window.__data || {}) as Data,
 }
 
-export type State = typeof state
+let currentPath: string
 
 const actions = {
-  setData: (data: Data) => {
+  setData(data: Data) {
     document.title = data.title
 
     return { data }
   },
+  replace(path: string, callback?: () => void) {
+    currentPath = path
+
+    load(path, (data) => {
+      if (path !== currentPath) return
+
+      main.setData(data)
+      if (callback) callback()
+    })
+
+    window.gtag('config', GA_TRACKING_ID, { page_path: path })
+  },
+  linkHandler(event: Event) {
+    const target = (event.currentTarget as HTMLElement).tagName.toLowerCase() === 'a'
+      ? event.currentTarget
+      : event.target
+
+    const to = (target as HTMLElement).getAttribute('href')
+
+    if (/$http/.test(to)) return
+
+    event.preventDefault()
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+
+    history.pushState({ scrollTop }, null, to)
+    smoothScroll()
+    main.replace(to)
+  }
 }
 
-const main = app(state, actions, App, document.body) as any
+export type State = typeof state
+export type Actions = typeof actions
 
-page('*', (ctx) => {
-  load(ctx.pathname, main.setData)
+const main = app<State, Actions>(state, actions, App, document.body)
 
-    // Google アナリティクスに送信
-  if (ctx.pathname !== location.pathname) {
-    window.gtag('config', GA_TRACKING_ID, { page_path: ctx.pathname })
-  }
+window.addEventListener('popstate', () => {
+  main.replace(location.pathname, () => {
+    if (history.state && history.state.scrollTop != null) {
+      scrollTo(0, history.state.scrollTop)
+    }
+  })
 })
-page.start()
