@@ -11,7 +11,7 @@ interface Props {
 const updateHandler = (el: HTMLAnchorElement) => {
   const href = el.getAttribute('href')
 
-  if (!/$http/.test(href)) {
+  if (!/^http/.test(href)) {
     preload(href)
   }
 }

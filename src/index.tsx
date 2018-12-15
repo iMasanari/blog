@@ -47,7 +47,7 @@ const actions = {
 
     const to = (target as HTMLElement).getAttribute('href')
 
-    if (/$http/.test(to)) return
+    if (/^http/.test(to)) return
 
     event.preventDefault()
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
