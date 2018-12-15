@@ -2,8 +2,8 @@ import { app } from 'hyperapp'
 import App from './App'
 import { GA_TRACKING_ID } from './constants'
 import { load } from './routing/preload'
+import smoothScroll from './util/smoothScroll'
 import 'prismjs/themes/prism.css'
-import smoothScroll from './util/smoothScroll';
 
 export interface Data {
   component: number
@@ -19,18 +19,23 @@ let currentPath: string
 
 const actions = {
   setData(data: Data) {
-    document.title = data.title
-
     return { data }
   },
-  replace(path: string, callback?: () => void) {
+  replace(path: string) {
     currentPath = path
 
     load(path, (data) => {
       if (path !== currentPath) return
 
+      document.title = data.title
       main.setData(data)
-      if (callback) callback()
+
+      if (history.state && history.state.scrollTop) {
+        // 描画後、スクロール位置を復元する
+        setTimeout(() => {
+          scrollTo(0, history.state.scrollTop)
+        }, 0)
+      }
     })
 
     window.gtag('config', GA_TRACKING_ID, { page_path: path })
@@ -47,7 +52,8 @@ const actions = {
     event.preventDefault()
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
 
-    history.pushState({ scrollTop }, null, to)
+    history.replaceState({ scrollTop }, null, location.pathname)
+    history.pushState({ scrollTop: 0 }, null, to)
     smoothScroll()
     main.replace(to)
   }
@@ -59,9 +65,5 @@ export type Actions = typeof actions
 const main = app<State, Actions>(state, actions, App, document.body)
 
 window.addEventListener('popstate', () => {
-  main.replace(location.pathname, () => {
-    if (history.state && history.state.scrollTop != null) {
-      scrollTo(0, history.state.scrollTop)
-    }
-  })
+  main.replace(location.pathname)
 })
