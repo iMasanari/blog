@@ -107,6 +107,11 @@ export default async () => {
     ...posts.map((post, i) => {
       const prev = posts[i - 1]
       const next = posts[i + 1]
+      const sameTags = posts
+        .filter((other) => post !== other)
+        .filter(({ tags }) => tags.some((tag) => post.tags.includes(tag)))
+        .slice(0, 5)
+        .map(({ title, slug, date, tags }) => ({ title, slug, date, tags }))
 
       return {
         path: `/blog/${post.slug}`,
@@ -116,6 +121,7 @@ export default async () => {
           post,
           prev: prev && { title: prev.title, slug: prev.slug },
           next: next && { title: next.title, slug: next.slug },
+          sameTags,
         },
         meta: {
           description: post.description,

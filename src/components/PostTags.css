@@ -1,15 +1,8 @@
-.PostTags {
-  padding: 0;
-  margin: 0;
-}
-
-.PostTags::before {
-  content: "tags: "
-}
-
+.PostTags,
 .PostTags-li {
   display: inline;
   padding: 0;
+  margin: 0;
 }
 
 .PostTags-Link {

@@ -1,8 +1,8 @@
 ---
 title: Rust + wasm-bindgen + WebWorkerの環境構築
-description: 
+description: WebAssembly Advent Calendar 2018の20日目の記事。
 slug: wasm-bindgen-with-worker
-tags: [Rust, wasm-bindgen]
+tags: [Rust, wasm-bindgen, TypeScript]
 date: 2018-12-20T14:58:37.388Z
 ---
 
