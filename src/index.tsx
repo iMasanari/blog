@@ -2,7 +2,6 @@ import { app } from 'hyperapp'
 import App from './App'
 import { GA_TRACKING_ID } from './constants'
 import { load } from './routing/preload'
-import smoothScroll from './util/smoothScroll'
 import 'prismjs/themes/prism.css'
 
 export interface Data {
@@ -54,8 +53,9 @@ const actions = {
 
     history.replaceState({ scrollTop }, null, location.pathname)
     history.pushState({ scrollTop: 0 }, null, to)
-    smoothScroll()
     main.replace(to)
+    
+    setTimeout(() => scrollTo(0, 0))
   }
 }
 
