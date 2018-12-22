@@ -4,6 +4,7 @@ import PostTags from '../components/PostTags'
 import PostPager from '../components/PostPager'
 import { Actions, State } from '..'
 import AsidePosts from '../components/AsidePosts'
+import linkObserver from '../routing/linkObserver'
 // import 'prismjs/themes/prism.css'
 
 interface Props {
@@ -11,6 +12,10 @@ interface Props {
   prev?: Pick<Post, 'title' | 'slug'>
   next?: Pick<Post, 'title' | 'slug'>
   sameTags: Post[]
+}
+
+const updateHundler = (el: HTMLElement) => {
+  el.querySelectorAll('a').forEach(linkObserver)
 }
 
 export default ({ post, prev, next, sameTags }: Props) =>
@@ -22,7 +27,11 @@ export default ({ post, prev, next, sameTags }: Props) =>
         <PostTags tags={post.tags} />
         <div
           innerHTML={post.contents}
-          oncreate={(el: Element) => { el.innerHTML = post.contents }}
+          oncreate={(el: HTMLElement) => {
+            el.innerHTML = post.contents
+            updateHundler(el)
+          }}
+          onupdate={updateHundler}
           onclick={(e: Event) => {
             const el = e.target as HTMLElement
 
