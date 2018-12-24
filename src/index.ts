@@ -44,15 +44,15 @@ const actions = {
       ? event.currentTarget
       : event.target
 
-    const to = (target as HTMLElement).getAttribute('href')
+    const to = (target as HTMLElement).getAttribute('href')!
 
     if (/^http/.test(to)) return
 
     event.preventDefault()
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    const scrollTop = document.documentElement!.scrollTop || document.body.scrollTop
 
-    history.replaceState({ scrollTop }, null, location.pathname)
-    history.pushState({ scrollTop: 0 }, null, to)
+    history.replaceState({ scrollTop }, '', location.pathname)
+    history.pushState({ scrollTop: 0 }, '', to)
     main.replace(to)
     
     setTimeout(() => scrollTo(0, 0))
@@ -67,3 +67,7 @@ const main = app<State, Actions>(state, actions, App, document.body)
 window.addEventListener('popstate', () => {
   main.replace(location.pathname)
 })
+
+if (!window.__data) {
+  main.replace(location.pathname)
+}

@@ -79,7 +79,7 @@ export default async () => {
   })
 
   const tags = Array.from(new Set(
-    posts.reduce((acc, post) => [...acc, ...post.tags], [])
+    posts.reduce((acc, post) => [...acc, ...post.tags], [] as string[])
   ))
 
   const pagerRow = 5
@@ -140,6 +140,7 @@ export default async () => {
           .map(({ title, slug, date, tags }) => ({ title, slug, date, tags })),
         tag,
       },
+      meta: {}
     })),
     // { is404: true, component: 'src/containers/404' }
   ]

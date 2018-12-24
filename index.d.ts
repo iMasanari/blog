@@ -3,7 +3,7 @@ interface Window {
   __data: any
 }
 
-declare module 'site-route'
+declare module '*/site-route'
 
 declare module '*.png'
 

@@ -1,7 +1,7 @@
 import { h } from 'hyperapp'
 import App from './App'
 import { title as siteTitle, siteRoot, GA_TRACKING_ID } from './constants'
-import { State } from '.';
+import { State } from '.'
 
 interface Props {
   path?: string
@@ -66,7 +66,7 @@ export default (props: Props) => (state: State) => {
           <script innerHTML={`\nvar __data = ${JSON.stringify(state.data, null, 2)};\n`} />
         </If>
         <If test={props.script}>
-          <script src={props.script} />
+          <script id="script" src={props.script} />
         </If>
       </body>
     </html>
