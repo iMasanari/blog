@@ -6,7 +6,9 @@
   "license": "MIT",
   "scripts": {
     "predev": "npm run build:routes",
-    "dev": "parcel src/index.html",
+    "dev": "npm run dev:routes & npm run dev:parcel",
+    "dev:routes": "chokidar \"content/**/*.md\" -c \"npm run build:routes\"",
+    "dev:parcel": "parcel src/index.html",
     "prebuild": "npm run clean && npm run build:copy",
     "build": "npm run build:routes && npm run build:parcel && npm run build:html",
     "build:copy": "cp -r ./public/* ./dist",
@@ -31,6 +33,7 @@
     "@types/mkdirp": "^0.5.2",
     "@types/prismjs": "^1.9.0",
     "cheerio": "^1.0.0-rc.2",
+    "chokidar-cli": "^1.2.1",
     "critical": "^1.3.4",
     "gh-pages": "^2.0.1",
     "html-minifier": "^3.5.21",
