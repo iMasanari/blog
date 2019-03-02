@@ -3,6 +3,13 @@
   font-weight: bold;
 }
 
+.AsidePosts-ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .AsidePosts-li {
   margin: 1em 0;
+  padding: 0;
 }

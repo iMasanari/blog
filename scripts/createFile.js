@@ -1,13 +1,13 @@
 // @ts-check
 
-const path = require('path')
-const fs = require('fs')
-const mkdirp = require('mkdirp')
+import { dirname } from 'path'
+import { writeFile } from 'fs'
+import mkdirp from 'mkdirp'
 
-module.exports = (url, data) =>
+export default (url, data) =>
   new Promise(resolve => {
-    mkdirp(path.dirname(url), () => {
-      fs.writeFile(url, data, 'utf-8', () => {
+    mkdirp(dirname(url), () => {
+      writeFile(url, data, 'utf-8', () => {
         resolve()
       })
     })

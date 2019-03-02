@@ -14,9 +14,9 @@ export default ({ tags, posts }: Props) =>
   <aside>
     <div class="AsidePosts-title">同じタグを含む記事</div>
     <PostTags tags={tags} />
-    <ul class="AsidePosts-ul shared-reset">
+    <ul class="AsidePosts-ul">
       {posts.map((post) =>
-        <li class="AsidePosts-li shared-reset" key={post.slug}>
+        <li class="AsidePosts-li" key={post.slug}>
           <Link to={`${blogUrl}/${post.slug}/`}>
             {post.title}
           </Link>

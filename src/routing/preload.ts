@@ -4,7 +4,7 @@ const loading = {} as Record<string, boolean>
 const cache = {} as Record<string, Data>
 
 if (typeof window === 'object') {
-  cache[location.pathname] = window.__data
+  cache[location.pathname] = (window as any).__data
 }
 
 let que = [] as string[]
@@ -12,7 +12,7 @@ let que = [] as string[]
 const loadQue = () => {
   if (!que.length) return
 
-  const path = que.shift()
+  const path = que.shift()!
   const xhr = new XMLHttpRequest()
 
   xhr.open('get', `${path}index.json`)

@@ -1,20 +1,16 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "esnext",
-    "jsx": "react",
-    "jsxFactory": "h",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "removeComments": false,
-    "preserveConstEnums": true,
-    "sourceMap": true,
     "lib": [
       "dom",
       "esnext"
-    ]
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "strict": true,
+    "sourceMap": true
   }
 }
