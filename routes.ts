@@ -44,21 +44,23 @@ const renderer = new class extends marked.Renderer {
 }
 
 export default async () => {
-  const { posts }: { posts: Post[] } = await jdown('content', {
-    breaks: true,
-    renderer,
-    langPrefix: 'language-',
-    highlight: function (code: string, lang: string) {
-      const language = !lang || lang === 'html' ? 'markup' : lang;
+  const { posts } = await jdown('content', {
+    markdown: {
+      breaks: true,
+      renderer,
+      langPrefix: 'language-',
+      highlight: function (code: string, lang: string) {
+        const language = !lang || lang === 'html' ? 'markup' : lang
 
-      if (!Prism.languages[language]) {
-        loadLanguages([language])
-      }
+        if (!Prism.languages[language]) {
+          loadLanguages([language])
+        }
 
-      return Prism.languages[language]
-        ? Prism.highlight(code, Prism.languages[language]) : code;
-    }
-  })
+        return Prism.languages[language]
+          ? Prism.highlight(code, Prism.languages[language], language) : code
+      },
+    },
+  }) as { posts: Post[] }
 
   posts.sort((a, b) => a.date < b.date ? 1 : -1)
 
