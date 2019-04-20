@@ -8,7 +8,7 @@ export interface Props {
 }
 
 const range = (n: number) => {
-  const arr = new Array(n);
+  const arr = new Array(n)
 
   for (let i = 0; i < n; ++i) arr[i] = i
 

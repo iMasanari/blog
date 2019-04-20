@@ -4,8 +4,8 @@ import { State, Actions } from '..'
 
 interface Props {
   [key: string]: any
-  to: string;
-  location?: Location;
+  to: string
+  location?: Location
 }
 
 export const Link = ({ to, ...props }: Props, childlen?: VNode) =>

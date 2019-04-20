@@ -102,7 +102,7 @@ export default async () => {
       },
       meta: {
         description: 'iMasanariの技術ブログ',
-      }
+      },
     })),
     // TODO: Redirect
     // { path: '/blog', redirect: '/' },
@@ -128,7 +128,7 @@ export default async () => {
         meta: {
           description: post.description,
           image: post.image,
-        }
+        },
       }
     }),
     // { path: '/tags', redirect: '/' },
@@ -142,7 +142,7 @@ export default async () => {
           .map(({ title, slug, date, tags }) => ({ title, slug, date, tags })),
         tag,
       },
-      meta: {}
+      meta: {},
     })),
     // { is404: true, component: 'src/containers/404' }
   ]
