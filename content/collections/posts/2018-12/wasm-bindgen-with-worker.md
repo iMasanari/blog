@@ -4,10 +4,11 @@ description: WebAssembly Advent Calendar 2018の20日目の記事。
 slug: wasm-bindgen-with-worker
 tags: [Rust, wasm-bindgen, TypeScript, parcel]
 date: 2018-12-20T14:58:37.388Z
+update: 2019-04-20T13:15:27.878Z
 ---
 
 [WebAssembly Advent Calendar 2018][advent-calendar-wasm]の20日目の記事。
-※ 12/25: 修正、追記
+※ 2019/4/20: 修正
 
 ## TL;DR
 
@@ -36,7 +37,7 @@ parcelのparcel-plugin-wasm.rsプラグインを使用しよう！
 - 中間ファイル生成（Rust→wasm）のせいで、ビルドタスクが煩雑になる
 - ライブリロード
   - ワンテンポ遅いタイミングでページ全体のリロードがされる
-  - ページ全体リロードの読み込み時間も長い
+  - リロードの読み込み時間も長い
 
 エントリーファイルの問題は、WebWorkerのファイル名にハッシュ（`worker.2290ab9e.js`の`2290ab9e`部分）が付けられないことである。今回はスクリプトがView、WebWorker、WASMの3ファイルに分かれるので、キャッシュ対策のためにも必要度は高い。
 
@@ -46,8 +47,7 @@ parcelのparcel-plugin-wasm.rsプラグインを使用しよう！
 Webpackで環境を作って数日後、ふと別のモジュールバンドラを使用すればよいのではと思い、parcelで試してみた。すると、上記のエントリーファイル問題、中間ファイル問題を解決することができた。
 ライブリロードの件は一応差分更新を試みてくれるが、Rustの更新内容は反映されなかった。ただ、普段ライブリロードは使わず、またワンテンポ遅れの全リロードでないためそこまで問題は感じていない。
 
-なぜ最初にparcelで試さなかったのかというと、情報がWebpackのものしかなかったからだ。なので今回、parcelでWebWorker + WebAssemblyを扱う方法を共有したい。
-（といっても、parcelがゼロコンフィグなモジュールバンドラのため、そこまで凝ったことはしていないが）
+なぜ最初にparcelで試さなかったのかというと、情報がWebpackのものしかなかったからだ。なので今回、parcelでWebWorker + WebAssemblyを扱う方法を共有したい。（といっても、parcelがゼロコンフィグなモジュールバンドラのため、そこまで凝ったことはしていない）
 
 
 ## 各種インストール
@@ -56,10 +56,10 @@ Node.jsやRustはインストール済みとする。
 
 parcelのインストール
 
-parcel-plugin-wasm.rs v1.2.7はparcel-bundler v1.11.0に対応していないのかビルドエラーになったため、バージョンを指定してインストールしている。
+~parcel-plugin-wasm.rs v1.2.7はparcel-bundler v1.11.0に対応していないのかビルドエラーになったため、バージョンを指定してインストールしている。~ ※最新バージョンで治っていることを確認。
 
 ```bash
-$ npm install -D parcel-bundler@1.10.x parcel-plugin-wasm.rs
+$ npm install -D parcel-bundler parcel-plugin-wasm.rs
 ```
 
 parcel-plugin-wasm.rsはRustをwasm-packでコンパイルするためのparcelのプラグイン。wasm-packのインストールがまだの場合はインストールする。
@@ -105,10 +105,10 @@ src
     "build": "parcel build src/index.html",
   },
   "devDependencies": {
-    "@types/webassembly-js-api": "0.0.2",
-    "parcel-bundler": "^1.10.3",
-    "parcel-plugin-wasm.rs": "^1.2.6",
-    "typescript": "^3.2.2"
+    "@types/webassembly-js-api": "0.0.3",
+    "parcel-bundler": "^1.12.3",
+    "parcel-plugin-wasm.rs": "^1.2.8",
+    "typescript": "^3.4.2"
   },
   "browserslist": [
     "last 2 chrome versions"
@@ -116,7 +116,7 @@ src
 }
 ```
 
-```text
+```toml
 # Cargo.toml
 [package]
 name = "wasm"
@@ -146,7 +146,7 @@ path = "./src/wasm/lib.rs"
 }
 ```
 
-WebAssembly未対応のIEを切り捨て、TypeScriptのコンパイルはes2015で行っている。parcelのbabel側で変換されないよう、`package.json`では`browserslist`の設定を行う。
+WebAssembly未対応のIEを切り捨て、TypeScriptのコンパイルはes2015で行っている。parcelのbabel側でes5に変換されないよう、`package.json`では`browserslist`の設定を行う。
 
 ## 各ファイル
 

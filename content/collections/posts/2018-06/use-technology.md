@@ -4,7 +4,13 @@ description: この技術ブログで使用したライブラリやツールを�
 slug: use-technology
 tags: [blog, React, preact, TypeScript, ReactStatic]
 date: 2018-06-30T14:52:29.225Z
+update: 2019-04-20T13:15:27.878Z
 ---
+
+## 追記
+
+現在はHyperappを使用しています。詳しくはこちら
+[ブログをHyperappベースの自作ジェネレータに変更した話](/blog/use-hyperapp/)
 
 ## 使用した技術
 
@@ -25,7 +31,7 @@ ReactはViewだけのシンプルなライブラリで、よく他のライブ�
 - [Angular](https://github.com/angular/angular)
   重そう。機能過多っぽそう。
 - [Hyperapp](https://github.com/hyperapp/hyperapp)
-  私がView系ライブラリに求める条件が一通り揃っていて、preactより軽量。気にはなっているが、SPA+staticなサイトを作るジェネレータがなさそうだったので今回は見送りました。いずれ自作して置き換えるかもしれないです。
+  私がView系ライブラリに求める条件が一通り揃っていて、preactより軽量。気にはなっているが、SPA+staticなサイトを作るジェネレータがなさそうだったので今回は見送った。いずれ自作して置き換えるかもしれない。
 
 
 ### TypeScript
