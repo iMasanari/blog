@@ -7,7 +7,7 @@ import './App.css'
 export default () =>
   <div class="App">
     <Header />
-    <div class="content">
+    <div class="App-content">
       <Route />
     </div>
     <Footer />

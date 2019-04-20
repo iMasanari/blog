@@ -1,35 +1,10 @@
-body {
-  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue',
-    Helvetica, Arial, 'Lucida Grande', sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-}
-
-a {
-  text-decoration: none;
-  color: #108db8;
-  font-weight: bold;
-}
-
-img {
-  max-width: 100%;
-}
-
-h2 {
-  border-bottom: 1px solid #6c6c6c;
-  border-right: 1px solid #6c6c6c;
-  padding-left: 0.5em;
-}
-
 .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.content {
+.App-content {
   flex: 1;
   box-sizing: border-box;
   width: 100%;
