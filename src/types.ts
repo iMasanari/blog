@@ -6,4 +6,5 @@ export interface Post {
   contents: string
   date: string
   image?: string
+  draft?: boolean
 }

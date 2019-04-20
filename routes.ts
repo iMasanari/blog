@@ -43,26 +43,30 @@ const renderer = new class extends marked.Renderer {
   }
 }
 
+const highlight = (code: string, lang: string) => {
+  const language = !lang || lang === 'html' ? 'markup' : lang
+
+  if (!Prism.languages[language]) {
+    loadLanguages([language])
+  }
+
+  return Prism.languages[language]
+    ? Prism.highlight(code, Prism.languages[language], language) : code
+}
+
 export default async () => {
-  const { posts } = await jdown('content', {
+  const content = await jdown('content', {
     markdown: {
       breaks: true,
-      renderer,
       langPrefix: 'language-',
-      highlight: function (code: string, lang: string) {
-        const language = !lang || lang === 'html' ? 'markup' : lang
-
-        if (!Prism.languages[language]) {
-          loadLanguages([language])
-        }
-
-        return Prism.languages[language]
-          ? Prism.highlight(code, Prism.languages[language], language) : code
-      },
+      renderer,
+      highlight,
     },
   }) as { posts: Post[] }
 
-  posts.sort((a, b) => a.date < b.date ? 1 : -1)
+  const posts = content.posts
+    .filter(post => !post.draft)
+    .sort((a, b) => a.date < b.date ? 1 : -1)
 
   posts.forEach(v => {
     v.date = formatDate(new Date(v.date))
