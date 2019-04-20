@@ -13,6 +13,10 @@ a {
   font-weight: bold;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 
 /* markdown */
 
@@ -24,6 +28,12 @@ h2 {
 
 img {
   max-width: 100%;
+}
+
+code {
+  padding: .1em .4em;
+  background-color:#EEEEEE;
+  border-radius: 3px;
 }
 
 
