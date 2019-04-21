@@ -2,7 +2,7 @@
 
 import { readFileSync } from 'fs'
 import { app, h } from 'hyperapp'
-import { withRender } from '@hyperapp/render'
+import { withRender, Render } from '@hyperapp/render'
 import { load } from 'cheerio'
 import { minify } from 'html-minifier'
 import critical from 'critical'
@@ -12,15 +12,15 @@ import MetaData from '../src/MetaData'
 const template = readFileSync('./dist/index.html', 'utf-8')
 const sitemap = JSON.parse(readFileSync('./build-cache/sitemap.json', 'utf-8'))
 
-const render = withRender(app)
+const render = withRender<typeof app, Render<any, any>>(app)
 
 const main = async () => {
   for (const path of Object.keys(sitemap)) {
     const { data, meta } = sitemap[path]
 
     const state = { data }
-    const markup = render(state, {}, () => h(App)).toString()
-    const metaData = render(state, {}, () => h(MetaData, { path, meta })).toString()
+    const markup = render(state, {}, () => h(App), null).toString()
+    const metaData = render(state, {}, () => h(MetaData, { path, meta }), null).toString()
     const initData = `<script>\nvar __data = ${JSON.stringify(state.data, null, 2)};\n</script>`
 
     const $ = load(template)

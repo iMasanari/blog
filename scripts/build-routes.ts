@@ -5,16 +5,16 @@ import { readFileSync } from 'fs'
 import routesConfig from '../routes'
 import createFile from './createFile'
 
-const unwarpFn = (config, arg) =>
-  typeof config === 'function' ? config(arg) : config
+const unwarpFn = <T>(config: T | (() => T)) =>
+  typeof config === 'function' ? (config as () => T)() : config
 
 const main = async () => {
   const routes = await routesConfig()
   const components = Array.from(new Set(routes.map((route) => route.component)))
 
-  const imports = []
-  const names = []
-  const mapping = {}
+  const imports = [] as string[]
+  const names = [] as string[]
+  const mapping = {} as Record<string, number>
 
   components.forEach((component, i) => {
     const name = `$${i + ('_' + component).replace(/[^a-zA-Z0-9]+/g, '_')}`
@@ -40,8 +40,8 @@ const main = async () => {
         props: unwarpFn(route.data) || {},
       },
       meta: unwarpFn(route.meta) || {},
-    }
-  }), {})
+    },
+  }), {} as Record<string, { data: any, meta: any }>)
 
   createFile(
     'build-cache/sitemap.json',

@@ -9,6 +9,8 @@ declare module '*.png'
 
 declare module 'prismjs/components/'
 
+declare module 'critical'
+
 // jdown
 declare module 'imagemin-jpegtran' {
   export type Options = unknown
