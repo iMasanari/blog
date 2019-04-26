@@ -1,0 +1,28 @@
+$cursor-url: auto;
+$cursor-click-url: auto;
+$font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue',
+    Helvetica, Arial, 'Lucida Grande', sans-serif;
+
+// utilities
+@import "node_modules/nes.css/scss/base/color-palette.scss";
+@import "node_modules/nes.css/scss/base/variables.scss";
+@import "node_modules/nes.css/scss/utilities/_index.scss";
+
+// cssリセット 必要かは要検証
+@import "node_modules/nes.css/scss/base/reboot.scss";
+@import "node_modules/nes.css/scss/base/generic.scss";
+
+body {
+  font-weight: 300;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+// elements
+@import "node_modules/nes.css/scss/elements/containers.scss";
+@import "node_modules/nes.css/scss/elements/buttons.scss";
+
+.nes-container.is-rounded {
+  margin-bottom: 32px;
+}

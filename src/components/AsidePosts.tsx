@@ -11,9 +11,11 @@ interface Props {
 }
 
 export default ({ tags, posts }: Props) =>
-  <aside>
-    <div class="AsidePosts-title">同じタグを含む記事</div>
-    <PostTags tags={tags} />
+  <aside class="nes-container with-title">
+    <div class="title">
+      <span class="AsidePosts-title">同じタグを含む記事</span>
+      <PostTags tags={tags} />
+    </div>
     <ul class="AsidePosts-ul">
       {posts.map((post) =>
         <li class="AsidePosts-li" key={post.slug}>

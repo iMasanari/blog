@@ -5,7 +5,7 @@ import PostPager from '../components/PostPager'
 import { Actions, State } from '..'
 import AsidePosts from '../components/AsidePosts'
 import linkObserver from '../routing/linkObserver'
-// import 'prismjs/themes/prism.css'
+import './Post.css'
 
 interface Props {
   post: Post
@@ -21,10 +21,12 @@ const updateHundler = (el: HTMLElement) => {
 export default ({ post, prev, next, sameTags }: Props) =>
   (_state: State, actions: Actions) =>
     <div>
-      <article>
-        <span>{post.date}</span>
-        <h1>{post.title}</h1>
-        <PostTags tags={post.tags} />
+      <article class="nes-container">
+        <div class="Post-header">
+          <span>{post.date}</span>
+          <h1>{post.title}</h1>
+          <PostTags tags={post.tags} />
+        </div>
         <div
           innerHTML={post.contents}
           oncreate={(el: HTMLElement) => {
