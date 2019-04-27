@@ -22,7 +22,12 @@ body {
 // elements
 @import "node_modules/nes.css/scss/elements/containers.scss";
 @import "node_modules/nes.css/scss/elements/buttons.scss";
+@import "node_modules/nes.css/scss/elements/tables.scss";
 
 .nes-container.is-rounded {
   margin-bottom: 32px;
+}
+
+.nes-table-responsive {
+  margin-bottom: 1rem;
 }

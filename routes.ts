@@ -50,6 +50,12 @@ const renderer = new class extends marked.Renderer {
 
     return `<h${level}>${text}</h${level}>`
   }
+  table(header: string, body: string) {
+    const tableTag = '<div class="nes-table-responsive"><table class="nes-table is-bordered is-centered">'
+    const tableTagEnd = '</table></div>'
+
+    return `${tableTag}<thead>${header}</thead>${body ? `<tbody>${body}</tbody>` : body}${tableTagEnd}`
+  }
 }
 
 const highlight = (code: string, lang: string) => {
