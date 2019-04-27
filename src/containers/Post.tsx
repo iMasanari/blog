@@ -21,7 +21,7 @@ const updateHundler = (el: HTMLElement) => {
 export default ({ post, prev, next, sameTags }: Props) =>
   (_state: State, actions: Actions) =>
     <div>
-      <article class="nes-container">
+      <article class="nes-container shared-main-container">
         <div class="Post-header">
           <span>{post.date}</span>
           <h1>{post.title}</h1>

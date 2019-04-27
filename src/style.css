@@ -4,6 +4,8 @@
 /* prismjs */
 @import url("./styles/prism.css");
 
+@import url("./styles/shared.css");
+
 /* markdown */
 
 img {

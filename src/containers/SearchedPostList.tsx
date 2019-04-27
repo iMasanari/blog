@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default ({ posts, tag }: Props) =>
-  <div class="nes-container">
+  <div class="nes-container shared-main-container">
     <div>
       <Link to="/">TOP</Link>
       {' > '}
