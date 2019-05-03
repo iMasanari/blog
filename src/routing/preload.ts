@@ -1,4 +1,4 @@
-import { Data } from '../'
+import { Data } from '~/modules/state'
 
 const loading = {} as Record<string, boolean>
 const cache = {} as Record<string, Data>

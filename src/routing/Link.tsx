@@ -1,6 +1,7 @@
 import { h, VNode } from 'hyperapp'
 import linkObserver from './linkObserver'
-import { State, Actions } from '..'
+import { Actions } from '~/modules/actions'
+import { State } from '~/modules/state'
 
 interface Props {
   [key: string]: any

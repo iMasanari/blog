@@ -1,6 +1,6 @@
 import { h } from 'hyperapp'
 import { title as siteTitle, siteRoot, GA_TRACKING_ID } from './constants'
-import { State } from '.'
+import { State } from '~/modules/state'
 
 interface Props {
   path?: string
