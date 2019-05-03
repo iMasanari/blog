@@ -1,9 +1,13 @@
-/* nes.css + reboot */
+/* reboot */
+@import url("./styles/reboot.scss");
+
+/* nes.css */
 @import url("./styles/nes.scss");
 
 /* prismjs */
 @import url("./styles/prism.css");
 
+/* shared */
 @import url("./styles/shared.css");
 
 /* markdown */
