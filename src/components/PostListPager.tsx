@@ -20,6 +20,6 @@ export default ({ page, max }: Props) =>
     {range(max).map((i) =>
       i + 1 === page
         ? <span class="PostListPager-item">{i + 1}</span>
-        : <Link class="PostListPager-item" to={i ? `/p${i + 1}/` : '/'}>{i + 1}</Link>
+        : <Link class="PostListPager-item nes-btn" to={i ? `/p${i + 1}/` : '/'}>{i + 1}</Link>
     )}
   </div>

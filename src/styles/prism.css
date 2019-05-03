@@ -1,0 +1,14 @@
+@import url("prismjs/themes/prism.css");
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	background: initial;
+}
+
+/* nes.cssが下でマージンをとっているため */
+pre[class*="language-"] {
+  margin-bottom: 1rem;
+}

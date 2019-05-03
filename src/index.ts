@@ -1,8 +1,8 @@
+import './style.css'
 import { app } from 'hyperapp'
 import App from './App'
 import { GA_TRACKING_ID } from './constants'
 import { load } from './routing/preload'
-import './style.css'
 
 const data = (window.__data || {}) as Data
 const gtag = window.gtag as ((...args: any[]) => void) | undefined

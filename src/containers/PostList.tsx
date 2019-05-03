@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default ({ posts, pager }: Props) =>
-  <div>
+  <div class="nes-container shared-main-container">
     <Posts posts={posts} />
     <PostListPager page={pager.page} max={pager.max} />
   </div>

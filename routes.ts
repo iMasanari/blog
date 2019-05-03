@@ -15,6 +15,8 @@ const formatDate = (date: Date) => {
   return `${year}-${month}-${date_}`
 }
 
+const sectionTag = '<section class="nes-container is-rounded with-title">'
+
 const renderer = new class extends marked.Renderer {
   options: any
 
@@ -40,6 +42,19 @@ const renderer = new class extends marked.Renderer {
     return lang
       ? `<pre class="${classMap}"><code class="${classMap}">${out}\n</code></pre>`
       : `<pre><code>${out}\n</code></pre>`
+  }
+  heading(text: string, level: number, raw: string, slugger: marked.Slugger) {
+    if (level === 2) {
+      return `</section>${sectionTag}<h${level} class="title">${text}</h${level}>`
+    }
+
+    return `<h${level}>${text}</h${level}>`
+  }
+  table(header: string, body: string) {
+    const tableTag = '<div class="nes-table-responsive"><table class="nes-table is-bordered is-centered">'
+    const tableTagEnd = '</table></div>'
+
+    return `${tableTag}<thead>${header}</thead>${body ? `<tbody>${body}</tbody>` : body}${tableTagEnd}`
   }
 }
 
@@ -68,10 +83,12 @@ export default async () => {
     .filter(post => !post.draft)
     .sort((a, b) => a.date < b.date ? 1 : -1)
 
+  const emptySection = `${sectionTag}</section>`
+
   posts.forEach(v => {
     v.date = formatDate(new Date(v.date))
 
-    v.contents = minify(v.contents, {
+    v.contents = minify(`${sectionTag}${v.contents}</section>`.replace(emptySection, ''), {
       collapseBooleanAttributes: true,
       // collapseInlineTagWhitespace: true,
       collapseWhitespace: true,

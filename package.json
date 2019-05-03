@@ -23,7 +23,9 @@
     "deploy": "gh-pages -d dist -b master"
   },
   "dependencies": {
-    "hyperapp": "^1.2.9"
+    "bootstrap": "^4.3.1",
+    "hyperapp": "^1.2.9",
+    "nes.css": "^2.1.1"
   },
   "devDependencies": {
     "@hyperapp/render": "^2.1.0",
@@ -41,6 +43,7 @@
     "jdown": "^1.0.1",
     "marked": "^0.5.x",
     "mkdirp": "^0.5.1",
+    "node-sass": "^4.11.0",
     "parcel-bundler": "^1.12.3",
     "prismjs": "^1.16.0",
     "textlint": "^11.2.3",
