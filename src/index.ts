@@ -42,14 +42,14 @@ const actions = {
       gtag('config', GA_TRACKING_ID, { page_path: path })
     }
   },
-  linkHandler(event: Event) {
+  linkHandler(event: MouseEvent) {
     const target = (event.currentTarget as HTMLElement).tagName.toLowerCase() === 'a'
       ? event.currentTarget
       : event.target
 
     const to = (target as HTMLElement).getAttribute('href')!
 
-    if (/^http/.test(to)) return
+    if (/^http/.test(to) || isModifiedEvent(event)) return
 
     event.preventDefault()
     const scrollTop = document.documentElement!.scrollTop || document.body.scrollTop
@@ -61,6 +61,9 @@ const actions = {
     setTimeout(() => scrollTo(0, 0))
   },
 }
+
+const isModifiedEvent = (e: MouseEvent) =>
+  e.metaKey || e.altKey || e.ctrlKey || e.shiftKey
 
 export type State = typeof state
 export type Actions = typeof actions

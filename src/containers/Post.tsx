@@ -34,7 +34,7 @@ export default ({ post, prev, next, sameTags }: Props) =>
             updateHundler(el)
           }}
           onupdate={updateHundler}
-          onclick={(e: Event) => {
+          onclick={(e: MouseEvent) => {
             const el = e.target as HTMLElement
 
             if (el.tagName.toLowerCase() === 'a') {
