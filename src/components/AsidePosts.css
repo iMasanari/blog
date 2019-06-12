@@ -12,3 +12,7 @@
   margin: 1em 0;
   padding: 0;
 }
+
+.AsidePosts-li:last-child {
+  margin-bottom: 0;
+}

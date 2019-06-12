@@ -18,6 +18,10 @@ img {
 
 code {
   padding: .1em .4em;
-  background-color:#EEEEEE;
+  background-color: #EEEEEE;
   border-radius: 3px;
+}
+
+code[class*="language-"] {
+  padding: 0;
 }
