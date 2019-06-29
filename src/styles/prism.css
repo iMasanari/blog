@@ -5,7 +5,7 @@
 .token.url,
 .language-css .token.string,
 .style .token.string {
-	background: initial;
+  background: transparent;
 }
 
 /* nes.cssが下でマージンをとっているため */

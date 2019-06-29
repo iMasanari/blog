@@ -2,6 +2,7 @@
   padding: 1rem;
   margin: 0 0 !important;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .Footer a {

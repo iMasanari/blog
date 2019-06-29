@@ -16,7 +16,11 @@ interface Props {
 }
 
 const updateHundler = (el: HTMLElement) => {
-  el.querySelectorAll('a').forEach(linkObserver)
+  const list = el.querySelectorAll('a')
+
+  for (let i = 0, len = list.length; i < len; ++i) {
+    linkObserver(list[i])
+  }
 }
 
 export default ({ post, prev, next, sameTags }: Props) =>
