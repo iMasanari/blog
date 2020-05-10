@@ -54,6 +54,6 @@ $ npx gh-pages -d dist -b master
 
 ## まとめ
 
-gitにはsubtreeという機能がある
-でも`.gitignore`が優先されてしまう
+gitにはsubtreeという機能がある。
+でも`.gitignore`が優先されてしまう。
 [gh-pages](https://github.com/tschaub/gh-pages)が超便利！
