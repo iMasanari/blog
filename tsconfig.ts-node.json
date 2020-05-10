@@ -1,8 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "target": "ES2015",
     "module": "commonjs",
     "strict": false,
     "allowJs": true
-  },
+  }
 }
