@@ -3,7 +3,7 @@ export interface Post {
   description: string
   slug: string
   tags: string[]
-  contents: string
+  body: string
   date: string
   image?: string
   draft?: boolean
