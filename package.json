@@ -10,7 +10,7 @@
     "prebuild": "rm -rf .next out",
     "build": "next build && next export",
     "test": "npm run test:textlint && npm run test:tsc",
-    "test:textlint": "textlint ./content",
+    "test:textlint": "textlint ./contents",
     "test:tsc": "tsc -p . --noEmit"
   },
   "dependencies": {
