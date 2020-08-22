@@ -21,6 +21,10 @@ const App = ({ Component, pageProps }: AppProps) =>
 export default withGA(GA_TRACKING_ID, Router)(App)
 
 const globalStyles = css.global`
+main {
+  display: block;
+}
+
 header + main {
   padding-top: 0;
 }
