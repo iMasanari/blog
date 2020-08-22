@@ -1,1 +1,0 @@
-{"component":2,"title":"「parcel」タグの一覧 - Tech SANDBOX","props":{"posts":[{"title":"ブログ開発をParcelに変更した","slug":"use-parcel","date":"2019-04-26","tags":["parcel","blog"]},{"title":"Rust + wasm-bindgen + WebWorkerの環境構築","slug":"wasm-bindgen-with-worker","date":"2018-12-20","tags":["Rust","wasm-bindgen","TypeScript","parcel"]}],"tag":"parcel"}}
