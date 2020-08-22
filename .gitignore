@@ -1,23 +1,3 @@
-# dependencies
-/node_modules
-
-# testing
-/coverage
-
-# production
-/dist
-/tmp
-/build-cache
-.cache
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.rpt2_cache
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+node_modules
+.next
+out
