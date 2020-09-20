@@ -56,7 +56,9 @@ Node.jsやRustはインストール済みとする。
 
 parcelのインストール
 
-~~parcel-plugin-wasm.rs v1.2.7はparcel-bundler v1.11.0に対応していないのかビルドエラーになったため、バージョンを指定してインストールしている。~~ ※最新バージョンで治っていることを確認。
+~~parcel-plugin-wasm.rs v1.2.7はparcel-bundler v1.11.0に対応していないのかビルドエラーになったため、バージョンを指定してインストールしている。~~
+
+※最新バージョンで治っていることを確認。
 
 ```bash
 $ npm install -D parcel-bundler parcel-plugin-wasm.rs

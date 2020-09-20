@@ -1,6 +1,8 @@
 {
   "rules": {
     "preset-japanese": true,
-    "preset-jtf-style": true
+    "preset-jtf-style": {
+      "4.2.2.疑問符(？)": false
+    }
   }
 }
