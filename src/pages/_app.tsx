@@ -1,9 +1,7 @@
-import 'mvp.css'
 // @ts-expect-error
 import withGA from 'next-ga'
 import { AppProps } from 'next/app'
 import Router from 'next/router'
-import 'prismjs/themes/prism-okaidia.css'
 import React from 'react'
 import css from 'styled-jsx/css'
 import { Footer } from '~/components/organisms/Footer'
@@ -21,6 +19,9 @@ const App = ({ Component, pageProps }: AppProps) =>
 export default withGA(GA_TRACKING_ID, Router)(App)
 
 const globalStyles = css.global`
+@import 'mvp.css';
+@import 'prismjs/themes/prism-okaidia.css';
+
 main {
   display: block;
 }

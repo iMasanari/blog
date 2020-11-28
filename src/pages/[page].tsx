@@ -1,13 +1,15 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { PostThumb } from '../components/molecules/PostHeader'
+import { Posts } from '../components/organisms/Posts'
 import { Head } from '~/components/molecules/Head'
 import { Pager } from '~/components/molecules/Pager'
 import { POST_LIMIT_OF_PAGES } from '~/constants'
 import { getAllPosts } from '~/static-api/contests'
 import { range } from '~/utils/array'
-import { PostThumb } from '../components/molecules/PostHeader'
-import { Posts } from '../components/organisms/Posts'
+
+export const config = { amp: 'hybrid' }
 
 type Query = {
   page?: string
