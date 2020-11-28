@@ -8,6 +8,8 @@ import { SUGGEST_LIMIT } from '~/constants'
 import { getAllPosts, getPost } from '~/static-api/contests'
 import { Post as IPost } from '~/types'
 
+export const config = { amp: 'hybrid' }
+
 type Query = {
   slug: string
 }

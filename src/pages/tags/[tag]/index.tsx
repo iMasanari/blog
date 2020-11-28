@@ -1,6 +1,8 @@
 import { GetStaticPaths } from 'next'
-import { getTags } from '~/static-api/contests'
 import Tags, { getStaticProps } from './[page]'
+import { getTags } from '~/static-api/contests'
+
+export const config = { amp: 'hybrid' }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const tags = getTags()

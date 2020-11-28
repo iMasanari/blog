@@ -9,6 +9,8 @@ import { POST_LIMIT_OF_PAGES } from '~/constants'
 import { getAllPosts, getTags } from '~/static-api/contests'
 import { range } from '~/utils/array'
 
+export const config = { amp: 'hybrid' }
+
 type Query = {
   tag: string
   page?: string
