@@ -1,6 +1,7 @@
 // @ts-expect-error
 import withGA from 'next-ga'
 import { AppProps } from 'next/app'
+import Head from 'next/head'
 import Router from 'next/router'
 import React from 'react'
 import css from 'styled-jsx/css'
@@ -10,6 +11,9 @@ import { GA_TRACKING_ID, SITE_NAME } from '~/constants'
 
 const App = ({ Component, pageProps }: AppProps) =>
   <>
+    <Head>
+      <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
+    </Head>
     <Header title={SITE_NAME} description="技術ブログ改め、Qiitaの下書き" />
     <Component {...pageProps} />
     <Footer />
