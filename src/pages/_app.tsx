@@ -1,7 +1,7 @@
+import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core'
 // @ts-expect-error
 import withGA from 'next-ga'
 import { AppProps } from 'next/app'
-import Head from 'next/head'
 import Router from 'next/router'
 import React from 'react'
 import css from 'styled-jsx/css'
@@ -9,21 +9,21 @@ import { Footer } from '~/components/organisms/Footer'
 import { Header } from '~/components/organisms/Header'
 import { GA_TRACKING_ID, SITE_NAME } from '~/constants'
 
+const theme = createMuiTheme({
+})
+
 const App = ({ Component, pageProps }: AppProps) =>
-  <>
-    <Head>
-      <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
-    </Head>
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
     <Header title={SITE_NAME} description="技術ブログ改め、Qiitaの下書き" />
     <Component {...pageProps} />
     <Footer />
     <style jsx global>{globalStyles}</style>
-  </>
+  </ThemeProvider>
 
 export default withGA(GA_TRACKING_ID, Router)(App)
 
 const globalStyles = css.global`
-@import 'mvp.css';
 @import 'prismjs/themes/prism-okaidia.css';
 
 main {
