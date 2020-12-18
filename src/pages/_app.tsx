@@ -6,37 +6,26 @@ import Router from 'next/router'
 import React from 'react'
 import css from 'styled-jsx/css'
 import { Footer } from '~/components/organisms/Footer'
-import { Header } from '~/components/organisms/Header'
+import Header from '~/components/organisms/Header'
 import { GA_TRACKING_ID, SITE_NAME } from '~/constants'
 
 const theme = createMuiTheme({
 })
 
-const App = ({ Component, pageProps }: AppProps) =>
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Header title={SITE_NAME} description="技術ブログ改め、Qiitaの下書き" />
-    <Component {...pageProps} />
-    <Footer />
-    <style jsx global>{globalStyles}</style>
-  </ThemeProvider>
-
-export default withGA(GA_TRACKING_ID, Router)(App)
+export default withGA(GA_TRACKING_ID, Router)(function App({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Header title={SITE_NAME} description="技術ブログ改め、Qiitaの下書き" />
+      <Component {...pageProps} />
+      <Footer />
+      <style jsx global>{globalStyles}</style>
+    </ThemeProvider>
+  )
+})
 
 const globalStyles = css.global`
 @import 'prismjs/themes/prism-okaidia.css';
-
-main {
-  display: block;
-}
-
-header + main {
-  padding-top: 0;
-}
-
-header:last-child {
-  padding-bottom: 0;
-}
 
 pre {
   overflow: auto;
