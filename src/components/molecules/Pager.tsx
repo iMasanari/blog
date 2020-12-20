@@ -1,48 +1,36 @@
-import css from 'styled-jsx/css'
-import { range } from '~/utils/array'
-import { PagerLink } from '../atoms/PagerLink'
+import { makeStyles } from '@material-ui/core'
+import { Pagination, PaginationItem } from '@material-ui/lab'
+import React from 'react'
+import LinkBehavior from '../atoms/LinkBehavior'
 
-export interface Pager {
-  current: number
-  max: number
-}
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+}))
 
 interface Props {
-  pager: Pager
-  basePath?: string
-  basePathAs?: string
+  page: number
+  count: number
+  basePath: string
 }
 
-export const Pager = ({ pager, basePath, basePathAs }: Props) =>
-  <ul className="Pager">
-    {range(pager.max).map((index) =>
-      <li key={index} className="item">
-        <PagerLink
-          label={index + 1}
-          active={index + 1 === pager.current}
-          basePath={basePath}
-          basePathAs={basePathAs}
+export default function Pager({ page, count, basePath }: Props) {
+  const classes = useStyles()
+
+  return (
+    <Pagination
+      className={classes.root}
+      page={page}
+      count={count}
+      renderItem={(item) =>
+        <PaginationItem
+          component={LinkBehavior}
+          href={`${basePath}${item.page === 1 ? '' : `p${item.page}`}`}
+          {...item}
         />
-      </li>
-    )}
-    <style jsx>{styles}</style>
-  </ul>
-
-const styles = css`
-.Pager {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin-right: auto;
-  margin-left: auto;
+      }
+    />
+  )
 }
-
-.item {
-  margin-right: 1rem;
-}
-
-.item:last-child {
-  margin-right: 0;
-}
-`

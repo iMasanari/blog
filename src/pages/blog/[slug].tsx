@@ -1,9 +1,11 @@
+import { Container } from '@material-ui/core'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { Head } from '~/components/molecules/Head'
+import React from 'react'
+import Head from '~/components/molecules/Head'
 import { PostThumb } from '~/components/molecules/PostHeader'
-import { PostPager } from '~/components/molecules/PostPager'
-import { AsidePosts } from '~/components/organisms/AsidePosts'
-import { Post } from '~/components/organisms/Post'
+import PostPager from '~/components/molecules/PostPager'
+import AsidePosts from '~/components/organisms/AsidePosts'
+import Post from '~/components/organisms/Post'
 import { SUGGEST_LIMIT } from '~/constants'
 import { getAllPosts, getPost } from '~/static-api/contests'
 import { Post as IPost } from '~/types'
@@ -44,14 +46,15 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
   return { props }
 }
 
-const Slug = ({ post, next, prev, sameTags }: Props) =>
-  <div>
-    <Head title={post.title} description={post.description} />
-    <Post post={post} />
-    <PostPager next={next} prev={prev} />
-    {sameTags.length > 0 && (
-      <AsidePosts tags={post.tags} posts={sameTags} />
-    )}
-  </div>
-
-export default Slug
+export default function Slug({ post, next, prev, sameTags }: Props) {
+  return (
+    <Container>
+      <Head title={post.title} description={post.description} />
+      <Post post={post} />
+      <PostPager next={next} prev={prev} />
+      {sameTags.length > 0 && (
+        <AsidePosts tags={post.tags} posts={sameTags} />
+      )}
+    </Container>
+  )
+}
