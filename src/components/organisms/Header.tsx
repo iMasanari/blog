@@ -10,6 +10,9 @@ import NavItem from '../molecules/NavItem'
 import SiteTitle from '../molecules/SiteTitle'
 
 const useStyles = makeStyles(theme => ({
+  appBar: {
+    overflow: 'hidden',
+  },
   title: {
     flexGrow: 1,
   },
@@ -69,7 +72,7 @@ export default function Header({ title, description }: Props) {
   return (
     <>
       <Slide appear={false} direction="down" in={!trigger}>
-        <AppBar position="fixed" color="default" elevation={1}>
+        <AppBar className={classes.appBar} amp-fx="float-in-top" position="fixed" color="default" elevation={1}>
           <Container component={Toolbar} disableGutters>
             <SiteTitle
               className={classes.title}
