@@ -16,7 +16,7 @@
   "dependencies": {
     "clsx": "^1.1.1",
     "mvp.css": "^1.6.2",
-    "next": "^10.0.3",
+    "next": "^11.1.0",
     "next-ga": "^2.3.4",
     "prismjs": "^1.22.0",
     "react": "^17.0.1",
