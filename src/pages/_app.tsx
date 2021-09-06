@@ -1,4 +1,4 @@
-import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core'
+import { createTheme, CssBaseline, ThemeProvider } from '@material-ui/core'
 // @ts-expect-error
 import withGA from 'next-ga'
 import { AppProps } from 'next/app'
@@ -9,7 +9,7 @@ import Footer from '~/components/organisms/Footer'
 import Header from '~/components/organisms/Header'
 import { GA_TRACKING_ID, SITE_NAME } from '~/constants'
 
-const theme = createMuiTheme({
+const theme = createTheme({
 })
 
 export default withGA(GA_TRACKING_ID, Router)(function App({ Component, pageProps }: AppProps) {
