@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core'
 import { useMemo } from 'react'
 
 interface Props {
@@ -14,8 +15,12 @@ const format = (time: string) => {
   return `${year}-${month}-${date}`
 }
 
-export const Time = ({ dateTime }: Props) => {
+export default function Time({ dateTime }: Props) {
   const date = useMemo(() => format(dateTime), [dateTime])
 
-  return <time dateTime={dateTime}>{date}</time>
+  return (
+    <Typography component="time" variant="body2" dateTime={dateTime}>
+      {date}
+    </Typography>
+  )
 }

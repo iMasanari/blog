@@ -1,27 +1,24 @@
-import Link from 'next/link'
-import css from 'styled-jsx/css'
+import { Typography } from '@material-ui/core'
+import React, { HTMLProps } from 'react'
+import Link from '../atoms/Link'
 
-interface Props {
-  label: string
-  isRoot: boolean
+interface Props extends HTMLProps<HTMLDivElement> {
+  title: string
+  description: string
+  isHeading?: boolean
 }
 
-export const SiteTitle = ({ label, isRoot }: Props) => {
-  const TitleTag = isRoot ? 'h1' : 'div'
-
+export default function SiteTitle({ title, description, isHeading, ...props }: Props) {
   return (
-    <TitleTag className="SiteTitle">
-      <Link href="/">
-        <a>{label}</a>
-      </Link>
-      <style jsx>{styles}</style>
-    </TitleTag>
+    <div {...props}>
+      <Typography variant="h6" component={isHeading ? 'h1' : 'div'} noWrap>
+        <Link href="/" color="inherit" underline="none">
+          {title}
+        </Link>
+      </Typography>
+      <Typography variant="body2" noWrap>
+        {description}
+      </Typography>
+    </div>
   )
 }
-
-const styles = css`
-.SiteTitle {
-  font-size: 2rem;
-  margin: 1rem 0;
-}
-`

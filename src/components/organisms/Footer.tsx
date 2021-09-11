@@ -1,20 +1,25 @@
-import css from 'styled-jsx/css'
+import { Container, Link, makeStyles, Typography } from '@material-ui/core'
 
-export const Footer = () =>
-  <footer className="Footer">
-    <p>
-      Author: <a href="https://github.com/iMasanari">iMasanari</a>
-    </p>
-    <small>
-      <a href="https://github.com/iMasanari/imasanari.github.io/">
-        {'Show on GitHub'}
-      </a>
-    </small>
-    <style jsx>{styles}</style>
-  </footer>
+const useStyles = makeStyles(theme => ({
+  root: {
+    textAlign: 'center',
+    margin: theme.spacing(4, 0),
+  },
+}))
 
-const styles = css`
-.Footer {
-  text-align: center;
+export default function Footer() {
+  const classes = useStyles()
+
+  return (
+    <footer className={classes.root}>
+      <Container>
+        <Typography gutterBottom>
+          Author: <Link href="https://github.com/iMasanari">iMasanari</Link>
+        </Typography>
+        <Link variant="body2" href="https://github.com/iMasanari/imasanari.github.io/">
+          {'Show on GitHub'}
+        </Link>
+      </Container>
+    </footer>
+  )
 }
-`

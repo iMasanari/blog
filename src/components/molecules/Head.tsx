@@ -8,7 +8,7 @@ interface Props {
   image?: string;
 }
 
-export const Head = ({ title, description, image }: Props) => {
+export default function Head({ title, description, image }: Props) {
   const router = useRouter()
 
   const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME
