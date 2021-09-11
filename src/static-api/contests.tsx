@@ -1,5 +1,3 @@
-import { renderToStaticMarkup } from 'react-dom/server'
-
 interface FrontMatter {
   title: string
   description: string
@@ -13,36 +11,33 @@ interface MDXModule {
   frontMatter: FrontMatter
 }
 
-const getModules = () => {
+const getPosts = () => {
   const contexts = require.context('@/contents/posts/', true, /\.mdx?$/)
 
   return contexts.keys().map((path) => {
-    const { default: Component, frontMatter } = contexts(path) as MDXModule
+    const { frontMatter } = contexts(path) as MDXModule
 
-    return { post: frontMatter, Component }
+    return frontMatter
   })
 }
 
 export const getAllPosts = () => {
-  const modules = getModules()
+  const posts = getPosts()
 
-  return modules.map(v => v.post).sort((a, b) => a.date > b.date ? -1 : 1)
+  return posts.sort((a, b) => a.date > b.date ? -1 : 1)
 }
 
 export const getPost = (slug: string) => {
-  const modules = getModules()
-  const module = modules.find(v => v.post.slug === slug)
+  const posts = getPosts()
+  const post = posts.find(v => v.slug === slug)
 
-  if (!module) throw new Error
+  if (!post) throw new Error
 
-  const { post, Component } = module
-  const body = renderToStaticMarkup(<Component />)
-
-  return { ...post, body }
+  return post
 }
 
 export const getTags = () => {
-  const modules = getModules()
+  const posts = getPosts()
 
-  return modules.flatMap(v => v.post.tags).sort()
+  return posts.flatMap(v => v.tags).sort()
 }

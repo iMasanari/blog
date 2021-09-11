@@ -1,24 +1,44 @@
-import Link from 'next/link'
+import { makeStyles, Typography } from '@material-ui/core'
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
+import React from 'react'
 import { Post } from '../../types'
-import { Time } from '../atoms/Time'
-import { Tags } from './Tags'
+import Link from '../atoms/Link'
+import Time from '../atoms/Time'
+import Tags from './Tags'
 
-export type PostThumb = Omit<Post, 'body'>
+const useStyles = makeStyles(theme => ({
+  createAt: {
+    display: 'flex',
+    alignItems: 'center',
+    margin: theme.spacing(1, 0),
+  },
+  icon: {
+    marginRight: theme.spacing(0.5),
+  },
+}))
 
 interface Props {
-  post: PostThumb
+  post: Post
   link?: boolean
 }
 
-export const PostHeader = ({ post, link }: Props) =>
-  <header>
-    <Time dateTime={post.date} />
-    <h1>
-      {!link ? post.title : (
-        <Link href="/blog/[slug]/" as={`/blog/${post.slug}/`}>
-          <a>{post.title}</a>
-        </Link>
-      )}
-    </h1>
-    <Tags tags={post.tags} />
-  </header>
+export default function PostHeader({ post, link }: Props) {
+  const classes = useStyles()
+
+  return (
+    <header>
+      <div className={classes.createAt}>
+        <CalendarTodayIcon fontSize="small" className={classes.icon} />
+        <Time dateTime={post.date} />
+      </div>
+      <Typography component="h1" variant="h5" gutterBottom>
+        {!link ? post.title : (
+          <Link href={`/blog/${post.slug}/`} >
+            {post.title}
+          </Link>
+        )}
+      </Typography>
+      <Tags tags={post.tags} />
+    </header>
+  )
+}

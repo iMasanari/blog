@@ -1,33 +1,38 @@
-import Link from 'next/link'
-import css from 'styled-jsx/css'
+import { makeStyles } from '@material-ui/core'
+import React, { ReactNode } from 'react'
+import Link from '../atoms/Link'
+
+const useStyles = makeStyles(theme => ({
+  list: {
+    padding: 0,
+    margin: 0,
+  },
+  item: {
+    display: 'inline',
+    padding: 0,
+    margin: 0,
+  },
+}))
+
+const separate = (separator: string, array: JSX.Element[]) =>
+  array.reduce((acc, v) => [...acc, separator, v], [] as ReactNode[])
 
 interface Props {
   tags: string[]
 }
 
-export const Tags = ({ tags }: Props) =>
-  <ul className="Tags">
-    {tags.map((tag) =>
-      <li key={tag} className="item">
-        <Link href="/tags/[tag]/" as={`/tags/${tag}/`}>
-          <a className="link">#{tag}</a>
-        </Link>
-      </li>
-    )}
-    <style jsx>{styles}</style>
-  </ul>
+export default function Tags({ tags }: Props) {
+  const classes = useStyles()
 
-const styles = css`
-.Tags {
-  padding: 0;
+  return (
+    <ul className={classes.list}>
+      {separate(' ', tags.map((tag) =>
+        <li key={tag} className={classes.item}>
+          <Link href={`/tags/${tag}/`} color="textSecondary">
+            {`#${tag}`}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
 }
-
-.item {
-  display: inline;
-  margin: 0 0.2em;
-}
-
-.link {
-  color: var(--color-text-secondary);
-}
-`

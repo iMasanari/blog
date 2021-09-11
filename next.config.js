@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+  webpack5: false,
   trailingSlash: true,
   webpack(config, options) {
     config.resolve.alias['~'] = path.join(__dirname, 'src')

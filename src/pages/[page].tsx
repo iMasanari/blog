@@ -1,12 +1,13 @@
+import { Container } from '@material-ui/core'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { PostThumb } from '../components/molecules/PostHeader'
-import { Posts } from '../components/organisms/Posts'
-import { Head } from '~/components/molecules/Head'
-import { Pager } from '~/components/molecules/Pager'
+import React, { useEffect } from 'react'
+import Posts from '../components/organisms/Posts'
+import Head from '~/components/molecules/Head'
+import Pager from '~/components/molecules/Pager'
 import { POST_LIMIT_OF_PAGES } from '~/constants'
 import { getAllPosts } from '~/static-api/contests'
+import { Post } from '~/types'
 import { range } from '~/utils/array'
 
 export const config = { amp: 'hybrid' }
@@ -15,8 +16,13 @@ type Query = {
   page?: string
 }
 
+interface Pager {
+  page: number
+  count: number
+}
+
 interface Props {
-  posts: PostThumb[]
+  posts: Post[]
   pager: Pager
 }
 
@@ -31,13 +37,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
   const posts = getAllPosts()
-  const max = Math.ceil(posts.length / POST_LIMIT_OF_PAGES)
-  const current = +params?.page?.slice(1)! || 1
-  const start = POST_LIMIT_OF_PAGES * (current - 1)
+  const count = Math.ceil(posts.length / POST_LIMIT_OF_PAGES)
+  const page = +params?.page?.slice(1)! || 1
+  const start = POST_LIMIT_OF_PAGES * (page - 1)
 
   const props = {
     posts: posts.slice(start, start + POST_LIMIT_OF_PAGES),
-    pager: { max, current },
+    pager: { count, page },
   }
 
   return { props }
@@ -54,11 +60,11 @@ const Page = ({ posts, pager }: Props) => {
   }, [page, router])
 
   return (
-    <main>
+    <Container component="main">
       <Head description="技術ブログ改め、Qiitaの下書き" />
       <Posts posts={posts} />
-      <Pager pager={pager} />
-    </main>
+      <Pager page={pager.page} count={pager.count} basePath="/" />
+    </Container>
   )
 }
 
