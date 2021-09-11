@@ -36,7 +36,8 @@ const useStyles = makeStyles(theme => ({
 
 const navItems = [
   { href: '/', title: 'Blog' },
-  { href: '/about/', title: 'About' },
+  { href: 'https://github.com/iMasanari', title: 'GitHub' },
+  { href: 'https://qiita.com/iMasanari', title: 'Qiita' },
 ]
 
 interface Props {
