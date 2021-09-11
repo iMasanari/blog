@@ -1,7 +1,7 @@
 // @ts-check
 
-const { readFileSync, readdirSync, writeFileSync } = require('fs')
-const { join, extname, relative, basename } = require('path')
+const { readFileSync, readdirSync, mkdirSync, writeFileSync } = require('fs')
+const { join, extname, relative, dirname } = require('path')
 const matter = require('gray-matter')
 
 const targetPath = join(process.cwd(), 'generated/posts.js')
@@ -29,9 +29,10 @@ const stringifiedFileContent = `import dynamic from 'next/dynamic'
 
 export const posts = {
 ${list.map(({ slug, path }) =>
-  `  '${slug}': dynamic(() => import('${relative(basename(targetPath), path)}')),`
+  `  '${slug}': dynamic(() => import('${relative(dirname(targetPath), path)}')),`
 ).join('\n')}
 }
 `
 
+mkdirSync(dirname(targetPath), { recursive: true })
 writeFileSync(targetPath, stringifiedFileContent)
