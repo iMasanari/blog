@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
-import PostHeader, { PostThumb } from '../molecules/PostHeader'
+import PostHeader from '../molecules/PostHeader'
+import { Post } from '~/types'
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 interface Props {
-  posts: PostThumb[]
+  posts: Post[]
 }
 
 export default function Posts({ posts }: Props) {

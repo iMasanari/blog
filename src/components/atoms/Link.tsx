@@ -16,6 +16,10 @@ export default forwardRef<HTMLAnchorElement, Props>(function LinkBehavior(
   { href, as, replace, scroll, shallow, prefetch, locale, ...props },
   ref
 ) {
+  if (href[0] !== ('/')) {
+    return <MuiLink href={href} target="_blank" rel="noopener" {...props} ref={ref} />
+  }
+
   return (
     <NextLink
       href={href}

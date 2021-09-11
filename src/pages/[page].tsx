@@ -2,12 +2,12 @@ import { Container } from '@material-ui/core'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import { PostThumb } from '../components/molecules/PostHeader'
 import Posts from '../components/organisms/Posts'
 import Head from '~/components/molecules/Head'
 import Pager from '~/components/molecules/Pager'
 import { POST_LIMIT_OF_PAGES } from '~/constants'
 import { getAllPosts } from '~/static-api/contests'
+import { Post } from '~/types'
 import { range } from '~/utils/array'
 
 export const config = { amp: 'hybrid' }
@@ -22,7 +22,7 @@ interface Pager {
 }
 
 interface Props {
-  posts: PostThumb[]
+  posts: Post[]
   pager: Pager
 }
 

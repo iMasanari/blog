@@ -6,8 +6,6 @@ import Link from '../atoms/Link'
 import Time from '../atoms/Time'
 import Tags from './Tags'
 
-export type PostThumb = Omit<Post, 'body'>
-
 const useStyles = makeStyles(theme => ({
   createAt: {
     display: 'flex',
@@ -20,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 interface Props {
-  post: PostThumb
+  post: Post
   link?: boolean
 }
 

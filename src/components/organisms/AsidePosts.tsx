@@ -1,7 +1,7 @@
 import { makeStyles, Typography } from '@material-ui/core'
-import { PostThumb } from '../molecules/PostHeader'
 import Tags from '../molecules/Tags'
 import Posts from './Posts'
+import { Post } from '~/types'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
 
 interface Props {
   tags: string[]
-  posts: PostThumb[]
+  posts: Post[]
 }
 
 export default function AsidePosts({ tags, posts }: Props) {

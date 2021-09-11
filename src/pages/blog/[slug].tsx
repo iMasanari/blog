@@ -1,8 +1,8 @@
 import { Container } from '@material-ui/core'
+import { posts } from 'generated/posts'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import React from 'react'
 import Head from '~/components/molecules/Head'
-import { PostThumb } from '~/components/molecules/PostHeader'
 import PostPager from '~/components/molecules/PostPager'
 import AsidePosts from '~/components/organisms/AsidePosts'
 import Post from '~/components/organisms/Post'
@@ -18,9 +18,9 @@ type Query = {
 
 interface Props {
   post: IPost
-  next: PostThumb | null
-  prev: PostThumb | null
-  sameTags: PostThumb[]
+  next: IPost | null
+  prev: IPost | null
+  sameTags: IPost[]
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -34,8 +34,8 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
   const posts = getAllPosts()
   const post = getPost(params?.slug!)
   const currentIndex = posts.findIndex(v => v.slug === post.slug)
-  const next: PostThumb | null = posts[currentIndex - 1] || null
-  const prev: PostThumb | null = posts[currentIndex + 1] || null
+  const next: IPost | null = posts[currentIndex - 1] || null
+  const prev: IPost | null = posts[currentIndex + 1] || null
 
   const sameTags = posts
     .filter(v => v.slug !== post.slug && v.tags.some(tag => post.tags.includes(tag)))
@@ -50,7 +50,7 @@ export default function Slug({ post, next, prev, sameTags }: Props) {
   return (
     <Container>
       <Head title={post.title} description={post.description} />
-      <Post post={post} />
+      <Post post={post} contents={posts[post.slug]} />
       <PostPager next={next} prev={prev} />
       {sameTags.length > 0 && (
         <AsidePosts tags={post.tags} posts={sameTags} />
