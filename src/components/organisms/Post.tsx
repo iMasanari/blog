@@ -2,21 +2,35 @@ import { makeStyles, Paper, Table, TableBody, TableCell, TableCellProps, TableCo
 import { OverridableComponent } from '@material-ui/core/OverridableComponent'
 import { MDXProvider } from '@mdx-js/react'
 import clsx from 'clsx'
+import { posts } from 'generated/posts'
+import { useRouter } from 'next/router'
 import Link from '../atoms/Link'
 import PostHeader from '../molecules/PostHeader'
 import { Post as IPost } from '~/types'
 
 interface Props {
   post: IPost
-  contents: React.ComponentType
 }
 
 const useStyle = makeStyles({
+  '@keyframes fadein': {
+    '0%': {
+      transform: 'scale(0.99)',
+      opacity: 0,
+    },
+    '100%': {
+      transform: 'scale(1)',
+      opacity: 1,
+    },
+  },
   p: {
     marginTop: '1em',
   },
   header: {
     marginBottom: '2em',
+  },
+  main: {
+    animation: '$fadein 0.4s',
   },
 })
 
@@ -59,14 +73,17 @@ const components = {
   ),
 }
 
-export default function Post({ post, contents: Contents }: Props) {
+export default function Post({ post }: Props) {
   const classes = useStyle()
+  const router = useRouter()
+  const Contents = posts[post.slug]
+
   return (
     <article>
       <div className={classes.header}>
         <PostHeader post={post} />
       </div>
-      <main>
+      <main key={router.asPath} className={classes.main}>
         <MDXProvider components={components}>
           <Contents />
         </MDXProvider>
