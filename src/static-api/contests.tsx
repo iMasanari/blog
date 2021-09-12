@@ -12,7 +12,7 @@ interface MDXModule {
 }
 
 const getPosts = () => {
-  const contexts = require.context('@/contents/posts/', true, /\.mdx?$/)
+  const contexts = require.context('contents/posts/', true, /^\.\/.*\.mdx?$/)
 
   return contexts.keys().map((path) => {
     const { frontMatter } = contexts(path) as MDXModule
