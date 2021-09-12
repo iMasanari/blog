@@ -26,10 +26,11 @@ const list = listFiles(postsPath, '.md').map(path => {
 })
 
 const stringifiedFileContent = `import dynamic from 'next/dynamic'
+import loading from '${relative(dirname(targetPath), join(__dirname, 'templates','Loading'))}'
 
 export const posts = {
 ${list.map(({ slug, path }) =>
-  `  '${slug}': dynamic(() => import('${relative(dirname(targetPath), path)}')),`
+  `  '${slug}': dynamic(() => import('${relative(dirname(targetPath), path)}'), { loading }),`
 ).join('\n')}
 }
 `

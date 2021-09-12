@@ -1,5 +1,4 @@
 import { Container } from '@material-ui/core'
-import { posts } from 'generated/posts'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import React from 'react'
 import Head from '~/components/molecules/Head'
@@ -50,7 +49,7 @@ export default function Slug({ post, next, prev, sameTags }: Props) {
   return (
     <Container>
       <Head title={post.title} description={post.description} />
-      <Post post={post} contents={posts[post.slug]} />
+      <Post post={post} />
       <PostPager next={next} prev={prev} />
       {sameTags.length > 0 && (
         <AsidePosts tags={post.tags} posts={sameTags} />

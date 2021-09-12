@@ -2,12 +2,14 @@ import { ServerStyleSheets } from '@material-ui/core'
 import CreanCss from 'clean-css'
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
 import React from 'react'
+import { getGenerateClassName } from '~/styles'
 
 const creanCss = new CreanCss()
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const sheets = new ServerStyleSheets()
+    const serverGenerateClassName = getGenerateClassName()
+    const sheets = new ServerStyleSheets({ serverGenerateClassName })
     const originalRenderPage = ctx.renderPage
 
     ctx.renderPage = () =>
