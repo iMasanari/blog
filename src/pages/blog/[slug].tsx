@@ -6,7 +6,8 @@ import PostPager from '~/components/molecules/PostPager'
 import AsidePosts from '~/components/organisms/AsidePosts'
 import Post from '~/components/organisms/Post'
 import { SUGGEST_LIMIT } from '~/constants'
-import { getAllPosts, getPost } from '~/static-api/contests'
+import { parse } from '~/modules/markdown'
+import { getAllPosts, getPostContent } from '~/modules/posts'
 import { Post as IPost } from '~/types'
 
 export const config = { amp: 'hybrid' }
@@ -20,6 +21,7 @@ interface Props {
   next: IPost | null
   prev: IPost | null
   sameTags: IPost[]
+  content: string
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -30,26 +32,30 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
+  const slug = params?.slug as string
   const posts = getAllPosts()
-  const post = getPost(params?.slug!)
-  const currentIndex = posts.findIndex(v => v.slug === post.slug)
+
+  const currentIndex = posts.findIndex(v => v.slug === slug)
+  const post = posts[currentIndex]
   const next: IPost | null = posts[currentIndex - 1] || null
   const prev: IPost | null = posts[currentIndex + 1] || null
+
+  const content = await parse(getPostContent(slug)!)
 
   const sameTags = posts
     .filter(v => v.slug !== post.slug && v.tags.some(tag => post.tags.includes(tag)))
     .slice(0, SUGGEST_LIMIT)
 
-  const props = { post, next, prev, sameTags }
+  const props = { post, next, prev, sameTags, content }
 
   return { props }
 }
 
-export default function Slug({ post, next, prev, sameTags }: Props) {
+export default function Slug({ post, next, prev, sameTags, content }: Props) {
   return (
     <Container>
       <Head title={post.title} description={post.description} />
-      <Post post={post} />
+      <Post post={post} content={content} />
       <PostPager next={next} prev={prev} />
       {sameTags.length > 0 && (
         <AsidePosts tags={post.tags} posts={sameTags} />

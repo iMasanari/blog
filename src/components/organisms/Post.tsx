@@ -1,36 +1,28 @@
 import { makeStyles, Paper, Table, TableBody, TableCell, TableCellProps, TableContainer, TableProps, TableRow, Typography, TypographyProps, TypographyTypeMap } from '@material-ui/core'
 import { OverridableComponent } from '@material-ui/core/OverridableComponent'
-import { MDXProvider } from '@mdx-js/react'
 import clsx from 'clsx'
-import { posts } from 'generated/posts'
-import { useRouter } from 'next/router'
+import DomParserReact from 'dom-parser-react'
+import { createDom } from 'dom-parser-react/server'
 import Link from '../atoms/Link'
 import PostHeader from '../molecules/PostHeader'
 import { Post as IPost } from '~/types'
 
 interface Props {
   post: IPost
+  content: string
 }
 
 const useStyle = makeStyles({
-  '@keyframes fadein': {
-    '0%': {
-      transform: 'scale(0.99)',
-      opacity: 0,
-    },
-    '100%': {
-      transform: 'scale(1)',
-      opacity: 1,
-    },
-  },
   p: {
     marginTop: '1em',
   },
+  pre: {
+    fontFamily: 'monospace',
+    overflow: 'auto',
+    padding: '0.5rem 2rem',
+  },
   header: {
     marginBottom: '2em',
-  },
-  main: {
-    animation: '$fadein 0.4s',
   },
 })
 
@@ -47,6 +39,19 @@ const Title: OverridableComponent<TypographyTypeMap> = (
   )
 }
 
+const CodeBlock: OverridableComponent<TypographyTypeMap> = (
+  props: TypographyProps
+) => {
+  const classes = useStyle()
+
+  return (
+    <Typography
+      {...props}
+      className={clsx(classes.pre, props.className)}
+    />
+  )
+}
+
 const components = {
   p: (props: TypographyProps<'p'>) => <Typography {...props} gutterBottom />,
   h2: (props: TypographyProps<'h2'>) => <Title {...props} component="h2" variant="h4" gutterBottom />,
@@ -57,6 +62,7 @@ const components = {
   ul: (props: TypographyProps<'ul'>) => <Typography {...props} component="ul" gutterBottom />,
   ol: (props: TypographyProps<'ol'>) => <Typography {...props} component="ol" gutterBottom />,
   li: (props: TypographyProps<'li'>) => <Typography {...props} component="li" />,
+  pre: (props: TypographyProps<'pre'>) => <CodeBlock {...props} component="pre" gutterBottom />,
   a: Link,
   table: (props: TableProps) => (
     <TableContainer component={Paper} variant="outlined">
@@ -73,20 +79,20 @@ const components = {
   ),
 }
 
-export default function Post({ post }: Props) {
+export default function Post({ post, content }: Props) {
   const classes = useStyle()
-  const router = useRouter()
-  const Contents = posts[post.slug]
 
   return (
     <article>
       <div className={classes.header}>
         <PostHeader post={post} />
       </div>
-      <main key={router.asPath} className={classes.main}>
-        <MDXProvider components={components}>
-          <Contents />
-        </MDXProvider>
+      <main>
+        <DomParserReact
+          source={typeof window === 'object' ? content : createDom(content)}
+          components={components}
+        />
+
       </main>
     </article>
   )
