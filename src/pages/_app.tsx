@@ -30,26 +30,4 @@ export default withGA(GA_TRACKING_ID, Router)(function App({ Component, pageProp
 })
 
 const globalStyles = css.global`
-@import 'prismjs/themes/prism-okaidia.css';
-
-pre {
-  overflow: auto;
-  max-width: none;
-  padding: 0.5rem 2rem;
-	background: #272822;
-}
-
-pre code,
-pre samp {
-  display: inline;
-  padding: 0;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  background: transparent;
-}
 `

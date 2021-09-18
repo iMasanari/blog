@@ -6,7 +6,7 @@ import Posts from '../components/organisms/Posts'
 import Head from '~/components/molecules/Head'
 import Pager from '~/components/molecules/Pager'
 import { POST_LIMIT_OF_PAGES } from '~/constants'
-import { getAllPosts } from '~/static-api/contests'
+import { getAllPosts } from '~/modules/posts'
 import { Post } from '~/types'
 import { range } from '~/utils/array'
 

@@ -36,6 +36,7 @@ export default class MyDocument extends Document {
       <Html lang="ja">
         <Head>
           <meta charSet="utf-8" />
+          <link rel="preconnect" href="https://www.google-analytics.com" />
           <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
         </Head>
         <body>
