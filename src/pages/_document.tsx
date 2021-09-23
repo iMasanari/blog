@@ -2,6 +2,8 @@ import { ServerStyleSheets } from '@material-ui/core'
 import CreanCss from 'clean-css'
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
 import React from 'react'
+import AnalyticsAmp from '~/modules/analytics/AnalyticsAmp'
+import AnalyticsScript from '~/modules/analytics/AnalyticsScript'
 import { getGenerateClassName } from '~/styles'
 
 const creanCss = new CreanCss()
@@ -36,10 +38,10 @@ export default class MyDocument extends Document {
       <Html lang="ja">
         <Head>
           <meta charSet="utf-8" />
-          <link rel="preconnect" href="https://www.google-analytics.com" />
-          <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
+          <AnalyticsScript />
         </Head>
         <body>
+          <AnalyticsAmp />
           <Main />
           <NextScript />
         </body>

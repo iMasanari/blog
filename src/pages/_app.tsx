@@ -1,12 +1,10 @@
 import { createTheme, CssBaseline, StylesProvider, ThemeProvider } from '@material-ui/core'
-// @ts-expect-error
-import withGA from 'next-ga'
 import { AppProps } from 'next/app'
-import Router from 'next/router'
 import React from 'react'
 import Footer from '~/components/organisms/Footer'
 import Header from '~/components/organisms/Header'
-import { GA_TRACKING_ID, SITE_NAME } from '~/constants'
+import { SITE_NAME } from '~/constants'
+import { useAnalytics } from '~/modules/analytics'
 import { getGenerateClassName } from '~/styles'
 
 const generateClassName = getGenerateClassName()
@@ -14,7 +12,9 @@ const generateClassName = getGenerateClassName()
 const theme = createTheme({
 })
 
-export default withGA(GA_TRACKING_ID, Router)(function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
+  useAnalytics()
+
   return (
     <StylesProvider generateClassName={generateClassName}>
       <ThemeProvider theme={theme}>
@@ -25,4 +25,4 @@ export default withGA(GA_TRACKING_ID, Router)(function App({ Component, pageProp
       </ThemeProvider>
     </StylesProvider>
   )
-})
+}
