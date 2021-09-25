@@ -1,4 +1,5 @@
-import { Container, makeStyles } from '@material-ui/core'
+import { Container } from '@mui/material'
+import makeStyles from '@mui/styles/makeStyles'
 import React from 'react'
 import Link from '../atoms/Link'
 import { Post } from '~/types'

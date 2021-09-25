@@ -1,5 +1,5 @@
-import { makeStyles } from '@material-ui/core'
-import { Pagination, PaginationItem, PaginationRenderItemParams } from '@material-ui/lab'
+import { Pagination, PaginationItem, PaginationRenderItemParams } from '@mui/material'
+import makeStyles from '@mui/styles/makeStyles'
 import React from 'react'
 import LinkBehavior from '../atoms/LinkBehavior'
 

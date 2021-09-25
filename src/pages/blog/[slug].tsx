@@ -1,4 +1,4 @@
-import { Container } from '@material-ui/core'
+import { Container } from '@mui/material'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import React from 'react'
 import Head from '~/components/molecules/Head'

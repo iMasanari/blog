@@ -1,5 +1,6 @@
-import { makeStyles, Typography } from '@material-ui/core'
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import { Typography } from '@mui/material'
+import makeStyles from '@mui/styles/makeStyles'
 import React from 'react'
 import { Post } from '../../types'
 import Link from '../atoms/Link'

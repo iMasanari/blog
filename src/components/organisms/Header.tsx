@@ -1,6 +1,7 @@
-import { makeStyles, useScrollTrigger, Slide, AppBar, Toolbar, Container, IconButton, Drawer, List, Divider } from '@material-ui/core'
-import CloseIcon from '@material-ui/icons/Close'
-import MenuIcon from '@material-ui/icons/Menu'
+import CloseIcon from '@mui/icons-material/Close'
+import MenuIcon from '@mui/icons-material/Menu'
+import { useScrollTrigger, Slide, AppBar, Toolbar, Container, IconButton, Drawer, List, Divider } from '@mui/material'
+import makeStyles from '@mui/styles/makeStyles'
 import { useAmp } from 'next/amp'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -74,7 +75,7 @@ export default function Header({ title, description }: Props) {
     <>
       <Slide appear={false} direction="down" in={!trigger}>
         <AppBar className={classes.appBar} amp-fx="float-in-top" position="fixed" color="default" elevation={1}>
-          <Container component={Toolbar} disableGutters>
+          <Toolbar component={Container} disableGutters>
             <SiteTitle
               className={classes.title}
               isHeading={isRoot}
@@ -90,19 +91,19 @@ export default function Header({ title, description }: Props) {
             </nav>
             <div className={classes.sectionMobile}>
               <AmpEvents on="tap:sidebar.toggle">
-                <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleOpen}>
+                <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleOpen} size="large">
                   <MenuIcon />
                 </IconButton>
               </AmpEvents>
             </div>
-          </Container>
+          </Toolbar>
         </AppBar>
       </Slide >
       <Sidebar anchor="right" open={isOpen} onClose={toggleOpen}>
         <div role="presentation" onKeyDown={toggleOpen}>
           <Toolbar className={classes.sidebarToolbar}>
             <AmpEvents on="tap:sidebar.close">
-              <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleOpen}>
+              <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleOpen} size="large">
                 <CloseIcon />
               </IconButton>
             </AmpEvents>
