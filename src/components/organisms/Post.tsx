@@ -1,8 +1,8 @@
-import { makeStyles, Paper, Table, TableBody, TableCell, TableCellProps, TableContainer, TableProps, TableRow, Typography, TypographyProps, TypographyTypeMap } from '@material-ui/core'
-import { OverridableComponent } from '@material-ui/core/OverridableComponent'
+import { makeStyles, Paper, Table, TableBody, TableCell, TableCellProps, TableContainer, TableProps, TableRow, Typography, TypographyProps } from '@material-ui/core'
 import clsx from 'clsx'
 import DomParserReact from 'dom-parser-react'
 import { createDom } from 'dom-parser-react/server'
+import { ElementType } from 'react'
 import Link from '../atoms/Link'
 import PostHeader from '../molecules/PostHeader'
 import { Post as IPost } from '~/types'
@@ -12,23 +12,32 @@ interface Props {
   content: string
 }
 
-const useStyle = makeStyles({
+const useStyle = makeStyles((theme) => ({
   p: {
-    marginTop: '1em',
+    marginTop: theme.spacing(2),
+  },
+  code: {
+    '&:not(pre > &)': {
+      padding: theme.spacing(0.5, 1),
+      borderRadius: theme.spacing(0.5),
+      backgroundColor: '#1e1e1e',
+      color: '#d4d4d4',
+    },
+  },
+  breakAll: {
+    wordBreak: 'break-all',
   },
   pre: {
     fontFamily: 'monospace',
     overflow: 'auto',
-    padding: '0.5rem 2rem',
+    padding: theme.spacing(1, 4),
   },
   header: {
-    marginBottom: '2em',
+    marginBottom: theme.spacing(4),
   },
-})
+}))
 
-const Title: OverridableComponent<TypographyTypeMap> = (
-  props: TypographyProps
-) => {
+const Title = <T extends ElementType>(props: TypographyProps<T>) => {
   const classes = useStyle()
 
   return (
@@ -39,13 +48,28 @@ const Title: OverridableComponent<TypographyTypeMap> = (
   )
 }
 
-const CodeBlock: OverridableComponent<TypographyTypeMap> = (
-  props: TypographyProps
-) => {
+const Code = (props: React.HTMLProps<HTMLDetailsElement>) => {
+  const classes = useStyle()
+
+  const breakAll =
+    typeof props.children === 'string' &&
+    /^[a-zA-Z$_][a-zA-Z0-9$_.]*$/.test(props.children)
+
+  return (
+    <code
+      {...props}
+      className={clsx(classes.code, breakAll && classes.breakAll, props.className)}
+    />
+  )
+}
+
+const CodeBlock = (props: TypographyProps<'pre'>) => {
   const classes = useStyle()
 
   return (
     <Typography
+      component="pre"
+      gutterBottom
       {...props}
       className={clsx(classes.pre, props.className)}
     />
@@ -62,7 +86,8 @@ const components = {
   ul: (props: TypographyProps<'ul'>) => <Typography {...props} component="ul" gutterBottom />,
   ol: (props: TypographyProps<'ol'>) => <Typography {...props} component="ol" gutterBottom />,
   li: (props: TypographyProps<'li'>) => <Typography {...props} component="li" />,
-  pre: (props: TypographyProps<'pre'>) => <CodeBlock {...props} component="pre" gutterBottom />,
+  code: Code,
+  pre: CodeBlock,
   a: Link,
   table: (props: TableProps) => (
     <TableContainer component={Paper} variant="outlined">
@@ -92,7 +117,6 @@ export default function Post({ post, content }: Props) {
           source={typeof window === 'object' ? content : createDom(content)}
           components={components}
         />
-
       </main>
     </article>
   )
