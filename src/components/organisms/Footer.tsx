@@ -1,18 +1,14 @@
+import { css, Theme } from '@emotion/react'
 import { Container, Link, Typography } from '@mui/material'
-import makeStyles from '@mui/styles/makeStyles'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    textAlign: 'center',
-    margin: theme.spacing(4, 0),
-  },
-}))
+const footerStyle = (theme: Theme) => css`
+  text-align: center;
+  margin: ${theme.spacing(4, 0)};
+`
 
 export default function Footer() {
-  const classes = useStyles()
-
   return (
-    <footer className={classes.root}>
+    <footer css={footerStyle}>
       <Container>
         <Typography gutterBottom>
           Author: <Link href="https://github.com/iMasanari">iMasanari</Link>

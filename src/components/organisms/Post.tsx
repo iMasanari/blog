@@ -1,9 +1,7 @@
-import { Paper, Table, TableBody, TableCell, TableCellProps, TableContainer, TableProps, TableRow, Typography, TypographyProps } from '@mui/material'
-import makeStyles from '@mui/styles/makeStyles'
-import clsx from 'clsx'
+import { css, Theme } from '@emotion/react'
+import { Box, Paper, Table, TableBody, TableCell, TableCellProps, TableContainer, TableProps, TableRow, Typography, TypographyProps } from '@mui/material'
 import DomParserReact from 'dom-parser-react'
 import { createDom } from 'dom-parser-react/server'
-import { ElementType } from 'react'
 import Link from '../atoms/Link'
 import PostHeader from '../molecules/PostHeader'
 import { Post as IPost } from '~/types'
@@ -13,77 +11,50 @@ interface Props {
   content: string
 }
 
-const useStyle = makeStyles((theme) => ({
-  p: {
-    marginTop: theme.spacing(2),
-  },
-  code: {
-    '&:not(pre > &)': {
-      padding: theme.spacing(0.5, 1),
-      borderRadius: theme.spacing(0.5),
-      backgroundColor: '#1e1e1e',
-      color: '#d4d4d4',
-    },
-  },
-  breakAll: {
-    wordBreak: 'break-all',
-  },
-  pre: {
-    fontFamily: 'monospace',
-    overflow: 'auto',
-    padding: theme.spacing(1, 4),
-  },
-  header: {
-    marginBottom: theme.spacing(4),
-  },
-}))
+const codeStyle = (theme: Theme) => css`
+  padding: ${theme.spacing(0.5, 1)};
+  border-radius: ${theme.spacing(0.5)};
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  pre > & {
+    padding: 0;
+  }
+`
 
-const Title = <T extends ElementType>(props: TypographyProps<T>) => {
-  const classes = useStyle()
+const breakAllStyle = css`
+  word-break: break-all;
+`
 
-  return (
-    <Typography
-      {...props}
-      className={clsx(classes.p, props.className)}
-    />
-  )
-}
+const codeBlockStyle = (theme: Theme) => css`
+  font-family: monospace;
+  overflow: auto;
+  padding: ${theme.spacing(1, 4)};
+`
 
-const Code = (props: React.HTMLProps<HTMLDetailsElement>) => {
-  const classes = useStyle()
-
+const Code = (props: any) => {
   const breakAll =
-    typeof props.children === 'string' &&
-    /^[a-zA-Z$_][a-zA-Z0-9$_.]*$/.test(props.children)
+    typeof props.children === 'string' && /^[a-zA-Z$_][a-zA-Z0-9$_.]*$/.test(props.children)
 
   return (
-    <code
-      {...props}
-      className={clsx(classes.code, breakAll && classes.breakAll, props.className)}
-    />
+    <code {...props} css={[codeStyle, breakAll && breakAllStyle]} />
   )
 }
 
-const CodeBlock = (props: TypographyProps<'pre'>) => {
-  const classes = useStyle()
-
-  return (
-    <Typography
-      component="pre"
-      gutterBottom
-      {...props}
-      className={clsx(classes.pre, props.className)}
-    />
-  )
-}
+const CodeBlock = (props: TypographyProps<'pre'>) =>
+  <Typography
+    component="pre"
+    gutterBottom
+    {...props}
+    css={codeBlockStyle}
+  />
 
 const components = {
   p: (props: TypographyProps<'p'>) => <Typography {...props} gutterBottom />,
-  h2: (props: TypographyProps<'h2'>) => <Title {...props} component="h2" variant="h4" gutterBottom />,
-  h3: (props: TypographyProps<'h3'>) => <Title {...props} component="h3" variant="h5" gutterBottom />,
-  h4: (props: TypographyProps<'h4'>) => <Title {...props} component="h4" variant="h6" gutterBottom />,
-  // h5: (props: TypographyProps<'h5'>) => <Title {...props} component="h5" variant="h6" />,
-  // h6: (props: TypographyProps<'h6'>) => <Title {...props} component="h6" variant="h6" />,
+  h2: (props: TypographyProps<'h2'>) => <Typography mt={2} {...props} component="h2" variant="h4" gutterBottom />,
+  h3: (props: TypographyProps<'h3'>) => <Typography mt={2} {...props} component="h3" variant="h5" gutterBottom />,
+  h4: (props: TypographyProps<'h4'>) => <Typography mt={2} {...props} component="h4" variant="h6" gutterBottom />,
+  // h5: (props: TypographyProps<'h5'>) => <Typography mt={2} {...props} component="h5" variant="h6" />,
+  // h6: (props: TypographyProps<'h6'>) => <Typography mt={2} {...props} component="h6" variant="h6" />,
   ul: (props: TypographyProps<'ul'>) => <Typography {...props} component="ul" gutterBottom />,
   ol: (props: TypographyProps<'ol'>) => <Typography {...props} component="ol" gutterBottom />,
   li: (props: TypographyProps<'li'>) => <Typography {...props} component="li" />,
@@ -106,13 +77,11 @@ const components = {
 }
 
 export default function Post({ post, content }: Props) {
-  const classes = useStyle()
-
   return (
     <article>
-      <div className={classes.header}>
+      <Box mb={4}>
         <PostHeader post={post} />
-      </div>
+      </Box>
       <main>
         <DomParserReact
           source={typeof window === 'object' ? content : createDom(content)}

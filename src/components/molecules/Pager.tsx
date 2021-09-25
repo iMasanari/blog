@@ -1,14 +1,12 @@
+import { css } from '@emotion/react'
 import { Pagination, PaginationItem, PaginationRenderItemParams } from '@mui/material'
-import makeStyles from '@mui/styles/makeStyles'
 import React from 'react'
 import LinkBehavior from '../atoms/LinkBehavior'
 
-const useStyles = makeStyles({
-  root: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-})
+const pagerStyle = css`
+  display: flex;
+  justify-content: center;
+`
 
 interface Props {
   page: number
@@ -17,8 +15,6 @@ interface Props {
 }
 
 export default function Pager({ page, count, basePath }: Props) {
-  const classes = useStyles()
-
   const renderItem = (item: PaginationRenderItemParams) => {
     if (item.page <= 0 || count < item.page) {
       return <PaginationItem component="span" {...item} />
@@ -35,7 +31,7 @@ export default function Pager({ page, count, basePath }: Props) {
 
   return (
     <Pagination
-      className={classes.root}
+      css={pagerStyle}
       page={page}
       count={count}
       renderItem={renderItem}
