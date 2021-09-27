@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export",
+    "analyze": "ANALYZE=true next build",
     "test": "npm run test:textlint && npm run test:tsc",
     "test:textlint": "textlint ./contents",
     "test:tsc": "tsc -p . --noEmit"
@@ -34,6 +35,7 @@
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@next/bundle-analyzer": "^11.1.2",
     "@types/gtag.js": "^0.0.7",
     "@types/node": "^16.9.6",
     "@types/react": "^17.0.24",

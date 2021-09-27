@@ -1,7 +1,13 @@
 // @ts-check
 
-/** @type {import('next').NextConfig} */
-module.exports = {
+const bundleAnalyzer = require('@next/bundle-analyzer')
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+/** @type {import('next').NextConfig} */ 
+const nextConfig = {
   trailingSlash: true,
   webpack(/** @type {import('webpack').Configuration} */ config, options) {
     config.resolve.alias = {
@@ -22,3 +28,5 @@ module.exports = {
     return config
   },
 }
+
+module.exports = withBundleAnalyzer(nextConfig)
