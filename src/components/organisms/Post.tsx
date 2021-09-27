@@ -16,8 +16,11 @@ const codeStyle = (theme: Theme) => css`
   border-radius: ${theme.spacing(0.5)};
   background-color: #1e1e1e;
   color: #d4d4d4;
+  font-family: "SFMono-Regular", Consolas, Menlo, Courier, monospace, monospace;
+  font-size: 0.9em;
   pre > & {
     padding: 0;
+    background-color: transparent;
   }
 `
 
@@ -26,9 +29,15 @@ const breakAllStyle = css`
 `
 
 const codeBlockStyle = (theme: Theme) => css`
-  font-family: monospace;
   overflow: auto;
   padding: ${theme.spacing(1, 4)};
+`
+
+const listStyle = css`
+  & & {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 `
 
 const Code = (props: any) => {
@@ -40,26 +49,18 @@ const Code = (props: any) => {
   )
 }
 
-const CodeBlock = (props: TypographyProps<'pre'>) =>
-  <Typography
-    component="pre"
-    gutterBottom
-    {...props}
-    css={codeBlockStyle}
-  />
-
 const components = {
-  p: (props: TypographyProps<'p'>) => <Typography {...props} gutterBottom />,
-  h2: (props: TypographyProps<'h2'>) => <Typography mt={2} {...props} component="h2" variant="h4" gutterBottom />,
-  h3: (props: TypographyProps<'h3'>) => <Typography mt={2} {...props} component="h3" variant="h5" gutterBottom />,
-  h4: (props: TypographyProps<'h4'>) => <Typography mt={2} {...props} component="h4" variant="h6" gutterBottom />,
-  // h5: (props: TypographyProps<'h5'>) => <Typography mt={2} {...props} component="h5" variant="h6" />,
-  // h6: (props: TypographyProps<'h6'>) => <Typography mt={2} {...props} component="h6" variant="h6" />,
-  ul: (props: TypographyProps<'ul'>) => <Typography {...props} component="ul" gutterBottom />,
-  ol: (props: TypographyProps<'ol'>) => <Typography {...props} component="ol" gutterBottom />,
+  p: (props: TypographyProps<'p'>) => <Typography my={2} textAlign="justify" whiteSpace="pre-line" {...props} />,
+  h2: (props: TypographyProps<'h2'>) => <Typography my={4} borderBottom="1px solid currentcolor" {...props} component="h2" variant="h4" />,
+  h3: (props: TypographyProps<'h3'>) => <Typography my={3} {...props} component="h3" variant="h5" />,
+  h4: (props: TypographyProps<'h4'>) => <Typography my={3} {...props} component="h4" variant="h6" />,
+  // h5: (props: TypographyProps<'h5'>) => <Typography my={2} {...props} component="h5" variant="h6" />,
+  // h6: (props: TypographyProps<'h6'>) => <Typography my={2} {...props} component="h6" variant="h6" />,
+  ul: (props: TypographyProps<'ul'>) => <Typography my={2} css={listStyle} {...props} component="ul" />,
+  ol: (props: TypographyProps<'ol'>) => <Typography my={2} css={listStyle} {...props} component="ol" />,
   li: (props: TypographyProps<'li'>) => <Typography {...props} component="li" />,
   code: Code,
-  pre: CodeBlock,
+  pre: (props: TypographyProps<'pre'>) => <Typography component="pre" my={2} {...props} css={codeBlockStyle} />,
   a: Link,
   table: (props: TableProps) => (
     <TableContainer component={Paper} variant="outlined">
@@ -68,12 +69,8 @@ const components = {
   ),
   tbody: TableBody,
   tr: TableRow,
-  th: (props: TableCellProps) => (
-    <TableCell component="th" {...props} align={props.align || undefined} />
-  ),
-  td: (props: TableCellProps) => (
-    <TableCell {...props} align={props.align || undefined} />
-  ),
+  th: (props: TableCellProps) => <TableCell component="th" {...props} align={props.align || undefined} />,
+  td: (props: TableCellProps) => <TableCell {...props} align={props.align || undefined} />,
 }
 
 export default function Post({ post, content }: Props) {

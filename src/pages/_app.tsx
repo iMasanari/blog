@@ -16,6 +16,10 @@ declare module '@emotion/react' {
 }
 
 const theme = createTheme({
+  typography: {
+    fontFamily: '游ゴシック体,YuGothic,游ゴシック,Yu Gothic,メイリオ,sans-serif',
+    fontWeightRegular: 500,
+  },
 })
 
 interface MyAppProps extends AppProps {
