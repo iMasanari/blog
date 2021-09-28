@@ -1,6 +1,7 @@
 // @ts-check
 
 const bundleAnalyzer = require('@next/bundle-analyzer')
+const withPreact = require('next-plugin-preact')
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -29,4 +30,4 @@ const nextConfig = {
   },
 }
 
-module.exports = withBundleAnalyzer(nextConfig)
+module.exports = withBundleAnalyzer(withPreact(nextConfig))
