@@ -1,4 +1,5 @@
 import { useAmp } from 'next/amp'
+import { Fragment } from 'react'
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
 const GOOGLE_SITE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
@@ -21,13 +22,13 @@ export default function AnalyticsScript() {
   }
 
   return (
-    <>
+    <Fragment>
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`} />
       <script dangerouslySetInnerHTML={{ __html: script }} />
       {GOOGLE_SITE_VERIFICATION
         ? <meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />
         : null
       }
-    </>
+    </Fragment>
   )
 }

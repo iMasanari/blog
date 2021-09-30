@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, Box, Container, Divider, Drawer, IconButton, List, Slide, Toolbar, useScrollTrigger } from '@mui/material'
 import { useAmp } from 'next/amp'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import AmpEvents from '../atoms/AmpEvents'
 import DrawerItem from '../molecules/DrawerItem'
 import NavItem from '../molecules/NavItem'
@@ -50,7 +50,7 @@ export default function Header({ title, description }: Props) {
   useEffect(delayClose, [router.asPath])
 
   return (
-    <>
+    <Fragment>
       <Slide appear={false} direction="down" in={!trigger}>
         <AppBar amp-fx="float-in-top" position="fixed" color="default" elevation={1}>
           <Toolbar component={Container} disableGutters>
@@ -97,6 +97,6 @@ export default function Header({ title, description }: Props) {
         </div>
       </Sidebar>
       <Toolbar />
-    </>
+    </Fragment>
   )
 }
