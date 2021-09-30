@@ -1,16 +1,17 @@
-import { Typography } from '@material-ui/core'
-import React, { HTMLProps } from 'react'
+import { Typography } from '@mui/material'
+import React from 'react'
 import Link from '../atoms/Link'
 
-interface Props extends HTMLProps<HTMLDivElement> {
+interface Props {
   title: string
   description: string
   isHeading?: boolean
+  className?: string
 }
 
-export default function SiteTitle({ title, description, isHeading, ...props }: Props) {
+export default function SiteTitle({ title, description, isHeading, className }: Props) {
   return (
-    <div {...props}>
+    <div className={className}>
       <Typography variant="h6" component={isHeading ? 'h1' : 'div'} noWrap>
         <Link href="/" color="inherit" underline="none">
           {title}

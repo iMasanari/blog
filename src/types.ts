@@ -4,6 +4,7 @@ export interface Post {
   slug: string
   tags: string[]
   date: string
+  update?: string
   image?: string
   draft?: boolean
 }

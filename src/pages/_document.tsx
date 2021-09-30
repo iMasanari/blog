@@ -1,32 +1,38 @@
-import { ServerStyleSheets } from '@material-ui/core'
-import CreanCss from 'clean-css'
+import createEmotionServer from '@emotion/server/create-instance'
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
 import React from 'react'
-import { getGenerateClassName } from '~/styles'
-
-const creanCss = new CreanCss()
+import AnalyticsAmp from '~/modules/analytics/AnalyticsAmp'
+import AnalyticsScript from '~/modules/analytics/AnalyticsScript'
+import { createEmotionCache } from '~/styles'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const serverGenerateClassName = getGenerateClassName()
-    const sheets = new ServerStyleSheets({ serverGenerateClassName })
+    const cache = createEmotionCache()
+    const { extractCriticalToChunks } = createEmotionServer(cache)
+
     const originalRenderPage = ctx.renderPage
 
     ctx.renderPage = () =>
       originalRenderPage({
-        enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+        enhanceApp: (App: any) => (props) => <App emotionCache={cache} {...props} />,
       })
 
     const initialProps = await Document.getInitialProps(ctx)
-    const css = creanCss.minify(sheets.toString()).styles
+
+    const emotionStyles = extractCriticalToChunks(initialProps.html)
+    const emotionStyleTags = emotionStyles.styles.map((style) => (
+      <style
+        data-emotion={`${style.key} ${style.ids.join(' ')}`}
+        key={style.key}
+        dangerouslySetInnerHTML={{ __html: style.css }}
+      />
+    ))
 
     return {
       ...initialProps,
       styles: [
         ...React.Children.toArray(initialProps.styles),
-        (
-          <style id="jss-server-side" key="jss-server-side" dangerouslySetInnerHTML={{ __html: css }} />
-        ),
+        ...emotionStyleTags,
       ],
     }
   }
@@ -36,10 +42,10 @@ export default class MyDocument extends Document {
       <Html lang="ja">
         <Head>
           <meta charSet="utf-8" />
-          <link rel="preconnect" href="https://www.google-analytics.com" />
-          <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
+          <AnalyticsScript />
         </Head>
         <body>
+          <AnalyticsAmp />
           <Main />
           <NextScript />
         </body>

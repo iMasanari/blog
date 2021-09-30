@@ -1,38 +1,18 @@
-import { makeStyles, useScrollTrigger, Slide, AppBar, Toolbar, Container, IconButton, Drawer, List, Divider } from '@material-ui/core'
-import CloseIcon from '@material-ui/icons/Close'
-import MenuIcon from '@material-ui/icons/Menu'
+import { css } from '@emotion/react'
+import CloseIcon from '@mui/icons-material/Close'
+import MenuIcon from '@mui/icons-material/Menu'
+import { AppBar, Box, Container, Divider, Drawer, IconButton, List, Slide, Toolbar, useScrollTrigger } from '@mui/material'
 import { useAmp } from 'next/amp'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import AmpEvents from '../atoms/AmpEvents'
 import DrawerItem from '../molecules/DrawerItem'
 import NavItem from '../molecules/NavItem'
 import SiteTitle from '../molecules/SiteTitle'
 
-const useStyles = makeStyles(theme => ({
-  appBar: {
-    overflow: 'hidden',
-  },
-  title: {
-    flexGrow: 1,
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
-  sidebarToolbar: {
-    justifyContent: 'flex-end',
-    width: 250,
-  },
-}))
+const titleStyle = css`
+  flex-grow: 1;
+`
 
 const navItems = [
   { href: '/', title: 'Blog' },
@@ -51,7 +31,6 @@ const AmpSidebar = ({ children }: any) =>
   <AmpSidebarTag id="sidebar" layout="nodisplay" side="right" children={children} />
 
 export default function Header({ title, description }: Props) {
-  const classes = useStyles()
   const router = useRouter()
   const isAmp = useAmp()
   const trigger = useScrollTrigger()
@@ -71,38 +50,38 @@ export default function Header({ title, description }: Props) {
   useEffect(delayClose, [router.asPath])
 
   return (
-    <>
+    <Fragment>
       <Slide appear={false} direction="down" in={!trigger}>
-        <AppBar className={classes.appBar} amp-fx="float-in-top" position="fixed" color="default" elevation={1}>
-          <Container component={Toolbar} disableGutters>
+        <AppBar amp-fx="float-in-top" position="fixed" color="default" elevation={1}>
+          <Toolbar component={Container} disableGutters>
             <SiteTitle
-              className={classes.title}
+              css={titleStyle}
               isHeading={isRoot}
-              title={title} description={description}
-              onClick={delayClose}
+              title={title}
+              description={description}
             />
-            <nav className={classes.sectionDesktop}>
+            <Box component="nav" display={{ xs: 'none', sm: 'flex' }}>
               {navItems.map(v =>
                 <NavItem key={v.href} href={v.href}>
                   {v.title}
                 </NavItem>
               )}
-            </nav>
-            <div className={classes.sectionMobile}>
+            </Box>
+            <Box display={{ xs: 'flex', sm: 'none' }}>
               <AmpEvents on="tap:sidebar.toggle">
-                <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleOpen}>
+                <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleOpen} size="large">
                   <MenuIcon />
                 </IconButton>
               </AmpEvents>
-            </div>
-          </Container>
+            </Box>
+          </Toolbar>
         </AppBar>
       </Slide >
       <Sidebar anchor="right" open={isOpen} onClose={toggleOpen}>
         <div role="presentation" onKeyDown={toggleOpen}>
-          <Toolbar className={classes.sidebarToolbar}>
+          <Toolbar sx={{ justifyContent: 'flex-end', width: 250 }}>
             <AmpEvents on="tap:sidebar.close">
-              <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleOpen}>
+              <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleOpen} size="large">
                 <CloseIcon />
               </IconButton>
             </AmpEvents>
@@ -118,6 +97,6 @@ export default function Header({ title, description }: Props) {
         </div>
       </Sidebar>
       <Toolbar />
-    </>
+    </Fragment>
   )
 }

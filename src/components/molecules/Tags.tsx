@@ -1,18 +1,17 @@
-import { makeStyles } from '@material-ui/core'
+import { css } from '@emotion/react'
 import React, { ReactNode } from 'react'
 import Link from '../atoms/Link'
 
-const useStyles = makeStyles(theme => ({
-  list: {
-    padding: 0,
-    margin: 0,
-  },
-  item: {
-    display: 'inline',
-    padding: 0,
-    margin: 0,
-  },
-}))
+const listStyle = css`
+  padding: 0;
+  margin: 0;
+`
+
+const itemStyle = css`
+  display: inline;
+  padding: 0;
+  margin: 0;
+`
 
 const separate = (separator: string, array: JSX.Element[]) =>
   array.reduce((acc, v) => [...acc, separator, v], [] as ReactNode[])
@@ -22,13 +21,11 @@ interface Props {
 }
 
 export default function Tags({ tags }: Props) {
-  const classes = useStyles()
-
   return (
-    <ul className={classes.list}>
+    <ul css={listStyle}>
       {separate(' ', tags.map((tag) =>
-        <li key={tag} className={classes.item}>
-          <Link href={`/tags/${tag}/`} color="textSecondary">
+        <li key={tag} css={itemStyle}>
+          <Link href={`/tags/${tag}/`} color="textSecondary" underline="hover">
             {`#${tag}`}
           </Link>
         </li>

@@ -1,33 +1,42 @@
-import { createTheme, CssBaseline, StylesProvider, ThemeProvider } from '@material-ui/core'
-// @ts-expect-error
-import withGA from 'next-ga'
+import { CacheProvider, EmotionCache } from '@emotion/react'
+import { createTheme, CssBaseline, Theme as MuiTheme, ThemeProvider } from '@mui/material'
 import { AppProps } from 'next/app'
-import Router from 'next/router'
 import React from 'react'
-import css from 'styled-jsx/css'
 import Footer from '~/components/organisms/Footer'
 import Header from '~/components/organisms/Header'
-import { GA_TRACKING_ID, SITE_NAME } from '~/constants'
-import { getGenerateClassName } from '~/styles'
+import { SITE_NAME } from '~/constants'
+import { useAnalytics } from '~/modules/analytics'
+import { createEmotionCache } from '~/styles'
 
-const generateClassName = getGenerateClassName()
+const clientSideEmotionCache = createEmotionCache()
+
+declare module '@emotion/react' {
+  interface Theme extends MuiTheme {
+  }
+}
 
 const theme = createTheme({
+  typography: {
+    fontFamily: '游ゴシック体,YuGothic,游ゴシック,Yu Gothic,メイリオ,sans-serif',
+    fontWeightRegular: 500,
+  },
 })
 
-export default withGA(GA_TRACKING_ID, Router)(function App({ Component, pageProps }: AppProps) {
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
+export default function App({ Component, pageProps, emotionCache }: MyAppProps) {
+  useAnalytics()
+
   return (
-    <StylesProvider generateClassName={generateClassName}>
+    <CacheProvider value={emotionCache || clientSideEmotionCache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header title={SITE_NAME} description="技術ブログ改め、Qiitaの下書き" />
         <Component {...pageProps} />
         <Footer />
-        <style jsx global>{globalStyles}</style>
       </ThemeProvider>
-    </StylesProvider>
+    </CacheProvider>
   )
-})
-
-const globalStyles = css.global`
-`
+}

@@ -1,21 +1,18 @@
-import { makeStyles, Typography } from '@material-ui/core'
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
-import React from 'react'
+import { css, Theme } from '@emotion/react'
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import EditIcon from '@mui/icons-material/Edit'
+import { Typography } from '@mui/material'
+import { Fragment } from 'react'
 import { Post } from '../../types'
 import Link from '../atoms/Link'
 import Time from '../atoms/Time'
 import Tags from './Tags'
 
-const useStyles = makeStyles(theme => ({
-  createAt: {
-    display: 'flex',
-    alignItems: 'center',
-    margin: theme.spacing(1, 0),
-  },
-  icon: {
-    marginRight: theme.spacing(0.5),
-  },
-}))
+const createAtStyle = (theme: Theme) => css`
+  display: flex;
+  align-items: center;
+  margin: ${theme.spacing(1, 0)};
+`
 
 interface Props {
   post: Post
@@ -23,17 +20,25 @@ interface Props {
 }
 
 export default function PostHeader({ post, link }: Props) {
-  const classes = useStyles()
-
   return (
     <header>
-      <div className={classes.createAt}>
-        <CalendarTodayIcon fontSize="small" className={classes.icon} />
+      <div css={createAtStyle}>
+        {/* <Tooltip title="作成日" placement="top" arrow> */}
+        <CalendarTodayIcon fontSize="small" sx={{ mr: 0.5 }} />
+        {/* </Tooltip> */}
         <Time dateTime={post.date} />
+        {post.update && (
+          <Fragment>
+            {/* <Tooltip title="最終更新日" placement="top" arrow> */}
+            <EditIcon fontSize="small" sx={{ ml: 2, mr: 0.5 }} />
+            {/* </Tooltip> */}
+            <Time dateTime={post.update} />
+          </Fragment>
+        )}
       </div>
       <Typography component="h1" variant="h5" gutterBottom>
         {!link ? post.title : (
-          <Link href={`/blog/${post.slug}/`} >
+          <Link href={`/blog/${post.slug}/`}>
             {post.title}
           </Link>
         )}

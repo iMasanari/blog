@@ -1,13 +1,12 @@
-import { makeStyles, Typography } from '@material-ui/core'
+import { css, Theme } from '@emotion/react'
+import { Typography } from '@mui/material'
 import Tags from '../molecules/Tags'
 import Posts from './Posts'
 import { Post } from '~/types'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    margin: theme.spacing(4, 'auto'),
-  },
-}))
+const asideStyle = (theme: Theme) => css`
+  margin: ${theme.spacing(4, 'auto')};
+`
 
 interface Props {
   tags: string[]
@@ -15,10 +14,8 @@ interface Props {
 }
 
 export default function AsidePosts({ tags, posts }: Props) {
-  const classes = useStyles()
-
   return (
-    <aside className={classes.root}>
+    <aside css={asideStyle}>
       <header>
         <Typography variant="h5" component="h1">同じタグを含む記事</Typography>
         <Tags tags={tags} />

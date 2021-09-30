@@ -1,7 +1,4 @@
-import { createGenerateClassName } from '@material-ui/core'
+import createCache from '@emotion/cache'
 
-export const getGenerateClassName = () =>
-  createGenerateClassName({
-    productionPrefix: 'c',
-    disableGlobal: true,
-  })
+export const createEmotionCache = () =>
+  createCache({ key: 'c', prepend: true })

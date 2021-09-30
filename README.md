@@ -12,4 +12,4 @@ https://imasanari.github.io
 
 ## 主な使用技術
 
-React + Next.js + TypeScript + Markdown (MDX)
+React + Next.js + TypeScript + Markdown
