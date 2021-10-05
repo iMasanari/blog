@@ -2,10 +2,10 @@ import { css, Theme } from '@emotion/react'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import EditIcon from '@mui/icons-material/Edit'
 import { Typography } from '@mui/material'
-import { Post } from '../../types'
 import Link from '../atoms/Link'
 import Time from '../atoms/Time'
 import Tags from './Tags'
+import { Post } from '~/domains/post'
 
 const createAtStyle = (theme: Theme) => css`
   display: flex;

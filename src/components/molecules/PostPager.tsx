@@ -1,7 +1,7 @@
 import { css, Theme } from '@emotion/react'
 import React from 'react'
 import Link from '../atoms/Link'
-import { Post } from '~/types'
+import { Post } from '~/domains/post'
 
 const listStyle = (theme: Theme) => css`
   display: flex;

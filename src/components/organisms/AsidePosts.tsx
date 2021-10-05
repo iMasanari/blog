@@ -2,7 +2,7 @@ import { css, Theme } from '@emotion/react'
 import { Typography } from '@mui/material'
 import Tags from '../molecules/Tags'
 import Posts from './Posts'
-import { Post } from '~/types'
+import { Post } from '~/domains/post'
 
 const asideStyle = (theme: Theme) => css`
   margin: ${theme.spacing(4, 'auto')};

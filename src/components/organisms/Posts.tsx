@@ -1,6 +1,6 @@
 import { css, Theme } from '@emotion/react'
 import PostHeader from '../molecules/PostHeader'
-import { Post } from '~/types'
+import { Post } from '~/domains/post'
 
 const listStyle = css`
   list-style: none;

@@ -6,9 +6,8 @@ import PostPager from '~/components/molecules/PostPager'
 import AsidePosts from '~/components/organisms/AsidePosts'
 import Post from '~/components/organisms/Post'
 import { SUGGEST_LIMIT } from '~/constants'
-import { parse } from '~/modules/markdown'
+import { Post as IPost } from '~/domains/post'
 import { getAllPosts, getPostContent } from '~/modules/posts'
-import { Post as IPost } from '~/types'
 
 export const config = { amp: 'hybrid' }
 
@@ -40,7 +39,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
   const next: IPost | null = posts[currentIndex - 1] || null
   const prev: IPost | null = posts[currentIndex + 1] || null
 
-  const content = await parse(getPostContent(slug)!)
+  const content = await getPostContent(slug)
 
   const sameTags = posts
     .filter(v => v.slug !== post.slug && v.tags.some(tag => post.tags.includes(tag)))
