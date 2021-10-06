@@ -1,6 +1,6 @@
 import { css, Theme } from '@emotion/react'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
-import EditIcon from '@mui/icons-material/Edit'
+import SyncIcon from '@mui/icons-material/Sync'
 import { Typography } from '@mui/material'
 import Link from '../atoms/Link'
 import Time from '../atoms/Time'
@@ -29,7 +29,7 @@ export default function PostHeader({ post, link }: Props) {
         {post.update && (
           <>
             {/* <Tooltip title="最終更新日" placement="top" arrow> */}
-            <EditIcon fontSize="small" sx={{ ml: 2, mr: 0.5 }} />
+            <SyncIcon fontSize="small" sx={{ ml: 2, mr: 0.5 }} />
             {/* </Tooltip> */}
             <Time dateTime={post.update} />
           </>
