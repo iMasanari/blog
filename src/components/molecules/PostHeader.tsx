@@ -1,12 +1,11 @@
 import { css, Theme } from '@emotion/react'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
-import EditIcon from '@mui/icons-material/Edit'
+import SyncIcon from '@mui/icons-material/Sync'
 import { Typography } from '@mui/material'
-import { Fragment } from 'react'
-import { Post } from '../../types'
 import Link from '../atoms/Link'
 import Time from '../atoms/Time'
 import Tags from './Tags'
+import { Post } from '~/domains/post'
 
 const createAtStyle = (theme: Theme) => css`
   display: flex;
@@ -28,12 +27,12 @@ export default function PostHeader({ post, link }: Props) {
         {/* </Tooltip> */}
         <Time dateTime={post.date} />
         {post.update && (
-          <Fragment>
+          <>
             {/* <Tooltip title="最終更新日" placement="top" arrow> */}
-            <EditIcon fontSize="small" sx={{ ml: 2, mr: 0.5 }} />
+            <SyncIcon fontSize="small" sx={{ ml: 2, mr: 0.5 }} />
             {/* </Tooltip> */}
             <Time dateTime={post.update} />
-          </Fragment>
+          </>
         )}
       </div>
       <Typography component="h1" variant="h5" gutterBottom>

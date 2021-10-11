@@ -1,10 +1,9 @@
 import { css, Theme } from '@emotion/react'
 import { Box, Paper, Table, TableBody, TableCell, TableCellProps, TableContainer, TableProps, TableRow, Typography, TypographyProps } from '@mui/material'
 import DomParserReact from 'dom-parser-react'
-import { createDom } from 'dom-parser-react/server'
 import Link from '../atoms/Link'
 import PostHeader from '../molecules/PostHeader'
-import { Post as IPost } from '~/types'
+import { Post as IPost } from '~/domains/post'
 
 interface Props {
   post: IPost
@@ -80,10 +79,7 @@ export default function Post({ post, content }: Props) {
         <PostHeader post={post} />
       </Box>
       <main>
-        <DomParserReact
-          source={typeof window === 'object' ? content : createDom(content)}
-          components={components}
-        />
+        <DomParserReact source={content} components={components} />
       </main>
     </article>
   )

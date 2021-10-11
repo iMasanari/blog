@@ -4,19 +4,28 @@ import remarkGfm from 'remark-gfm'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import * as shiki from 'shiki'
-import { unified } from 'unified'
+import { Processor, unified } from 'unified'
 
-export const parse = async (markdown: string) => {
+let processorPromise: Promise<Processor>
+
+const createProsessor = async () => {
   const highlighter = await shiki.getHighlighter({ theme: 'dark-plus' })
 
-  const processor = unified()
+  return unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypeShiki as any, { highlighter })
     .use(rehypeStringify)
+}
 
-  const result = await processor.process(markdown)
+export const toHTML = async (text: string) => {
+  if (!processorPromise) {
+    processorPromise = createProsessor()
+  }
+
+  const processor = await processorPromise
+  const result = await processor.process(text)
 
   return result.toString()
 }
