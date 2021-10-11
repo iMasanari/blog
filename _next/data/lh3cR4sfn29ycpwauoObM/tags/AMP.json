@@ -1,0 +1,1 @@
+{"pageProps":{"posts":[{"title":"ブログをAMP対応（仮）しました","description":"実質、各ページに `export const config = { amp: 'hybrid' }` を追加しただけ。next.js超ラク。","slug":"use-amp","tags":["AMP","Next.js","blog"],"date":"2020-11-28T08:05:18.607Z","update":null,"image":null,"draft":false}],"pager":{"page":1,"count":1}},"__N_SSG":true}

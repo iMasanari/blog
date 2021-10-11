@@ -1,0 +1,1 @@
+{"pageProps":{"posts":[{"title":"GitHub PagesのUser Pageにdistフォルダをデプロイする","description":"User Pageにはmasterブランチしか指定できないようです。そこに任意のフォルダの中身をデプロイする方法を書きました。","slug":"deploy-to-github-pages-user-page","tags":["GitHubPages"],"date":"2018-07-01T15:11:38.719Z","update":"2018-07-02T13:49:48.876Z","image":null,"draft":false}],"pager":{"page":1,"count":1}},"__N_SSG":true}
