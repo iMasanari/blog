@@ -17,9 +17,9 @@
     "@emotion/react": "^11.8.1",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
-    "@leafac/rehype-shiki": "^2.1.1",
     "@mui/icons-material": "^5.4.4",
     "@mui/material": "^5.4.4",
+    "@stefanprobst/remark-shiki": "^2.1.0",
     "dom-parser-react": "^0.2.1",
     "gray-matter": "^4.0.3",
     "next": "^12.1.0",
@@ -34,7 +34,8 @@
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",
     "shiki": "^0.10.1",
-    "unified": "^10.1.1"
+    "unified": "^10.1.1",
+    "unist-util-visit-parents": "^5.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
