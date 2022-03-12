@@ -99,8 +99,7 @@ src
 
 ### 各種設定ファイル（必要最低限の箇所のみ）
 
-```json
-// package.json
+```json:package.json
 {
   "scripts": {
     "dev": "parcel src/index.html",
@@ -118,8 +117,7 @@ src
 }
 ```
 
-```toml
-# Cargo.toml
+```toml:Cargo.toml
 [package]
 name = "wasm"
 version = "0.1.0"
@@ -132,8 +130,7 @@ crate-type = ["cdylib"]
 path = "./src/wasm/lib.rs"
 ```
 
-```json
-// tsconfig.json
+```json:tsconfig.json
 {
   "compilerOptions": {
     "target": "es2015",
@@ -156,18 +153,15 @@ WebAssembly未対応のIEを切り捨て、TypeScriptのコンパイルはes2015
 書き足している場所もあるが、全体はサンプルリポジトリを参照。
 [iMasanari/wasm-bindgen-with-worker][wasm-bindgen-with-worker]
 
-```html
-<!-- src/index.html -->
+```html:src/index.html
 <script src="app/index.ts"></script>
 ```
 
-```typescript
-// src/app/index.ts
+```typescript:src/app/index.ts
 const worker = new Worker('../worker/index.ts')
 ```
 
-```typescript
-// src/worker/index.ts
+```typescript:src/worker/index.ts
 import * as wasm from '../wasm/lib.rs'
 
 // WebAssemblyの実行
@@ -177,8 +171,7 @@ wasm.some_function('WebAssembly')
 あとは、Rustの関数を作るだけ。
 現在のWebAssemblyは数値しかやりとりができないが、wasm-bindgenを使うことで文字列やJSONもやりとりができるようになる。
 
-```rust
-// src/wasm/lib.rs
+```rust:src/wasm/lib.rs
 extern crate wasm_bindgen;
 use wasm_bindgen::prelude::*;
 
@@ -222,8 +215,7 @@ dist
 Webpackでは、pkgフォルダ内のファイルをインポートするため、相対パスの基準は`pkg/`である。
 parcel(parcel-plugin-wasm.rs)では、`node_modules/parcel-plugin-wasm.rs/`が基準である。parcelの絶対パス（`/*`）を使えば、エントリーファイルの場所（今回は`src/`）が基準になる。
 
-```rust
-// src/wasm/lib.rs
+```rust:src/wasm/lib.rs
 #[wasm_bindgen(module = "/worker/wasm-util")]
 extern {
     fn console_log(s: &str);

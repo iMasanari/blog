@@ -66,9 +66,7 @@ export default function Index() {
 クラス名を短縮させるには、`createGenerateClassName` で設定を行います。
 Next.jsではクライアント側、サーバー(SSR/SSG)側の両方で使用するので、今回は別ファイルで設定しておき、importして使用するようにします。
 
-```js
-// src/styles.ts
-
+```js:src/styles.ts
 import { createGenerateClassName } from '@material-ui/core'
 
 export const getGenerateClassName = () =>
@@ -84,9 +82,7 @@ export const getGenerateClassName = () =>
 
 次はクライアント側、`_app.tsx` です。
 
-```diff
-// pages/_app.tsx
-
+```diff:pages/_app.tsx
 +import { StylesProvider } from '@material-ui/core/styles'
 +import { getGenerateClassName } from '../src/styles'
  
@@ -116,9 +112,7 @@ export const getGenerateClassName = () =>
 
 続いてサーバー側、`_document.tsx`です。
 
-```diff
-// pages/_document.tsx
-
+```diff:pages/_document.tsx
 +import { getGenerateClassName } from '../src/styles'
 
  // 略

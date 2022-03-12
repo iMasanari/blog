@@ -22,9 +22,7 @@ https://github.com/webpack/extract-text-webpack-plugin for th  e usage example
 
 サンプルの初期コードどころか、そもそも下記の設定で動かなかった。
 
-```js
-// static.config.js
-
+```js:static.config.js
 export default {
   // ...
   webpack: (config, { defaultLoaders }) => {
@@ -52,9 +50,7 @@ export default {
 `defaultLoaders.cssLoader`を使わず、既存のルールの先頭に追加したい処理を置く。
 ルールは`oneOf`で書かれているため、最初に一致するルールのみが使用される。先頭に追加することで、既存のルールは変更することなくマイルールを適用することができるのだ。
 
-```js
-// static.config.js
-
+```js:static.config.js
 export default {
   // ...
   webpack: (config, { defaultLoaders }) => {
