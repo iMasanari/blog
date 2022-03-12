@@ -1,6 +1,8 @@
 import { css, Theme } from '@emotion/react'
-import { Box, Paper, Table, TableBody, TableCell, TableCellProps, TableContainer, TableProps, TableRow, Typography, TypographyProps } from '@mui/material'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+import { Box, IconButton, Paper, Snackbar, Table, TableBody, TableCell, TableCellProps, TableContainer, TableProps, TableRow, Typography, TypographyProps } from '@mui/material'
 import DomParserReact from 'dom-parser-react'
+import { useState } from 'react'
 import Link from '../atoms/Link'
 import PostHeader from '../molecules/PostHeader'
 import { Post as IPost } from '~/domains/post'
@@ -27,9 +29,22 @@ const breakAllStyle = css`
   word-break: break-all;
 `
 
+const codeTitileStyle = (theme: Theme) => css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${theme.spacing(0.5, 4)};
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  background-color: #555;
+  color: white;
+`
+
 const codeBlockStyle = (theme: Theme) => css`
   overflow: auto;
   padding: ${theme.spacing(1, 4)};
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 `
 
 const listStyle = css`
@@ -38,6 +53,41 @@ const listStyle = css`
     margin-bottom: 0;
   }
 `
+
+const CodeWrapper = ({ title, lang, code, children }: any) => {
+  const [open, setOpen] = useState(false)
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const copy = () => {
+    navigator.clipboard.writeText(code).then(() => {
+      setOpen(true)
+    })
+  }
+
+  return (
+    <Paper elevation={4} sx={{ my: 2 }}>
+      <div css={codeTitileStyle}>
+        <Typography component="span">
+          {lang === 'diff' && title ? `diff: ${title}` : title}
+        </Typography>
+        <IconButton aria-label="copy" size="small" sx={{ color: 'white' }} onClick={copy}>
+          <ContentCopyIcon fontSize="small" />
+        </IconButton>
+      </div>
+      {children}
+      <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        message="コードをコピーしました"
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      />
+    </Paper>
+  )
+}
 
 const Code = (props: any) => {
   const breakAll =
@@ -59,7 +109,7 @@ const components = {
   ol: (props: TypographyProps<'ol'>) => <Typography my={2} css={listStyle} {...props} component="ol" />,
   li: (props: TypographyProps<'li'>) => <Typography {...props} component="li" />,
   code: Code,
-  pre: (props: TypographyProps<'pre'>) => <Typography component="pre" my={2} {...props} css={codeBlockStyle} />,
+  pre: (props: TypographyProps<'pre'>) => <Typography component="pre" {...props} css={codeBlockStyle} />,
   a: Link,
   table: (props: TableProps) => (
     <TableContainer component={Paper} variant="outlined">
@@ -70,6 +120,7 @@ const components = {
   tr: TableRow,
   th: (props: TableCellProps) => <TableCell component="th" {...props} align={props.align || undefined} />,
   td: (props: TableCellProps) => <TableCell {...props} align={props.align || undefined} />,
+  'app-code-wrapper': CodeWrapper,
 }
 
 export default function Post({ post, content }: Props) {

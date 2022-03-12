@@ -58,9 +58,7 @@ AMP時は `{slug}.amp/index.html` に、非AMP時は `{slug}/index.html` が使�
 
 参考： [AMP: styles missing when importing standard css files in a project using styled components #7121](https://github.com/vercel/next.js/issues/7121)
 
-```diff
-// src/pages/_app.tsx
-
+```diff:src/pages/_app.tsx
 -import 'mvp.css'
 -import 'prismjs/themes/prism-okaidia.css'
 
@@ -73,9 +71,7 @@ AMP時は `{slug}.amp/index.html` に、非AMP時は `{slug}/index.html` が使�
  `}</style>
 ```
 
-```diff
-// postcss.config.js
-
+```diff:postcss.config.js
 module.exports = {
   plugins: {
     'postcss-custom-properties': {},
@@ -91,9 +87,7 @@ module.exports = {
 
 現在このブログで使用しているCSSフレームワークの「mvp.css」に下記のようなスタイルがあったため、AMP時と非AMP時で表示に差異が出ていました。
 
-```css
-/* mvp.css */
-
+```css:mvp.css
 /* 非AMP時のみ下記が適応されない */
 article header, div header, main header {
   padding-top: 0;
@@ -102,9 +96,7 @@ article header, div header, main header {
 
 非AMP時でも同じ見た目になるよう、下記を追加しました。
 
-```diff
-// src/components/organisms/Header.tsx
-
+```diff:src/components/organisms/Header.tsx
 +<style jsx>{`
 +.Header {
 +  padding-top: 0;
