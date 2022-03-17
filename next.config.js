@@ -10,6 +10,9 @@ const withBundleAnalyzer = bundleAnalyzer({
 /** @type {import('next').NextConfig} */ 
 const nextConfig = {
   trailingSlash: true,
+  experimental: {
+    emotion: true,
+  },
   webpack(/** @type {import('webpack').Configuration} */ config, options) {
     config.resolve.alias = {
       ...config.resolve.alias,
