@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import CloseIcon from '@mui/icons-material/Close'
 import MenuIcon from '@mui/icons-material/Menu'
-import { AppBar, Box, Container, Divider, Drawer, IconButton, List, Slide, Toolbar, useScrollTrigger } from '@mui/material'
+import { AppBar, Box, Container, Divider, Drawer, DrawerProps, IconButton, List, Slide, Toolbar, useScrollTrigger } from '@mui/material'
 import { useAmp } from 'next/amp'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -9,6 +9,11 @@ import AmpEvents from '../atoms/AmpEvents'
 import DrawerItem from '../molecules/DrawerItem'
 import NavItem from '../molecules/NavItem'
 import SiteTitle from '../molecules/SiteTitle'
+
+const appBarStyle = css`
+  /* amp-fx */
+  overflow: hidden;
+`
 
 const titleStyle = css`
   flex-grow: 1;
@@ -27,8 +32,10 @@ interface Props {
 
 const AmpSidebarTag = 'amp-sidebar' as any
 
-const AmpSidebar = ({ children }: any) =>
-  <AmpSidebarTag id="sidebar" layout="nodisplay" side="right" children={children} />
+const AmpSidebar = ({ anchor, children }: DrawerProps) =>
+  <AmpSidebarTag id="sidebar" layout="nodisplay" side={anchor}>
+    {children}
+  </AmpSidebarTag>
 
 export default function Header({ title, description }: Props) {
   const router = useRouter()
@@ -52,7 +59,7 @@ export default function Header({ title, description }: Props) {
   return (
     <>
       <Slide appear={false} direction="down" in={!trigger}>
-        <AppBar amp-fx="float-in-top" position="fixed" color="default" elevation={1}>
+        <AppBar css={appBarStyle} amp-fx="float-in-top" position="fixed" color="default" elevation={1}>
           <Toolbar component={Container} disableGutters>
             <SiteTitle
               css={titleStyle}

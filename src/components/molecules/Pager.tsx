@@ -16,7 +16,7 @@ interface Props {
 
 export default function Pager({ page, count, basePath }: Props) {
   const renderItem = (item: PaginationRenderItemParams) => {
-    if (item.page <= 0 || count < item.page) {
+    if (item.page == null || item.page <= 0 || count < item.page) {
       return <PaginationItem component="span" {...item} />
     }
 
