@@ -7,16 +7,17 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
-/** @type {import('next').NextConfig} */ 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: true,
-  experimental: {
+  compiler: {
     emotion: true,
   },
   webpack(/** @type {import('webpack').Configuration} */ config, options) {
+    // for IE
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@mui/core': '@mui/core/legacy',
+      '@mui/base': '@mui/base/legacy',
       '@mui/material': '@mui/material/legacy',
       '@mui/private-theming': '@mui/private-theming/legacy',
       '@mui/styled-engine': '@mui/styled-engine/legacy',
