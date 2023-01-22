@@ -19,7 +19,7 @@ export default function Head({ title, description, image }: Props) {
     <NextHead>
       <title>{pageTitle}</title>
       <meta name="description" content={description} />
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={isArticle ? 'article' : 'website'} />
       <meta property="og:url" content={url} />
