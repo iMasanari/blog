@@ -41,13 +41,13 @@ export default function PostPager({ prev, next }: Props) {
   return (
     <ul css={listStyle}>
       <li css={[itemStyle, prevItemStyle]}>
-        {prev ? <Link href={`/blog/${prev.slug}`} variant="body1">{prev.title}</Link> : null}
+        {prev ? <Link href={`/posts/${prev.slug}`} variant="body1">{prev.title}</Link> : null}
       </li>
       <li css={[itemStyle, homeItemStyle]}>
         <Link href="/" variant="body1">HOME</Link>
       </li>
       <li css={[itemStyle, nextItemStyle]}>
-        {next ? <Link href={`/blog/${next.slug}`} variant="body1">{next.title}</Link> : null}
+        {next ? <Link href={`/posts/${next.slug}`} variant="body1">{next.title}</Link> : null}
       </li>
     </ul>
   )

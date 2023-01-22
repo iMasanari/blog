@@ -86,7 +86,7 @@ const Template = await requireWithRollup('./src/Template.tsx', rollupConfig)
 ジェネレータ部分を分離
 
 
-[use-technology]: /blog/use-technology/
+[use-technology]: /posts/use-technology/
 
 [requireWithRollup]: https://github.com/iMasanari/imasanari.github.io/blob/9ab02e264623038b6d296fa0b0a6171be93907ee/scripts/requireWithRollup.js
 

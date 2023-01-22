@@ -25,7 +25,7 @@ interface Props {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const contents = getAllPosts()
-  const paths = contents.map(v => `/blog/${v.slug}`)
+  const paths = contents.map(v => `/posts/${v.slug}`)
 
   return { paths, fallback: false }
 }
