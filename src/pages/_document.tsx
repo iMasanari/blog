@@ -40,7 +40,6 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="ja">
-        {/* @ts-expect-error */}
         <Head>
           <meta charSet="utf-8" />
           <AnalyticsScript />
