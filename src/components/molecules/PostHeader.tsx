@@ -37,7 +37,7 @@ export default function PostHeader({ post, link }: Props) {
       </div>
       <Typography component="h1" variant="h5" gutterBottom>
         {!link ? post.title : (
-          <Link href={`/blog/${post.slug}/`}>
+          <Link href={`/posts/${post.slug}/`}>
             {post.title}
           </Link>
         )}

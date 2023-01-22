@@ -70,4 +70,4 @@ Tree Shakingがサポートされていたため。`--experimental-scope-hoistin
 rollup.jsでは非対応だったDynamic Importで記事fetchをしてみたい。そうすると、React Suspence使ってみたいからReactに書き換えるかもしれない。
 
 
-[wasm-bindgen-with-worker]: /blog/wasm-bindgen-with-worker/
+[wasm-bindgen-with-worker]: /posts/wasm-bindgen-with-worker/

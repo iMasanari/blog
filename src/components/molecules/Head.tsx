@@ -12,7 +12,7 @@ export default function Head({ title, description, image }: Props) {
   const router = useRouter()
 
   const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME
-  const isArticle = router.pathname.startsWith('/blog/')
+  const isArticle = router.pathname.startsWith('/posts/')
   const url = `${SITE_ROOT}${router.asPath}`
 
   return (

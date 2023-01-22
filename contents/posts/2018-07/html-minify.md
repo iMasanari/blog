@@ -101,4 +101,4 @@ markdownで`removeOptionalTags`というオプションを使用したかった�
 
 <!-- link -->
 [html-minifier]: https://github.com/kangax/html-minifier
-[remove-object-key]: /blog/remove-object-key/
+[remove-object-key]: /posts/remove-object-key/

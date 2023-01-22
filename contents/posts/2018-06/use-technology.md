@@ -10,7 +10,7 @@ update: 2019-04-20T13:15:27.878Z
 ## 追記
 
 現在はHyperappを使用しています。詳しくはこちら
-[ブログをHyperappベースの自作ジェネレータに変更した話](/blog/use-hyperapp/)
+[ブログをHyperappベースの自作ジェネレータに変更した話](/posts/use-hyperapp/)
 
 ## 使用した技術
 
