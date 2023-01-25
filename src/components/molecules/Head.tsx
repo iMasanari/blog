@@ -26,6 +26,7 @@ export default function Head({ title, description, image }: Props) {
       <meta property="og:image" content={`${SITE_ROOT}${image || '/images/icon.jpg'}`} />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta name="twitter:card" content="summary" />
+      <link rel="canonical" href={url} />
     </NextHead>
   )
 }
