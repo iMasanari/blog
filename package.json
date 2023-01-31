@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next",
-    "build": "next build && next export",
+    "build": "next build && next export && node scripts/fix-amphtml-path.mjs",
     "analyze": "ANALYZE=true next build",
     "test": "npm run test:textlint && npm run test:tsc",
     "test:textlint": "textlint ./contents",
@@ -49,6 +49,7 @@
     "@types/webpack-env": "^1.18.0",
     "babel-loader": "^9.1.2",
     "raw-loader": "^4.0.2",
+    "glob": "^8.1.0",
     "textlint": "^12.6.0",
     "textlint-rule-preset-japanese": "^7.0.0",
     "textlint-rule-preset-jtf-style": "^2.3.13",
