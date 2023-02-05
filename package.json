@@ -48,7 +48,6 @@
     "@types/webpack": "^5.28.0",
     "@types/webpack-env": "^1.18.0",
     "babel-loader": "^9.1.2",
-    "raw-loader": "^4.0.2",
     "glob": "^8.1.0",
     "textlint": "^12.6.0",
     "textlint-rule-preset-japanese": "^7.0.0",
