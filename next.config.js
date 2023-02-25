@@ -17,7 +17,7 @@ const nextConfig = {
     // @ts-expect-error
     config.module.rules.push({
       test: /\.mdx?$/i,
-      use: 'raw-loader',
+      type: 'asset/source',
     })
 
     return config

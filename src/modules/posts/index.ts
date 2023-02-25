@@ -6,7 +6,7 @@ const getPosts = () => {
   const contexts = require.context('contents/posts/', true, /^(?!\.\/).*\.mdx?$/i)
 
   return contexts.keys().map(path => {
-    const contents = contexts(path).default
+    const contents = contexts(path) as string
     const { content, data } = matter(contents)
 
     const post: Post = {
