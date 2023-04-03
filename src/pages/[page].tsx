@@ -10,8 +10,6 @@ import { Post } from '~/domains/post'
 import { getAllPosts } from '~/modules/posts'
 import { range } from '~/utils/array'
 
-export const config = { amp: 'hybrid' }
-
 type Query = {
   page?: string
 }
