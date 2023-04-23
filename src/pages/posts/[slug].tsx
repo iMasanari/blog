@@ -9,8 +9,6 @@ import { SUGGEST_LIMIT } from '~/constants'
 import { Post as IPost } from '~/domains/post'
 import { getAllPosts, getPostContent } from '~/modules/posts'
 
-export const config = { amp: 'hybrid' }
-
 type Query = {
   slug: string
 }
