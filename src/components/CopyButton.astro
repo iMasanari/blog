@@ -1,0 +1,50 @@
+---
+import { Icon } from 'astro-icon'
+
+const { copyText } = Astro.props
+---
+
+<button
+  class="js-copy-button appearance-none overflow-hidden p-2 rounded-full"
+  class:list={[
+    'shadow-[2px_2px_4px_#bebebe,-2px_-2px_4px_#fff,inset_0_0_0_#bebebe,inset_0_0_0_#fff]',
+    'active:shadow-[0_0_0px_#bebebe,0_0_0px_#fff,inset_0_0_0_#bebebe,inset_0_0_0_#fff]',
+  ]}
+  aria-label="copy"
+  data-text={copyText}
+>
+  <Icon name="ic:outline-content-copy" class="w-4 h-4" />
+</button>
+
+<script>
+  const createToolTip = () => {
+    const tooltip = document.createElement('div')
+
+    tooltip.className =
+      'fixed top-2 left-0 right-0 w-max py-2 px-4 rounded mx-auto bg-blue-300 shadow-md cursor-pointer'
+    tooltip.textContent = 'コードをコピーしました！'
+
+    window.addEventListener('click', () => tooltip.remove(), {
+      once: true,
+      capture: true,
+      passive: true,
+    })
+
+    setTimeout(() => tooltip.remove(), 5000)
+
+    document.body.appendChild(tooltip)
+  }
+
+  const buttons =
+    document.querySelectorAll<HTMLButtonElement>('.js-copy-button')
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const copyText = button.dataset.text
+
+      if (copyText) {
+        navigator.clipboard.writeText(copyText).then(createToolTip)
+      }
+    })
+  })
+</script>
