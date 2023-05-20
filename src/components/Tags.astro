@@ -1,0 +1,25 @@
+---
+interface Props {
+  tags: string[]
+}
+
+const { tags } = Astro.props
+
+const separate = (separator: string, array: any[]) =>
+  array.reduce((acc, v) => [...acc, separator, v], [] as astroHTML.JSX.Child[])
+---
+
+<ul>
+  {
+    separate(
+      ' ',
+      tags.map((v) => (
+        <li class="inline-block">
+          <a href={`/tags/${v}/`} class="text-slate-500 hover:underline">
+            #{v}
+          </a>
+        </li>
+      ))
+    )
+  }
+</ul>

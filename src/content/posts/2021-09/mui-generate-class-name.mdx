@@ -1,0 +1,137 @@
+---
+title: Material-UI v4のクラス名を短縮してレンダリングする方法
+description: Material-UI v4で標準コンポーネントのクラス名を短縮するには、`createGenerateClassName` を使用します。このページでは、その `createGenerateClassName` の設定方法を紹介します。
+slug: mui-generate-class-name
+tags: [MUI, Next.js]
+date: 2021-10-11T16:40:23.602Z
+---
+
+Qiitaに投稿予定でしたが、MUI（Material-UI）がv5になってこの方法が非対応になってしまったので、このブログで供養します。
+
+
+## Material-UIのクラス名長い問題
+
+長くないですか？
+下記は、Next.jsとMaterial-UIを組み合わせたexampleのコードです。実際にSSR/SSGしてみましょう。
+
+```tsx
+export default function Index() {
+  return (
+    <Container maxWidth="sm">
+      <Box my={4}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Next.js with TypeScript example
+        </Typography>
+        <Link href="/about" color="secondary">
+          Go to the about page
+        </Link>
+        <ProTip />
+        <Copyright />
+      </Box>
+    </Container>
+  )
+}
+```
+
+`MuiContainerroot-0-1-1`のように、長いクラス名（しかも1つの要素に複数のクラス）になります。
+
+```html
+<div class="MuiContainerroot-0-1-1 MuiContainermaxWidthSm-0-1-5">
+  <div class="MuiBoxroot-0-1-9 MuiBoxroot-0-1-10">
+    <h1 class="MuiTypographyroot-0-1-11 MuiTypographyh4-0-1-19 MuiTypographygutterBottom-0-1-31">Next.js with TypeScript example</h1>
+    <a class="MuiTypographyroot-0-1-11 MuiLinkroot-0-1-41 MuiLinkunderlineHover-0-1-43 MuiTypographycolorSecondary-0-1-35" href="/about">Go to the about page</a>
+    <p class="MuiTypographyroot-0-1-11 makeStylesroot-0-1-47 MuiTypographybody1-0-1-13 MuiTypographycolorTextSecondary-0-1-37">
+<!-- ...(略) -->
+```
+
+この記事で紹介する設定を行えば、`production`設定のビルドで下記のようになります。
+
+```html
+<div class="c1 c5">
+  <div class="c9 c10">
+    <h1 class="c11 c19 c31">Next.js with TypeScript example</h1>
+    <a class="c11 c41 c43 c35" href="/about">Go to the about page</a>
+    <p class="c11 c47 c13 c37">
+<!-- ...(略) -->
+```
+
+かなりすっきりしていますね。
+1ページすべてで上記の短縮が行われると、結構大きなHTMLのサイズ差になるのではないでしょうか。
+
+
+## 設定方法
+
+それでは、その設定方法を見ていきましょう。
+
+クラス名を短縮させるには、`createGenerateClassName` で設定を行います。
+Next.jsではクライアント側、サーバー(SSR/SSG)側の両方で使用するので、今回は別ファイルで設定しておき、importして使用するようにします。
+
+```js:src/styles.ts
+import { createGenerateClassName } from '@material-ui/core'
+
+export const getGenerateClassName = () =>
+  createGenerateClassName({
+    productionPrefix: 'c',
+    disableGlobal: true,
+  })
+
+```
+
+ポイントは、`disableGlobal` で、`true` にすることです。これによって、Material-UI標準のクラス名も短縮されるようになります。
+`productionPrefix` はクラス名のプレフィックスで、初期値は `jss` です。今回は、より短くするために、1文字の `c` を指定しました。それによって、クラス名が `c10` のようになります。
+
+次はクライアント側、`_app.tsx` です。
+
+```diff:pages/_app.tsx
++import { StylesProvider } from '@material-ui/core/styles'
++import { getGenerateClassName } from '../src/styles'
+ 
++const generateClassName = getGenerateClassName()
+
+ export default function MyApp(props: AppProps) {
+   // 略
+
+   return (
++    <StylesProvider generateClassName={generateClassName}>
+       <Head>
+         <title>My page</title>
+         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+       </Head>
+       <ThemeProvider theme={theme}>
+         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+         <CssBaseline />
+         <Component {...pageProps} />
+       </ThemeProvider>
++    </StylesProvider>
+   )
+ }
+```
+
+コンテンツを `<StylesProvider />` で囲み、生成した `generateClassName` をpropsに渡してください。
+ポイントは、`generateClassName` の生成は1回だけ行うことです。今回のコードでは、コンポーネントの外に出しています。
+
+続いてサーバー側、`_document.tsx`です。
+
+```diff:pages/_document.tsx
++import { getGenerateClassName } from '../src/styles'
+
+ // 略
+
+ MyDocument.getInitialProps = async (ctx) => {
+   // 略
+-  const sheets = new ServerStyleSheets()
++  const serverGenerateClassName = getGenerateClassName()
++  const sheets = new ServerStyleSheets({ serverGenerateClassName })
+   // 略
+ }
+```
+
+`generateClassName` を生成し、`ServerStyleSheets` の引数に渡します。
+ポイントは、クライアント側と違い、パラメータ名が `serverGenerateClassName` になっていることと、`getInitialProps` で `generateClassName` を生成、つまりアクセスの度に生成し直している所です。
+
+上記の設定により、Material-UI標準のコンポーネントのクラス名が、短縮されるようになります。
+
+## 最後に
+
+供養完了です。
+MUI v5でもできる方法があれば教えて下さい。

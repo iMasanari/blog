@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content'
+import { SITE_DESCRIPTION, SITE_NAME } from '../constants'
+import Layout from '../features/Layout/Layout.astro'
+import PostCard from '../features/PostCard/PostCard.astro'
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+)
+---
+
+<Layout title={SITE_NAME} description={SITE_DESCRIPTION}>
+  <main class="max-w-5xl px-2 mx-auto my-4">
+    <ul class="-my-4">
+      {
+        posts.map((post) => (
+          <li class="my-8">
+            <PostCard link={`/posts/${post.slug}/`} post={post.data} />
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>
+
+<script>
+  console.log('index')
+</script>
