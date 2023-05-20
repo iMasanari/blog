@@ -1,0 +1,70 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content'
+import { SITE_NAME, SUGGEST_LIMIT } from '../../constants'
+import Layout from '../../features/Layout/Layout.astro'
+import { components } from '../../features/Markdown'
+import PostCard from '../../features/PostCard/PostCard.astro'
+import Tags from '../../components/Tags.astro'
+
+export const getStaticPaths = async () => {
+  const posts = (await getCollection('posts')).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  )
+
+  return posts.map((post) => {
+    const sameTags = posts
+      .filter(
+        (v) =>
+          v.slug !== post.slug &&
+          v.data.tags.some((tag) => post.data.tags.includes(tag))
+      )
+      .slice(0, SUGGEST_LIMIT)
+
+    return { params: { slug: post.slug }, props: { post, sameTags } }
+  })
+}
+
+interface Props {
+  post: CollectionEntry<'posts'>
+  sameTags: CollectionEntry<'posts'>[]
+}
+
+const { post, sameTags } = Astro.props
+const { Content } = await post.render()
+---
+
+<Layout
+  title={`${post.data.title} | ${SITE_NAME}`}
+  description={post.data.description}
+>
+  <main class="max-w-5xl px-2 mt-4 mx-auto">
+    <article>
+      <PostCard post={post.data}>
+        <div class="mt-8">
+          <Content components={components} />
+        </div>
+      </PostCard>
+    </article>
+  </main>
+  {
+    sameTags.length > 0 && (
+      <aside class="max-w-5xl px-2 mt-8 mx-auto">
+        <h2 class="pl-3 mt-12 mb-4 border-l-4 border-slate-700 text-2xl font-bold">
+          同じタグを含む記事
+        </h2>
+        <Tags tags={post.data.tags} />
+        <ul>
+          {sameTags.map((post) => (
+            <li class="my-8">
+              <PostCard link={`/posts/${post.slug}/`} post={post.data} />
+            </li>
+          ))}
+        </ul>
+      </aside>
+    )
+  }
+</Layout>
+
+<script>
+  console.log('posts')
+</script>

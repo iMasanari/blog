@@ -1,0 +1,38 @@
+---
+import { Icon } from 'astro-icon'
+import CopyButton from '../../../components/CopyButton.astro'
+
+interface Props {
+  lang: string
+  title: string
+  code: string
+}
+
+const { lang, title, code, ...props } = Astro.props
+const langMap = new Map([
+  ['html', 'HTML'],
+  ['ts', 'TypeScript'],
+  ['tsx', 'TypeScript with JSX'],
+  ['js', 'JavaScript'],
+  ['jsx', 'JavaScript with JSX'],
+])
+---
+
+<div
+  class="my-8 rounded overflow-hidden"
+  class:list={[
+    'shadow-[0_0_0px_#bebebe,0_0_0px_#fff,inset_2px_2px_4px_#bebebe,inset_-2px_-2px_4px_#fff]',
+  ]}
+  {...props}
+>
+  <div
+    class="flex justify-between items-center py-2 px-4"
+  >
+    <span class="flex items-center">
+      <Icon name="ic:baseline-insert-drive-file" class="w-4 h-4 mr-1" />
+      {lang === 'diff' && title ? `diff: ${title}` : title || langMap.get(lang) || lang}
+    </span>
+    <CopyButton copyText={code} />
+  </div>
+  <slot />
+</div>

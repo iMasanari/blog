@@ -1,0 +1,10 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = HTMLAttributes<'pre'>
+const { class: className, style, ...props } = Astro.props
+---
+
+<pre
+  class={`${className} overflow-auto py-2 px-4 rounded-b overflow-x-auto`.trim()}
+  {...props}><slot /></pre>

@@ -1,0 +1,71 @@
+---
+import { SITE_NAME } from '../../../constants'
+
+const { pathname } = Astro.url
+
+const Title = pathname === '/' ? 'h1' : 'div'
+---
+
+<header
+  class="js-header sticky top-0 w-full bg-slate-200/30 backdrop-blur transition"
+>
+  <div class="flex items-center max-w-5xl py-4 px-6 mx-auto">
+    <div class="mr-auto">
+      <Title class="text-xl">
+        <a href="/" class="hover:underline">{SITE_NAME}</a>
+      </Title>
+      <p class="text-sm text-gray-700">技術ブログ改め、Qiitaの下書き</p>
+    </div>
+    <a
+      href="https://github.com/iMasanari"
+      target="_blank"
+      rel="noopener"
+      class="py-1 px-4 ml-2 rounded bg-slate-200 transition-shadow"
+      class:list={[
+        'shadow-[2px_2px_4px_#bebebe,-2px_-2px_4px_#fff,inset_0_0_0_#bebebe,inset_0_0_0_#fff]',
+        'hover:shadow-[0_0_0px_#bebebe,0_0_0px_#fff,inset_2px_2px_4px_#bebebe,inset_-2px_-2px_4px_#fff]',
+      ]}
+    >
+      Qiita
+    </a>
+    <a
+      href="https://github.com/iMasanari"
+      target="_blank"
+      rel="noopener"
+      class="py-1 px-4 ml-2 rounded bg-slate-200 transition-shadow"
+      class:list={[
+        'shadow-[2px_2px_4px_#bebebe,-2px_-2px_4px_#fff,inset_0_0_0_#bebebe,inset_0_0_0_#fff]',
+        'hover:shadow-[0_0_0px_#bebebe,0_0_0px_#fff,inset_2px_2px_4px_#bebebe,inset_-2px_-2px_4px_#fff]',
+      ]}
+    >
+      GitHub
+    </a>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('.js-header')!
+  const headerHeight = 64 // header.getBoundingClientRect().height
+
+  let prevScrollPos = 0
+  let prevVisible = true
+
+  window.addEventListener('scroll', () => {
+    const currentScrollPos = window.pageYOffset
+
+    const visible =
+      currentScrollPos < headerHeight || currentScrollPos <= prevScrollPos
+
+    if (visible !== prevVisible) {
+      if (visible) {
+        header.classList.remove('-translate-y-full')
+      } else {
+        header.classList.add('-translate-y-full')
+      }
+
+      prevVisible = visible
+    }
+
+    prevScrollPos = currentScrollPos
+  })
+</script>

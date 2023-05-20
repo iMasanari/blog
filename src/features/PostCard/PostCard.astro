@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon'
+import type { CollectionEntry } from 'astro:content'
+import FormattedDate from '../../components/FormattedDate.astro'
+import Link from '../../components/Link.astro'
+import Tags from '../../components/Tags.astro'
+
+interface Props {
+  post: CollectionEntry<'posts'>['data']
+  link?: string
+}
+
+const { post, link } = Astro.props
+---
+
+<div
+  class="p-4 rounded bg-slate-200 transition-shadow"
+  class:list={[
+    'shadow-[2px_2px_4px_#bebebe,-2px_-2px_4px_#fff,inset_0_0_0_#bebebe,inset_0_0_0_#fff]',
+    link && '[&:has(.title:hover)]:shadow-[0_0_0px_#bebebe,0_0_0px_#fff,inset_2px_2px_4px_#bebebe,inset_-2px_-2px_4px_#fff]',
+  ]}
+>
+  <div class="flex items-center">
+    <Icon name="ph:calendar-blank" class="w-6 h-6 mr-1" />
+    <FormattedDate date={post.date} />
+    {
+      post.update && (
+        <>
+          <Icon name="ic:outline-update" class="w-6 h-6 ml-2 mr-1" />
+          <FormattedDate date={post.update} />
+        </>
+      )
+    }
+  </div>
+  {
+    link ? (
+      <Link href={link} class="title text-xl">
+        {post.title}
+      </Link>
+    ) : (
+      <h1 class="text-xl">{post.title}</h1>
+    )
+  }
+  <Tags tags={post.tags} />
+  <slot />
+</div>

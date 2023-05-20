@@ -1,0 +1,47 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content'
+import { SITE_NAME } from '../../constants'
+import Layout from '../../features/Layout/Layout.astro'
+import PostCard from '../../features/PostCard/PostCard.astro'
+
+export const getStaticPaths = async () => {
+  const posts = (await getCollection('posts')).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  )
+
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))]
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { tag, posts: posts.filter((v) => v.data.tags.includes(tag)) },
+  }))
+}
+
+interface Props {
+  tag: string
+  posts: CollectionEntry<'posts'>[]
+}
+
+const { tag, posts } = Astro.props
+---
+
+<Layout title={`${tag} | ${SITE_NAME}`} description={`「${tag}」のページ。`}>
+  <main class="max-w-5xl px-2 mx-auto">
+    <h1 class="pl-3 my-4 text-2xl font-bold">
+      「{tag}」の投稿一覧
+    </h1>
+    <ul class="-my-4">
+      {
+        posts.map((post) => (
+          <li class="my-8">
+            <PostCard link={`/posts/${post.slug}/`} post={post.data} />
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>
+
+<script>
+  console.log('tags')
+</script>
