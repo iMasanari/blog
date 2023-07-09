@@ -1,8 +1,14 @@
 ---
+import { tw } from 'tw-tag'
 import Link from '../../../components/Link.astro'
+
+const footerStyle = tw(`
+  p-6
+  text-center
+`)
 ---
 
-<footer class="p-6 text-center">
+<footer class={footerStyle}>
   Author:
   <Link href="https://github.com/iMasanari" target="_blank" rel="noopener">
     iMasanari

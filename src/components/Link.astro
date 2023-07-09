@@ -1,11 +1,17 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
+import { tw } from 'tw-tag'
 
 interface Props extends HTMLAttributes<'a'> {}
 
 const { class: className, ...props } = Astro.props
+
+const linkStyle = tw(`
+  text-blue-600
+  hover:underline
+`)
 ---
 
-<a class={`${className} text-blue-600 hover:underline`.trim()} {...props}>
+<a class:list={[className, linkStyle]} {...props}>
   <slot />
 </a>

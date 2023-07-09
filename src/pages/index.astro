@@ -3,18 +3,26 @@ import { getCollection } from 'astro:content'
 import { SITE_DESCRIPTION, SITE_NAME } from '../constants'
 import Layout from '../features/Layout/Layout.astro'
 import PostCard from '../features/PostCard/PostCard.astro'
+import { tw } from 'tw-tag'
 
 const posts = (await getCollection('posts')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 )
+
+const mainStyle = tw(`
+  max-w-5xl
+  px-2
+  mx-auto
+  my-4
+`)
 ---
 
 <Layout title={SITE_NAME} description={SITE_DESCRIPTION}>
-  <main class="max-w-5xl px-2 mx-auto my-4">
-    <ul class="-my-4">
+  <main class={mainStyle}>
+    <ul class={tw(`-my-4`)}>
       {
         posts.map((post) => (
-          <li class="my-8">
+          <li class={tw(`my-8`)}>
             <PostCard link={`/posts/${post.slug}/`} post={post.data} />
           </li>
         ))

@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon'
 import type { CollectionEntry } from 'astro:content'
+import { tw } from 'tw-tag'
 import FormattedDate from '../../components/FormattedDate.astro'
 import Link from '../../components/Link.astro'
 import Tags from '../../components/Tags.astro'
@@ -11,19 +12,55 @@ interface Props {
 }
 
 const { post, link } = Astro.props
+
+const postCardStyle = tw(`
+  p-4
+  rounded
+  bg-slate-200
+  shadow-neumo
+  transition-shadow
+`)
+
+const postCardLinkStyle = tw(`
+  [&:has(.title:hover)]:shadow-neumo-inset
+`)
+
+const dateContainerStyle = tw(`
+  flex
+  items-center
+`)
+
+const postDateIconStyle = tw(`
+  w-6
+  h-6
+  mr-1
+`)
+
+const updateDateIconStyle = tw(`
+  w-6
+  h-6
+  ml-2
+  mr-1
+`)
+
+const linkTitleStyle = tw(`
+  title
+  text-xl
+`)
+
+const titleStyle = tw(`
+  text-xl
+`)
 ---
 
-<div
-  class="p-4 rounded bg-slate-200 shadow-neumo transition-shadow"
-  class:list={link && '[&:has(.title:hover)]:shadow-neumo-inset'}
->
-  <div class="flex items-center">
-    <Icon name="ph:calendar-blank" class="w-6 h-6 mr-1" />
+<div class:list={[postCardStyle, link && postCardLinkStyle]}>
+  <div class={dateContainerStyle}>
+    <Icon name="ph:calendar-blank" class={postDateIconStyle} />
     <FormattedDate date={post.date} />
     {
       post.update && (
         <>
-          <Icon name="ic:outline-update" class="w-6 h-6 ml-2 mr-1" />
+          <Icon name="ic:outline-update" class={updateDateIconStyle} />
           <FormattedDate date={post.update} />
         </>
       )
@@ -31,11 +68,11 @@ const { post, link } = Astro.props
   </div>
   {
     link ? (
-      <Link href={link} class="title text-xl">
+      <Link href={link} class={linkTitleStyle}>
         {post.title}
       </Link>
     ) : (
-      <h1 class="text-xl">{post.title}</h1>
+      <h1 class={titleStyle}>{post.title}</h1>
     )
   }
   <Tags tags={post.tags} />

@@ -1,11 +1,15 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-
+import { tw } from 'tw-tag'
 
 type Props = HTMLAttributes<'p'>
 const props = Astro.props
+
+const pStyle = tw(`
+  my-2
+`)
 ---
 
-<p class="my-2" {...props}>
+<p class={pStyle} {...props}>
   <slot />
 </p>

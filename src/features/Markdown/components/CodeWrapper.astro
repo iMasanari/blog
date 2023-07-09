@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon'
+import { tw } from 'tw-tag'
 import CopyButton from '../../../components/CopyButton.astro'
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { lang, title, code, ...props } = Astro.props
+
 const langMap = new Map([
   ['html', 'HTML'],
   ['ts', 'TypeScript'],
@@ -16,18 +18,43 @@ const langMap = new Map([
   ['js', 'JavaScript'],
   ['jsx', 'JavaScript with JSX'],
 ])
+
+const codeWrapperStyle = tw(`
+  my-8
+  rounded
+  overflow-hidden
+  shadow-neumo-inset
+`)
+
+const headerStyle = tw(`
+  flex
+  justify-between
+  items-center
+  py-2
+  px-4
+`)
+
+const fileNameStyle = tw(`
+  flex
+  items-center
+`)
+
+const fileIconStyle = tw(`
+  w-4
+  h-4
+  mr-1
+`)
 ---
 
-<div
-  class="my-8 rounded overflow-hidden shadow-neumo-inset"
-  {...props}
->
-  <div
-    class="flex justify-between items-center py-2 px-4"
-  >
-    <span class="flex items-center">
-      <Icon name="ic:baseline-insert-drive-file" class="w-4 h-4 mr-1" />
-      {lang === 'diff' && title ? `diff: ${title}` : title || langMap.get(lang) || lang}
+<div class={codeWrapperStyle} {...props}>
+  <div class={headerStyle}>
+    <span class={fileNameStyle}>
+      <Icon name="ic:baseline-insert-drive-file" class={fileIconStyle} />
+      {
+        lang === 'diff' && title
+          ? `diff: ${title}`
+          : title || langMap.get(lang) || lang
+      }
     </span>
     <CopyButton copyText={code} />
   </div>
