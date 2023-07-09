@@ -1,23 +1,55 @@
 ---
 import { Icon } from 'astro-icon'
+import { tw } from 'tw-tag'
 
 const { copyText } = Astro.props
+
+const buttonStyle = tw(`
+  appearance-none
+  overflow-hidden
+  p-2
+  rounded-full
+  shadow-neumo
+  hover:shadow-neumo-inset
+  transition-shadow
+`)
+
+const iconStyle = tw(`
+  w-4
+  h-4
+`)
 ---
 
 <button
-  class="js-copy-button appearance-none overflow-hidden p-2 rounded-full shadow-neumo hover:shadow-neumo-inset transition-shadow"
+  class={`js-copy-button ${buttonStyle}`}
   aria-label="copy"
   data-text={copyText}
 >
-  <Icon name="ic:outline-content-copy" class="w-4 h-4" />
+  <Icon name="ic:outline-content-copy" class={iconStyle} />
 </button>
 
 <script>
+  import { tw } from 'tw-tag'
+
+  const tooltipStyle = tw(`
+    fixed
+    top-2
+    left-0
+    right-0
+    w-max
+    py-2
+    px-4
+    rounded
+    mx-auto
+    bg-blue-300
+    shadow-md
+    cursor-pointer
+  `)
+
   const createToolTip = () => {
     const tooltip = document.createElement('div')
 
-    tooltip.className =
-      'fixed top-2 left-0 right-0 w-max py-2 px-4 rounded mx-auto bg-blue-300 shadow-md cursor-pointer'
+    tooltip.className = tooltipStyle
     tooltip.textContent = 'コードをコピーしました！'
 
     window.addEventListener('click', () => tooltip.remove(), {

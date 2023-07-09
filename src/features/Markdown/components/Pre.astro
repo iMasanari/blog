@@ -1,10 +1,17 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
+import { tw } from 'tw-tag'
 
 type Props = HTMLAttributes<'pre'>
 const { class: className, style, ...props } = Astro.props
+
+const preStyle = tw(`
+  overflow-auto
+  py-2
+  px-4
+  rounded-b
+  overflow-x-auto
+`)
 ---
 
-<pre
-  class={`${className} overflow-auto py-2 px-4 rounded-b overflow-x-auto`.trim()}
-  {...props}><slot /></pre>
+<pre class={`${className} ${preStyle}`.trim()} {...props}><slot /></pre>

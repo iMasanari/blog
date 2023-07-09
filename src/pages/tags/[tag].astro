@@ -1,5 +1,6 @@
 ---
 import { CollectionEntry, getCollection } from 'astro:content'
+import { tw } from 'tw-tag'
 import { SITE_NAME } from '../../constants'
 import Layout from '../../features/Layout/Layout.astro'
 import PostCard from '../../features/PostCard/PostCard.astro'
@@ -23,17 +24,30 @@ interface Props {
 }
 
 const { tag, posts } = Astro.props
+
+const mainStyle = tw(`
+  max-w-5xl
+  px-2
+  mx-auto
+`)
+
+const titleStyle = tw(`
+  pl-3
+  my-4
+  text-2xl
+  font-bold
+`)
 ---
 
 <Layout title={`${tag} | ${SITE_NAME}`} description={`「${tag}」のページ。`}>
-  <main class="max-w-5xl px-2 mx-auto">
-    <h1 class="pl-3 my-4 text-2xl font-bold">
+  <main class={mainStyle}>
+    <h1 class={titleStyle}>
       「{tag}」の投稿一覧
     </h1>
-    <ul class="-my-4">
+    <ul class={tw(`-my-4`)}>
       {
         posts.map((post) => (
-          <li class="my-8">
+          <li class={tw(`my-8`)}>
             <PostCard link={`/posts/${post.slug}/`} post={post.data} />
           </li>
         ))
@@ -41,7 +55,3 @@ const { tag, posts } = Astro.props
     </ul>
   </main>
 </Layout>
-
-<script>
-  console.log('tags')
-</script>

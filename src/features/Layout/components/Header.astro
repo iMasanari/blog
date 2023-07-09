@@ -1,26 +1,71 @@
 ---
+import { tw } from 'tw-tag'
 import { SITE_NAME } from '../../../constants'
 
 const { pathname } = Astro.url
 
 const Title = pathname === '/' ? 'h1' : 'div'
+
+const headerStyle = tw(`
+  sticky
+  top-0
+  w-full
+  bg-slate-200/30
+  backdrop-blur
+  transition
+`)
+
+const headerContentStyle = tw(`
+  flex
+  items-center
+  max-w-5xl
+  py-4
+  px-6
+  mx-auto
+`)
+
+const siteTitleStyle = tw(`
+  mr-auto
+`)
+
+const titleStyle = tw(`
+  text-xl
+`)
+
+const titleLinkStyle = tw(`
+  hover:underline
+`)
+
+const siteDescriptionStyle = tw(`
+  text-sm
+  text-gray-700
+`)
+
+const navItemStyle = tw(`
+  py-1
+  px-4
+  ml-2
+  rounded
+  bg-slate-200
+  shadow-neumo
+  transition-shadow
+  hover:shadow-neumo-inset
+`)
 ---
 
-<header
-  class="js-header sticky top-0 w-full bg-slate-200/30 backdrop-blur transition"
->
-  <div class="flex items-center max-w-5xl py-4 px-6 mx-auto">
-    <div class="mr-auto">
-      <Title class="text-xl">
-        <a href="/" class="hover:underline">{SITE_NAME}</a>
+<header class={`js-header ${headerStyle}`}>
+  <div class={headerContentStyle}>
+    <div class={siteTitleStyle}>
+      <Title class={titleStyle}>
+        <a href="/" class={titleLinkStyle}>{SITE_NAME}</a>
       </Title>
-      <p class="text-sm text-gray-700">技術ブログ改め、Qiitaの下書き</p>
+      <p class={siteDescriptionStyle}>技術ブログ改め、Qiitaの下書き</p>
     </div>
     <a
       href="https://github.com/iMasanari"
       target="_blank"
       rel="noopener"
-      class="py-1 px-4 ml-2 rounded bg-slate-200 shadow-neumo hover:shadow-neumo-inset transition-shadow"
+      class={navItemStyle}
     >
       Qiita
     </a>
@@ -28,7 +73,7 @@ const Title = pathname === '/' ? 'h1' : 'div'
       href="https://github.com/iMasanari"
       target="_blank"
       rel="noopener"
-      class="py-1 px-4 ml-2 rounded bg-slate-200 shadow-neumo hover:shadow-neumo-inset transition-shadow"
+      class={navItemStyle}
     >
       GitHub
     </a>

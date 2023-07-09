@@ -3,6 +3,7 @@
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
+import babel from '@rollup/plugin-babel'
 import { defineConfig } from 'astro/config'
 import { remarkCodeWrapper } from './scripts/remark-plugin'
 
@@ -19,5 +20,16 @@ export default defineConfig({
     tailwind(),
     sitemap(),
   ],
+  vite: {
+    plugins: [
+      /** @type {any} */(
+        babel({
+          extensions: ['astro', 'ts', 'tsx'],
+          plugins: ['tw-tag/babel-plugin'],
+          babelHelpers: 'bundled',
+        })
+      ),
+    ],
+  },
   compressHTML: true,
 })

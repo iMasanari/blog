@@ -1,17 +1,17 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
+import { tw } from 'tw-tag'
 
 type Props = HTMLAttributes<'code'>
 const props = Astro.props
+
+const style = tw`
+  [:not(pre)>&]:px-2
+  [:not(pre)>&]:py-0.5
+  [:not(pre)>&]:rounded
+  [:not(pre)>&]:text-sm
+  [:not(pre)>&]:bg-slate-300
+`
 ---
 
-<code
-  class:list={[
-    '[:not(pre)>&]:px-2',
-    '[:not(pre)>&]:py-0.5',
-    '[:not(pre)>&]:rounded',
-    '[:not(pre)>&]:text-sm',
-    '[:not(pre)>&]:bg-slate-300',
-  ]}
-  {...props}><slot /></code
->
+<code class={style} {...props}><slot /></code>

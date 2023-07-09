@@ -1,4 +1,6 @@
 ---
+import { tw } from 'tw-tag'
+
 interface Props {
   tags: string[]
 }
@@ -7,6 +9,15 @@ const { tags } = Astro.props
 
 const separate = (separator: string, array: any[]) =>
   array.reduce((acc, v) => [...acc, separator, v], [] as astroHTML.JSX.Child[])
+
+const tagItemStyle = tw(`
+  inline-block
+`)
+
+const tagLinkStyle = tw(`
+  text-slate-500
+  hover:underline
+`)
 ---
 
 <ul>
@@ -14,8 +25,8 @@ const separate = (separator: string, array: any[]) =>
     separate(
       ' ',
       tags.map((v) => (
-        <li class="inline-block">
-          <a href={`/tags/${v}/`} class="text-slate-500 hover:underline">
+        <li class={tagItemStyle}>
+          <a href={`/tags/${v}/`} class={tagLinkStyle}>
             #{v}
           </a>
         </li>

@@ -1,10 +1,11 @@
 ---
 import { CollectionEntry, getCollection } from 'astro:content'
+import { tw } from 'tw-tag'
+import Tags from '../../components/Tags.astro'
 import { SITE_NAME, SUGGEST_LIMIT } from '../../constants'
 import Layout from '../../features/Layout/Layout.astro'
 import { components } from '../../features/Markdown'
 import PostCard from '../../features/PostCard/PostCard.astro'
-import Tags from '../../components/Tags.astro'
 
 export const getStaticPaths = async () => {
   const posts = (await getCollection('posts')).sort(
@@ -31,16 +32,40 @@ interface Props {
 
 const { post, sameTags } = Astro.props
 const { Content } = await post.render()
+
+const mainStyle = tw(`
+  max-w-5xl
+  px-2
+  mt-4
+  mx-auto
+`)
+
+const sameTagsStyle = tw(`
+  max-w-5xl
+  px-2
+  mt-8
+  mx-auto
+`)
+
+const sameTagsTitleStyle = tw(`
+  pl-3
+  mt-12
+  mb-4
+  border-l-4
+  border-slate-700
+  text-2xl
+  font-bold
+`)
 ---
 
 <Layout
   title={`${post.data.title} | ${SITE_NAME}`}
   description={post.data.description}
 >
-  <main class="max-w-5xl px-2 mt-4 mx-auto">
+  <main class={mainStyle}>
     <article>
       <PostCard post={post.data}>
-        <div class="mt-8">
+        <div class={tw(`mt-8`)}>
           <Content components={components} />
         </div>
       </PostCard>
@@ -48,14 +73,12 @@ const { Content } = await post.render()
   </main>
   {
     sameTags.length > 0 && (
-      <aside class="max-w-5xl px-2 mt-8 mx-auto">
-        <h2 class="pl-3 mt-12 mb-4 border-l-4 border-slate-700 text-2xl font-bold">
-          同じタグを含む記事
-        </h2>
+      <aside class={sameTagsStyle}>
+        <h2 class={sameTagsTitleStyle}>同じタグを含む記事</h2>
         <Tags tags={post.data.tags} />
-        <ul>
+        <ul class={tw(`-my-4`)}>
           {sameTags.map((post) => (
-            <li class="my-8">
+            <li class={tw(`my-8`)}>
               <PostCard link={`/posts/${post.slug}/`} post={post.data} />
             </li>
           ))}
@@ -64,7 +87,3 @@ const { Content } = await post.render()
     )
   }
 </Layout>
-
-<script>
-  console.log('posts')
-</script>
