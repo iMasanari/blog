@@ -1,7 +1,7 @@
 # Tech SANDBOX
 
 技術ブログ  
-https://imasanari.github.io
+https://blog.imasanari.dev/
 
 ## 目的
 
@@ -12,4 +12,4 @@ https://imasanari.github.io
 
 ## 主な使用技術
 
-React + Next.js + TypeScript + Markdown
+Astro + TypeScript + Markdown + Tailwind CSS
