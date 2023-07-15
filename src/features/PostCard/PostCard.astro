@@ -43,11 +43,6 @@ const updateDateIconStyle = tw(`
   mr-1
 `)
 
-const linkTitleStyle = tw(`
-  title
-  text-xl
-`)
-
 const titleStyle = tw(`
   text-xl
 `)
@@ -68,7 +63,7 @@ const titleStyle = tw(`
   </div>
   {
     link ? (
-      <Link href={link} class={linkTitleStyle}>
+      <Link href={link} class={`title ${titleStyle}`}>
         {post.title}
       </Link>
     ) : (

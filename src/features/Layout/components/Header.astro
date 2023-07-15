@@ -81,6 +81,12 @@ const navItemStyle = tw(`
 </header>
 
 <script>
+  import { tw } from 'tw-tag'
+
+  const headerStyle = tw(`
+    -translate-y-full
+  `)
+
   const header = document.querySelector('.js-header')!
   const headerHeight = 64 // header.getBoundingClientRect().height
 
@@ -88,16 +94,16 @@ const navItemStyle = tw(`
   let prevVisible = true
 
   window.addEventListener('scroll', () => {
-    const currentScrollPos = window.pageYOffset
+    const currentScrollPos = window.scrollY
 
     const visible =
       currentScrollPos < headerHeight || currentScrollPos <= prevScrollPos
 
     if (visible !== prevVisible) {
       if (visible) {
-        header.classList.remove('-translate-y-full')
+        header.classList.remove(headerStyle)
       } else {
-        header.classList.add('-translate-y-full')
+        header.classList.add(headerStyle)
       }
 
       prevVisible = visible
