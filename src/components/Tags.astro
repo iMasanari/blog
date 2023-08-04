@@ -1,5 +1,5 @@
 ---
-import { tw } from 'tw-tag'
+import { css } from 'molcss'
 
 interface Props {
   tags: string[]
@@ -10,14 +10,16 @@ const { tags } = Astro.props
 const separate = (separator: string, array: any[]) =>
   array.reduce((acc, v) => [...acc, separator, v], [] as astroHTML.JSX.Child[])
 
-const tagItemStyle = tw(`
-  inline-block
-`)
+const tagItemStyle = css`
+  display: inline-block;
+`
 
-const tagLinkStyle = tw(`
-  text-slate-500
-  hover:underline
-`)
+const tagLinkStyle = css`
+  color: rgb(100 116 139);
+  &:hover {
+    text-decoration-line: underline;
+  }
+`
 ---
 
 <ul>

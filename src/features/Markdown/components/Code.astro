@@ -1,16 +1,18 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import { tw } from 'tw-tag'
+import { css } from 'molcss'
 
 type Props = HTMLAttributes<'code'>
 const props = Astro.props
 
-const style = tw`
-  [:not(pre)>&]:px-2
-  [:not(pre)>&]:py-0.5
-  [:not(pre)>&]:rounded
-  [:not(pre)>&]:text-sm
-  [:not(pre)>&]:bg-slate-300
+const style = css`
+  :not(pre) > & {
+    padding: 0.125rem 0.5rem /* 2px 8px */;
+    border-radius: 0.25rem /* 4px */;
+    font-size: 0.875rem /* 14px */;
+    line-height: 1.25rem /* 20px */;
+    background-color: rgb(203 213 225);
+  }
 `
 ---
 

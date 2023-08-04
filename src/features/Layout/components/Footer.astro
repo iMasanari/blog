@@ -1,11 +1,11 @@
 ---
-import { tw } from 'tw-tag'
+import { css } from 'molcss'
 import Link from '../../../components/Link.astro'
 
-const footerStyle = tw(`
-  p-6
-  text-center
-`)
+const footerStyle = css`
+  padding: 1.5rem/* 24px */;
+  text-align: center;
+`
 ---
 
 <footer class={footerStyle}>

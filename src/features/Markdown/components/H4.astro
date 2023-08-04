@@ -1,15 +1,16 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import { tw } from 'tw-tag'
+import { css } from 'molcss'
 
 type Props = HTMLAttributes<'h4'>
 const props = Astro.props
 
-const h4Style = tw(`
-  my-6
-  text-lg
-  font-bold
-`)
+const h4Style = css`
+  margin: 1.5rem 0 /* 24px 0 */;
+  font-size: 1.125rem /* 18px */;
+  line-height: 1.75rem /* 28px */;
+  font-weight: 700;
+`
 ---
 
 <h4 class={h4Style} {...props}>
