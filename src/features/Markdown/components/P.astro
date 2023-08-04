@@ -1,14 +1,14 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import { tw } from 'tw-tag'
+import { css } from 'molcss'
 
 type Props = HTMLAttributes<'p'>
 const props = Astro.props
 
-const pStyle = tw(`
-  my-2
-  whitespace-pre-wrap
-`)
+const pStyle = css`
+  margin: 0.5rem 0 /* 8px 0 */;
+  white-space: pre-wrap;
+`
 ---
 
 <p class={pStyle} {...props}>

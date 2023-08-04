@@ -1,56 +1,75 @@
 ---
-import { tw } from 'tw-tag'
+import { css } from 'molcss'
 import { SITE_NAME } from '../../../constants'
 
 const { pathname } = Astro.url
 
 const Title = pathname === '/' ? 'h1' : 'div'
 
-const headerStyle = tw(`
-  sticky
-  top-0
-  w-full
-  bg-slate-200/30
-  backdrop-blur
-  transition
-`)
+const headerStyle = css`
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgb(226 232 240 / 0.3);
+  /* TODO: autoprefix (backdrop-filter) */
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+`
 
-const headerContentStyle = tw(`
-  flex
-  items-center
-  max-w-5xl
-  py-4
-  px-6
-  mx-auto
-`)
+const headerContentStyle = css`
+  display: flex;
+  padding: 1rem 1.5rem;
+  margin: 0 auto;
+  align-items: center;
+  max-width: 64rem;
+`
 
-const siteTitleStyle = tw(`
-  mr-auto
-`)
+const siteTitleStyle = css`
+  margin-right: auto;
+`
 
-const titleStyle = tw(`
-  text-xl
-`)
+const titleStyle = css`
+  font-size: 1.25rem /* 20px */;
+  line-height: 1.75rem /* 28px */;
+`
 
-const titleLinkStyle = tw(`
-  hover:underline
-`)
+const titleLinkStyle = css`
+  &:hover {
+    text-decoration-line: underline;
+  }
+`
 
-const siteDescriptionStyle = tw(`
-  text-sm
-  text-gray-700
-`)
+const siteDescriptionStyle = css`
+  font-size: 0.875rem /* 14px */;
+  line-height: 1.25rem /* 20px */;
+  color: rgb(55 65 81);
+`
 
-const navItemStyle = tw(`
-  py-1
-  px-4
-  ml-2
-  rounded
-  bg-slate-200
-  shadow-neumo
-  transition-shadow
-  hover:shadow-neumo-inset
-`)
+const navItemStyle = css`
+  padding-top: 0.25rem /* 4px */;
+  padding-bottom: 0.25rem /* 4px */;
+  padding-left: 1rem /* 16px */;
+  padding-right: 1rem /* 16px */;
+  margin-left: 0.5rem /* 8px */;
+  border-radius: 0.25rem /* 4px */;
+  background-color: rgb(226 232 240);
+  box-shadow: 2px 2px 4px #bebebe,
+    -2px -2px 4px #fff,
+    inset 0 0 0 #bebebe,
+    inset 0 0 0 #fff;
+  transition-property: box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  &:hover {
+    box-shadow: 0 0 0 #bebebe,
+      0 0 0 #fff,
+      inset 2px 2px 4px #bebebe,
+      inset -2px -2px 4px #fff;
+  }
+`
 ---
 
 <header class={`js-header ${headerStyle}`}>
@@ -81,11 +100,11 @@ const navItemStyle = tw(`
 </header>
 
 <script>
-  import { tw } from 'tw-tag'
+  import { css } from 'molcss'
 
-  const headerStyle = tw(`
-    -translate-y-full
-  `)
+  const headerStyle = css`
+    transform: translateY(-100%);
+  `
 
   const header = document.querySelector('.js-header')!
   const headerHeight = 64 // header.getBoundingClientRect().height

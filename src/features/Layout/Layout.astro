@@ -1,5 +1,7 @@
 ---
-import { tw } from 'tw-tag'
+import '../../styles/preflight.css'
+import 'virtual:molcss/style.css'
+import { css } from 'molcss'
 import { GOOGLE_ANALYTICS_ID } from '../../constants'
 import BaseHead from './components/BaseHead.astro'
 import Footer from './components/Footer.astro'
@@ -20,10 +22,10 @@ const script = `
   gtag('config', '${GOOGLE_ANALYTICS_ID}');
 `
 
-const bodyStyle = tw(`
-  bg-slate-200
-  text-slate-900
-`)
+const bodyStyle = css`
+  background-color: rgb(226 232 240);
+  color: rgb(15 23 42);
+`
 ---
 
 <html lang="ja">

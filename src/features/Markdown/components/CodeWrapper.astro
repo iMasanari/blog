@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon'
-import { tw } from 'tw-tag'
+import { css } from 'molcss'
 import CopyButton from '../../../components/CopyButton.astro'
 
 interface Props {
@@ -19,31 +19,33 @@ const langMap = new Map([
   ['jsx', 'JavaScript with JSX'],
 ])
 
-const codeWrapperStyle = tw(`
-  my-8
-  rounded
-  overflow-hidden
-  shadow-neumo-inset
-`)
+const codeWrapperStyle = css`
+  overflow: hidden;
+  margin: 2rem 0 /* 32px 0 */;
+  border-radius: 0.25rem /* 4px */;
+  box-shadow: 0 0 0 #bebebe,
+    0 0 0 #fff,
+    inset 2px 2px 4px #bebebe,
+    inset -2px -2px 4px #fff;
+`
 
-const headerStyle = tw(`
-  flex
-  justify-between
-  items-center
-  py-2
-  px-4
-`)
+const headerStyle = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem /* 8px 16px */;
+`
 
-const fileNameStyle = tw(`
-  flex
-  items-center
-`)
+const fileNameStyle = css`
+  display: flex;
+  align-items: center;
+`
 
-const fileIconStyle = tw(`
-  w-4
-  h-4
-  mr-1
-`)
+const fileIconStyle = css`
+  width: 1rem /* 16px */;
+  height: 1rem /* 16px */;
+  margin-right: 0.25rem /* 4px */;
+`
 ---
 
 <div class={codeWrapperStyle} {...props}>

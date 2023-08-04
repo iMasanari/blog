@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon'
 import type { CollectionEntry } from 'astro:content'
-import { tw } from 'tw-tag'
+import { css, mergeStyle } from 'molcss'
 import FormattedDate from '../../components/FormattedDate.astro'
 import Link from '../../components/Link.astro'
 import Tags from '../../components/Tags.astro'
@@ -13,42 +13,50 @@ interface Props {
 
 const { post, link } = Astro.props
 
-const postCardStyle = tw(`
-  p-4
-  rounded
-  bg-slate-200
-  shadow-neumo
-  transition-shadow
-`)
+const postCardStyle = css`
+  padding: 1rem /* 16px */;
+  border-radius: 0.25rem /* 4px */;
+  box-shadow: 2px 2px 4px #bebebe,
+    -2px -2px 4px #fff,
+    inset 0 0 0 #bebebe,
+    inset 0 0 0 #fff;
+`
 
-const postCardLinkStyle = tw(`
-  [&:has(.title:hover)]:shadow-neumo-inset
-`)
+const postCardLinkStyle = css`
+  transition: box-shadow cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+  &:has(.title:hover) {
+    box-shadow: 0 0 0 #bebebe,
+      0 0 0 #fff,
+      inset 2px 2px 4px #bebebe,
+      inset -2px -2px 4px #fff;
+  }
+`
 
-const dateContainerStyle = tw(`
-  flex
-  items-center
-`)
+const dateContainerStyle = css`
+  display: flex;
+  align-items: center;
+`
 
-const postDateIconStyle = tw(`
-  w-6
-  h-6
-  mr-1
-`)
+const postDateIconStyle = css`
+  width: 1.5rem /* 24px */;
+  height: 1.5rem /* 24px */;
+  margin-right: 0.25rem /* 4px */;
+`
 
-const updateDateIconStyle = tw(`
-  w-6
-  h-6
-  ml-2
-  mr-1
-`)
+const updateDateIconStyle = css`
+  width: 1.5rem /* 24px */;
+  height: 1.5rem /* 24px */;
+  margin-left: 0.5rem /* 8px */;
+  margin-right: 0.25rem /* 4px */;
+`
 
-const titleStyle = tw(`
-  text-xl
-`)
+const titleStyle = css`
+  font-size: 1.25rem /* 20px */;
+  line-height: 1.75rem /* 28px */;
+`
 ---
 
-<div class:list={[postCardStyle, link && postCardLinkStyle]}>
+<div class={mergeStyle(postCardStyle, link && postCardLinkStyle)}>
   <div class={dateContainerStyle}>
     <Icon name="ph:calendar-blank" class={postDateIconStyle} />
     <FormattedDate date={post.date} />

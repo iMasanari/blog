@@ -1,17 +1,19 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import { tw } from 'tw-tag'
+import { css, mergeStyle } from 'molcss'
 
 interface Props extends HTMLAttributes<'a'> {}
 
 const { class: className, ...props } = Astro.props
 
-const linkStyle = tw(`
-  text-blue-600
-  hover:underline
-`)
+const linkStyle = css`
+  color: rgb(37 99 235);
+  &:hover {
+    text-decoration-line: underline;
+  }
+`
 ---
 
-<a class:list={[className, linkStyle]} {...props}>
+<a class={mergeStyle(linkStyle, className)} {...props}>
   <slot />
 </a>

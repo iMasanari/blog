@@ -1,17 +1,17 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import { tw } from 'tw-tag'
+import { css } from 'molcss'
 
 type Props = HTMLAttributes<'h3'>
 const props = Astro.props
 
-const h3Style = tw(`
-  my-6
-  border-b-2
-  border-slate-700
-  text-xl
-  font-bold
-`)
+const h3Style = css`
+margin: 1.5rem 0 /* 24px 0 */;
+border-color: rgb(51 65 85);
+font-size: 1.25rem/* 20px */;
+  line-height: 1.75rem/* 28px */;
+  font-weight: 700;
+`
 ---
 
 <h3 class={h3Style} {...props}>
