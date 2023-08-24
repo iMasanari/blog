@@ -12,4 +12,4 @@ https://blog.imasanari.dev/
 
 ## 主な使用技術
 
-Astro + TypeScript + Markdown + Tailwind CSS
+Astro + TypeScript + Markdown + molcss（自作 CSS-in-JS）
