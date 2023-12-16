@@ -1,8 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content'
-import { SITE_NAME } from '../../constants'
-import Layout from '../../features/Layout/Layout.astro'
-import TagsPage from '../../features/TagsPage/TagsPage.astro'
+import { SITE_NAME } from '#src/constants'
+import Layout from '#src/features/Layout/Layout.astro'
+import TagsPage from '#src/features/TagsPage/TagsPage.astro'
 
 export const getStaticPaths = async () => {
   const posts = (await getCollection('posts')).sort(

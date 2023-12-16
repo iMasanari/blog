@@ -1,9 +1,9 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content'
-import { SITE_NAME, SUGGEST_LIMIT } from '../../constants'
-import Layout from '../../features/Layout/Layout.astro'
-import { components } from '../../features/Markdown'
-import PostPage from '../../features/PostPage/PostPage.astro'
+import { SITE_NAME, SUGGEST_LIMIT } from '#src/constants'
+import Layout from '#src/features/Layout/Layout.astro'
+import { components } from '#src/features/Markdown'
+import PostPage from '#src/features/PostPage/PostPage.astro'
 
 export const getStaticPaths = async () => {
   const posts = (await getCollection('posts')).sort(
