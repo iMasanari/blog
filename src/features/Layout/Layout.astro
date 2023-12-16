@@ -1,8 +1,8 @@
 ---
 import '../../styles/preflight.css'
 import 'virtual:molcss/style.css'
-import { css } from 'molcss'
 import { GOOGLE_ANALYTICS_ID } from '../../constants'
+import * as styles from './Layout.styles'
 import BaseHead from './components/BaseHead.astro'
 import Footer from './components/Footer.astro'
 import Header from './components/Header.astro'
@@ -21,11 +21,6 @@ const script = `
 
   gtag('config', '${GOOGLE_ANALYTICS_ID}');
 `
-
-const bodyStyle = css`
-  background-color: rgb(226 232 240);
-  color: rgb(15 23 42);
-`
 ---
 
 <html lang="ja">
@@ -38,13 +33,13 @@ const bodyStyle = css`
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
           />
-          <script is:inline set:html={script}></script>
+          <script is:inline set:html={script} />
         </>
       )
     }
     <BaseHead title={title} description={description} />
   </head>
-  <body class={bodyStyle}>
+  <body class={styles.body}>
     <Header />
     <slot />
     <Footer />

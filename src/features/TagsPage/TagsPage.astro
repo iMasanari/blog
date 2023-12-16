@@ -1,0 +1,26 @@
+---
+import { type CollectionEntry } from 'astro:content'
+import PostCard from '../PostCard/PostCard.astro'
+import * as styles from './TagsPage.styles'
+
+interface Props {
+  tag: string
+  posts: CollectionEntry<'posts'>[]
+}
+
+const { tag, posts } = Astro.props
+---
+<main class={styles.main}>
+  <h1 class={styles.title}>
+    「{tag}」の投稿一覧
+  </h1>
+  <ul class={styles.postList}>
+    {
+      posts.map((post) => (
+        <li class={styles.postItem}>
+          <PostCard link={`/posts/${post.slug}/`} post={post.data} />
+        </li>
+      ))
+    }
+  </ul>
+</main>

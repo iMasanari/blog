@@ -1,19 +1,14 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import { css } from 'molcss'
+import { mergeStyle } from 'molcss'
+import * as styles from './Code.styles'
 
 type Props = HTMLAttributes<'code'>
-const props = Astro.props
 
-const style = css`
-  :not(pre) > & {
-    padding: 0.125rem 0.5rem /* 2px 8px */;
-    border-radius: 0.25rem /* 4px */;
-    font-size: 0.875rem /* 14px */;
-    line-height: 1.25rem /* 20px */;
-    background-color: rgb(203 213 225);
-  }
-`
+const props = {
+  ...Astro.props,
+  class: mergeStyle(styles.code, Astro.props.class),
+}
 ---
 
-<code class={style} {...props}><slot /></code>
+<code {...props}><slot /></code>

@@ -1,19 +1,16 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import { css } from 'molcss'
+import { mergeStyle } from 'molcss'
+import * as styles from './H3.styles'
 
 type Props = HTMLAttributes<'h3'>
-const props = Astro.props
 
-const h3Style = css`
-margin: 1.5rem 0 /* 24px 0 */;
-border-color: rgb(51 65 85);
-font-size: 1.25rem/* 20px */;
-  line-height: 1.75rem/* 28px */;
-  font-weight: 700;
-`
+const props = {
+  ...Astro.props,
+  class: mergeStyle(styles.h3, Astro.props.class),
+}
 ---
 
-<h3 class={h3Style} {...props}>
+<h3 {...props}>
   <slot />
 </h3>

@@ -1,9 +1,8 @@
 ---
-import { CollectionEntry, getCollection } from 'astro:content'
-import { css } from 'molcss'
+import { getCollection, type CollectionEntry } from 'astro:content'
 import { SITE_NAME } from '../../constants'
 import Layout from '../../features/Layout/Layout.astro'
-import PostCard from '../../features/PostCard/PostCard.astro'
+import TagsPage from '../../features/TagsPage/TagsPage.astro'
 
 export const getStaticPaths = async () => {
   const posts = (await getCollection('posts')).sort(
@@ -24,44 +23,8 @@ interface Props {
 }
 
 const { tag, posts } = Astro.props
-
-const mainStyle = css`
-  max-width: 64rem /* 1024px */;
-  padding: 0 0.5rem /* 0 8px */;
-  margin: 0 auto;
-`
-
-const titleStyle = css`
-  padding-left: 0.75rem /* 12px */;
-  margin-top: 1rem /* 16px */;
-  margin-bottom: 1rem /* 16px */;
-  font-size: 1.5rem /* 24px */;
-  line-height: 2rem /* 32px */;
-  font-weight: 700;
-`
-
-const postListStyle = css`
-  margin: -1rem 0 /* -16px 0 */;
-`
-
-const postItemStyle = css`
-  margin: 2rem 0 /* 32px 0 */;
-`
 ---
 
 <Layout title={`${tag} | ${SITE_NAME}`} description={`「${tag}」のページ。`}>
-  <main class={mainStyle}>
-    <h1 class={titleStyle}>
-      「{tag}」の投稿一覧
-    </h1>
-    <ul class={postListStyle}>
-      {
-        posts.map((post) => (
-          <li class={postItemStyle}>
-            <PostCard link={`/posts/${post.slug}/`} post={post.data} />
-          </li>
-        ))
-      }
-    </ul>
-  </main>
+  <TagsPage tag={tag} posts={posts} />
 </Layout>

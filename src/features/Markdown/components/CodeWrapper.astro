@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon'
-import { css } from 'molcss'
 import CopyButton from '../../../components/CopyButton.astro'
+import * as styles from './CodeWrapper.styles'
 
 interface Props {
   lang: string
@@ -18,40 +18,12 @@ const langMap = new Map([
   ['js', 'JavaScript'],
   ['jsx', 'JavaScript with JSX'],
 ])
-
-const codeWrapperStyle = css`
-  overflow: hidden;
-  margin: 2rem 0 /* 32px 0 */;
-  border-radius: 0.25rem /* 4px */;
-  box-shadow: 0 0 0 #bebebe,
-    0 0 0 #fff,
-    inset 2px 2px 4px #bebebe,
-    inset -2px -2px 4px #fff;
-`
-
-const headerStyle = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 1rem /* 8px 16px */;
-`
-
-const fileNameStyle = css`
-  display: flex;
-  align-items: center;
-`
-
-const fileIconStyle = css`
-  width: 1rem /* 16px */;
-  height: 1rem /* 16px */;
-  margin-right: 0.25rem /* 4px */;
-`
 ---
 
-<div class={codeWrapperStyle} {...props}>
-  <div class={headerStyle}>
-    <span class={fileNameStyle}>
-      <Icon name="ic:baseline-insert-drive-file" class={fileIconStyle} />
+<div class={styles.codeWrapper} {...props}>
+  <div class={styles.header}>
+    <span class={styles.fileName}>
+      <Icon name="ic:baseline-insert-drive-file" class={styles.fileIcon} />
       {
         lang === 'diff' && title
           ? `diff: ${title}`

@@ -1,0 +1,23 @@
+---
+import { type CollectionEntry } from 'astro:content'
+import PostCard from '../PostCard/PostCard.astro'
+import * as styles from './TopPage.style'
+
+interface Props {
+  posts: CollectionEntry<'posts'>[]
+}
+
+const { posts } = Astro.props
+---
+
+<main class={styles.main}>
+  <ul class={styles.postList}>
+    {
+      posts.map((post) => (
+        <li class={styles.postItem}>
+          <PostCard link={`/posts/${post.slug}/`} post={post.data} />
+        </li>
+      ))
+    }
+  </ul>
+</main>
