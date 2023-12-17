@@ -1,0 +1,37 @@
+---
+import { type CollectionEntry } from 'astro:content'
+import Tags from '#src/components/Tags.astro'
+import PostCard from '#src/features/PostCard/PostCard.astro'
+import * as styles from './PostPage.styles'
+
+interface Props {
+  post: CollectionEntry<'posts'>
+  sameTags: CollectionEntry<'posts'>[]
+}
+
+const { post, sameTags } = Astro.props
+---
+<main class={styles.main}>
+  <article>
+    <PostCard post={post.data}>
+      <div class={styles.contentContainer}>
+        <slot />
+      </div>
+    </PostCard>
+  </article>
+</main>
+{
+  sameTags.length > 0 && (
+    <aside class={styles.sameTags}>
+      <h2 class={styles.sameTagsTitle}>同じタグを含む記事</h2>
+      <Tags tags={post.data.tags} />
+      <ul class={styles.postList}>
+        {sameTags.map((post) => (
+          <li class={styles.postItem}>
+            <PostCard link={`/posts/${post.slug}/`} post={post.data} />
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )
+}

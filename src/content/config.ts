@@ -15,8 +15,6 @@ const posts = defineCollection({
       .or(z.date())
       .optional()
       .transform((str) => (str ? new Date(str) : undefined)),
-    image: z.string().optional(),
-    ogp: z.string().optional(),
   }),
 })
 

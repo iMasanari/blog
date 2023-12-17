@@ -1,5 +1,5 @@
 ---
-import { css } from 'molcss'
+import * as styles from './Tags.styles'
 
 interface Props {
   tags: string[]
@@ -9,17 +9,6 @@ const { tags } = Astro.props
 
 const separate = (separator: string, array: any[]) =>
   array.reduce((acc, v) => [...acc, separator, v], [] as astroHTML.JSX.Child[])
-
-const tagItemStyle = css`
-  display: inline-block;
-`
-
-const tagLinkStyle = css`
-  color: rgb(100 116 139);
-  &:hover {
-    text-decoration: underline;
-  }
-`
 ---
 
 <ul>
@@ -27,12 +16,12 @@ const tagLinkStyle = css`
     separate(
       ' ',
       tags.map((v) => (
-        <li class={tagItemStyle}>
-          <a href={`/tags/${v}/`} class={tagLinkStyle}>
+        <li class={styles.tagItem}>
+          <a href={`/tags/${v}/`} class={styles.tagLink}>
             #{v}
           </a>
         </li>
-      ))
+      )),
     )
   }
 </ul>

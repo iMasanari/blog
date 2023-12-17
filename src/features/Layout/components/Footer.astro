@@ -1,14 +1,9 @@
 ---
-import { css } from 'molcss'
-import Link from '../../../components/Link.astro'
-
-const footerStyle = css`
-  padding: 1.5rem/* 24px */;
-  text-align: center;
-`
+import Link from '#src/components/Link.astro'
+import * as styles from './Footer.styles'
 ---
 
-<footer class={footerStyle}>
+<footer class={styles.footer}>
   Author:
   <Link href="https://github.com/iMasanari" target="_blank" rel="noopener">
     iMasanari

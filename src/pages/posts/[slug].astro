@@ -1,15 +1,13 @@
 ---
-import { CollectionEntry, getCollection } from 'astro:content'
-import { css } from 'molcss'
-import Tags from '../../components/Tags.astro'
-import { SITE_NAME, SUGGEST_LIMIT } from '../../constants'
-import Layout from '../../features/Layout/Layout.astro'
-import { components } from '../../features/Markdown'
-import PostCard from '../../features/PostCard/PostCard.astro'
+import { getCollection, type CollectionEntry } from 'astro:content'
+import { SITE_NAME, SUGGEST_LIMIT } from '#src/constants'
+import Layout from '#src/features/Layout/Layout.astro'
+import { components } from '#src/features/Markdown'
+import PostPage from '#src/features/PostPage/PostPage.astro'
 
 export const getStaticPaths = async () => {
   const posts = (await getCollection('posts')).sort(
-    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
   )
 
   return posts.map((post) => {
@@ -17,7 +15,7 @@ export const getStaticPaths = async () => {
       .filter(
         (v) =>
           v.slug !== post.slug &&
-          v.data.tags.some((tag) => post.data.tags.includes(tag))
+          v.data.tags.some((tag) => post.data.tags.includes(tag)),
       )
       .slice(0, SUGGEST_LIMIT)
 
@@ -33,68 +31,17 @@ interface Props {
 const { post, sameTags } = Astro.props
 const { Content } = await post.render()
 
-const mainStyle = css`
-  max-width: 64rem /* 1024px */;
-  padding: 0 0.5rem /* 0 8px */;
-  margin: 1rem auto 0 /* 16px auto 0 */;
-`
-
-const sameTagsStyle = css`
-  max-width: 64rem /* 1024px */;
-  padding: 0 0.5rem /* 0 8px */;
-  margin: 2rem auto 0 /* 32px auto 0 */;
-`
-
-const sameTagsTitleStyle = css`
-  padding-left: 0.75rem /* 12px */;
-  margin-top: 3rem /* 48px */;
-  margin-bottom: 1rem /* 16px */;
-  border-left-width: 4px;
-  border-color: rgb(51 65 85);
-  font-size: 1.5rem /* 24px */;
-  line-height: 2rem /* 32px */;
-  font-weight: 700;
-`
-
-const contentContainerStyle = css`
-  margin-top: 2rem;
-`
-
-const postListStyle = css`
-  margin: -1rem 0 /* -16px 0 */;
-`
-
-const postItemStyle = css`
-  margin: 2rem 0 /* 32px 0 */;
-`
+// 下記のファイルとパスを合わせること
+// src/pages/posts/[slug]/ogp.png.ts
+const ogImage = new URL('ogp.png', Astro.request.url).toString()
 ---
 
 <Layout
   title={`${post.data.title} | ${SITE_NAME}`}
   description={post.data.description}
+  ogpImage={ogImage}
 >
-  <main class={mainStyle}>
-    <article>
-      <PostCard post={post.data}>
-        <div class={contentContainerStyle}>
-          <Content components={components} />
-        </div>
-      </PostCard>
-    </article>
-  </main>
-  {
-    sameTags.length > 0 && (
-      <aside class={sameTagsStyle}>
-        <h2 class={sameTagsTitleStyle}>同じタグを含む記事</h2>
-        <Tags tags={post.data.tags} />
-        <ul class={postListStyle}>
-          {sameTags.map((post) => (
-            <li class={postItemStyle}>
-              <PostCard link={`/posts/${post.slug}/`} post={post.data} />
-            </li>
-          ))}
-        </ul>
-      </aside>
-    )
-  }
+  <PostPage post={post} sameTags={sameTags}>
+    <Content components={components} />
+  </PostPage>
 </Layout>

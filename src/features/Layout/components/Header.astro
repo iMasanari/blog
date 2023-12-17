@@ -1,82 +1,25 @@
 ---
-import { css } from 'molcss'
-import { SITE_NAME } from '../../../constants'
+import { SITE_NAME } from '#src/constants'
+import * as styles from './Header.styles'
 
 const { pathname } = Astro.url
 
 const Title = pathname === '/' ? 'h1' : 'div'
-
-const headerStyle = css`
-  position: sticky;
-  z-index: 1;
-  top: 0;
-  width: 100%;
-  background-color: rgb(226 232 240 / 0.3);
-  backdrop-filter: blur(8px);
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
-`
-
-const headerContentStyle = css`
-  display: flex;
-  padding: 1rem 1.5rem;
-  margin: 0 auto;
-  align-items: center;
-  max-width: 64rem;
-`
-
-const siteTitleStyle = css`
-  margin-right: auto;
-`
-
-const titleStyle = css`
-  font-size: 1.25rem /* 20px */;
-  line-height: 1.75rem /* 28px */;
-`
-
-const titleLinkStyle = css`
-  &:hover {
-    text-decoration: underline;
-  }
-`
-
-const siteDescriptionStyle = css`
-  font-size: 0.875rem /* 14px */;
-  line-height: 1.25rem /* 20px */;
-  color: rgb(55 65 81);
-`
-
-const navItemStyle = css`
-  padding: 0.25rem 1rem /* 4px 16px */;
-  margin-left: 0.5rem /* 8px */;
-  border-radius: 0.25rem /* 4px */;
-  background-color: rgb(226 232 240);
-  box-shadow: 2px 2px 4px #bebebe,
-    -2px -2px 4px #fff,
-    inset 0 0 0 #bebebe,
-    inset 0 0 0 #fff;
-  transition: box-shadow cubic-bezier(0.4, 0, 0.2, 1) 150ms;
-  &:hover {
-    box-shadow: 0 0 0 #bebebe,
-      0 0 0 #fff,
-      inset 2px 2px 4px #bebebe,
-      inset -2px -2px 4px #fff;
-  }
-`
 ---
 
-<header class={`js-header ${headerStyle}`}>
-  <div class={headerContentStyle}>
-    <div class={siteTitleStyle}>
-      <Title class={titleStyle}>
-        <a href="/" class={titleLinkStyle}>{SITE_NAME}</a>
+<header class={`js-header ${styles.header}`}>
+  <div class={styles.headerContent}>
+    <div class={styles.siteTitle}>
+      <Title class={styles.title}>
+        <a href="/" class={styles.titleLink}>{SITE_NAME}</a>
       </Title>
-      <p class={siteDescriptionStyle}>技術ブログ改め、Qiitaの下書き</p>
+      <p class={styles.siteDescription}>技術ブログ改め、Qiitaの下書き</p>
     </div>
     <a
       href="https://qiita.com/iMasanari"
       target="_blank"
       rel="noopener"
-      class={navItemStyle}
+      class={styles.navItem}
     >
       Qiita
     </a>
@@ -84,7 +27,7 @@ const navItemStyle = css`
       href="https://zenn.dev/imasanari?tab=scraps"
       target="_blank"
       rel="noopener"
-      class={navItemStyle}
+      class={styles.navItem}
     >
       Zenn
     </a>
@@ -92,7 +35,7 @@ const navItemStyle = css`
       href="https://github.com/iMasanari"
       target="_blank"
       rel="noopener"
-      class={navItemStyle}
+      class={styles.navItem}
     >
       GitHub
     </a>
@@ -100,11 +43,7 @@ const navItemStyle = css`
 </header>
 
 <script>
-  import { css } from 'molcss'
-
-  const headerStyle = css`
-    transform: translateY(-100%);
-  `
+  import * as styles from './Header.styles'
 
   const header = document.querySelector('.js-header')!
   const headerHeight = 64 // header.getBoundingClientRect().height
@@ -120,9 +59,9 @@ const navItemStyle = css`
 
     if (visible !== prevVisible) {
       if (visible) {
-        header.classList.remove(headerStyle)
+        header.classList.remove(styles.headerHidden)
       } else {
-        header.classList.add(headerStyle)
+        header.classList.add(styles.headerHidden)
       }
 
       prevVisible = visible

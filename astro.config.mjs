@@ -20,13 +20,14 @@ export default defineConfig({
   ],
   vite: {
     plugins: [
-      /** @type {any} */(
-        molcss({
-          content: 'src/**/*.{astro,ts}',
-          include: /\.(astro|ts)$/,
-        })
-      ),
+      molcss({
+        content: 'src/**/*.{astro,ts}',
+        include: /\.(astro|ts)$/,
+      }),
     ],
+    optimizeDeps: {
+      exclude: ['@resvg/resvg-js'],
+    },
   },
   compressHTML: true,
 })

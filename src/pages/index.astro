@@ -1,39 +1,14 @@
 ---
 import { getCollection } from 'astro:content'
-import { css } from 'molcss'
 import { SITE_DESCRIPTION, SITE_NAME } from '../constants'
 import Layout from '../features/Layout/Layout.astro'
-import PostCard from '../features/PostCard/PostCard.astro'
+import TopPage from '../features/TopPage/TopPage.astro'
 
 const posts = (await getCollection('posts')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 )
-
-const mainStyle = css`
-  max-width: 64rem /* 1024px */;
-  padding: 0 0.5rem /* 0 8px */;
-  margin: 1rem auto /* 16px auto */;
-`
-
-const postListStyle = css`
-  margin: -1rem 0 /* -16px 0 */;
-`
-
-const postItemStyle = css`
-  margin: 2rem 0 /* 32px 0 */;
-`
 ---
 
 <Layout title={SITE_NAME} description={SITE_DESCRIPTION}>
-  <main class={mainStyle}>
-    <ul class={postListStyle}>
-      {
-        posts.map((post) => (
-          <li class={postItemStyle}>
-            <PostCard link={`/posts/${post.slug}/`} post={post.data} />
-          </li>
-        ))
-      }
-    </ul>
-  </main>
+  <TopPage posts={posts} />
 </Layout>

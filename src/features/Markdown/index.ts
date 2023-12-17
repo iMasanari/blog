@@ -1,4 +1,4 @@
-import Link from '../../components/Link.astro'
+import Link from '#src/components/Link.astro'
 import Blockquote from './components/Blockquote.astro'
 import Code from './components/Code.astro'
 import CodeWrapper from './components/CodeWrapper.astro'
