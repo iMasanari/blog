@@ -30,11 +30,16 @@ interface Props {
 
 const { post, sameTags } = Astro.props
 const { Content } = await post.render()
+
+// 下記のファイルとパスを合わせること
+// src/pages/posts/[slug]/ogp.png.ts
+const ogImage = new URL('ogp.png', Astro.request.url).toString()
 ---
 
 <Layout
   title={`${post.data.title} | ${SITE_NAME}`}
   description={post.data.description}
+  ogpImage={ogImage}
 >
   <PostPage post={post} sameTags={sameTags}>
     <Content components={components} />

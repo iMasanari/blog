@@ -25,6 +25,9 @@ export default defineConfig({
         include: /\.(astro|ts)$/,
       }),
     ],
+    optimizeDeps: {
+      exclude: ['@resvg/resvg-js'],
+    },
   },
   compressHTML: true,
 })
