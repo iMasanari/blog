@@ -17,12 +17,12 @@ const { post, link } = Astro.props
 
 <div class={mergeStyle(styles.postCard, link && styles.postCardLink)}>
   <div class={styles.dateContainer}>
-    <Icon name="ph:calendar-blank" class={styles.postDateIcon} />
+    <Icon name="ic:baseline-calendar-month" class={styles.postDateIcon} />
     <FormattedDate date={post.date} />
     {
       post.update && (
         <>
-          <Icon name="ic:outline-update" class={styles.updateDateIcon} />
+          <Icon name="ic:baseline-update" class={styles.updateDateIcon} />
           <FormattedDate date={post.update} />
         </>
       )

@@ -16,14 +16,15 @@ export const headerHidden = css`
 
 export const headerContent = css`
   display: flex;
-  padding: 1rem 1.5rem;
+  flex-wrap: wrap;
+  padding: 1rem 0.5rem;
   margin: 0 auto;
   align-items: center;
   max-width: 64rem;
 `
 
 export const siteTitle = css`
-  margin-right: auto;
+  margin-left: 1rem;
 `
 
 export const title = css`
@@ -43,8 +44,15 @@ export const siteDescription = css`
   color: rgb(55 65 81);
 `
 
+export const nav = css`
+  display: flex;
+  margin: 0.25rem 0 0.25rem auto;
+`
+
 export const navItem = css`
-  padding: 0.25rem 1rem /* 4px 16px */;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
   margin-left: 0.5rem /* 8px */;
   border-radius: 0.25rem /* 4px */;
   background-color: rgb(226 232 240);
@@ -59,5 +67,16 @@ export const navItem = css`
       0 0 0 #fff,
       inset 2px 2px 4px #bebebe,
       inset -2px -2px 4px #fff;
+  }
+`
+
+export const menuIcon = css`
+  margin-right: 0.25rem;
+  width: 1.5rem /* 24px */;
+  height: 1.5rem /* 24px */;
+
+  & svg {
+    width: 100%;
+    height: 100%;
   }
 `
