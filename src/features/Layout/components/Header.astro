@@ -1,4 +1,7 @@
 ---
+import qiitaSvg from '#src/assets/svg/qiita.svg?raw'
+import zennSvg from '#src/assets/svg/zenn.svg?raw'
+import githubSvg from '#src/assets/svg/github.svg?raw'
 import { SITE_NAME } from '#src/constants'
 import * as styles from './Header.styles'
 
@@ -15,30 +18,35 @@ const Title = pathname === '/' ? 'h1' : 'div'
       </Title>
       <p class={styles.siteDescription}>技術ブログ改め、Qiitaの下書き</p>
     </div>
-    <a
-      href="https://qiita.com/iMasanari"
-      target="_blank"
-      rel="noopener"
-      class={styles.navItem}
-    >
-      Qiita
-    </a>
-    <a
-      href="https://zenn.dev/imasanari?tab=scraps"
-      target="_blank"
-      rel="noopener"
-      class={styles.navItem}
-    >
-      Zenn
-    </a>
-    <a
-      href="https://github.com/iMasanari"
-      target="_blank"
-      rel="noopener"
-      class={styles.navItem}
-    >
-      GitHub
-    </a>
+    <nav class={styles.nav}>
+      <a
+        href="https://qiita.com/iMasanari"
+        target="_blank"
+        rel="noopener"
+        class={styles.navItem}
+      >
+        <span class={styles.menuIcon} set:html={qiitaSvg} />
+        Qiita
+      </a>
+      <a
+        href="https://zenn.dev/imasanari?tab=scraps"
+        target="_blank"
+        rel="noopener"
+        class={styles.navItem}
+      >
+        <span class={styles.menuIcon} set:html={zennSvg} />
+        Zenn
+      </a>
+      <a
+        href="https://github.com/iMasanari"
+        target="_blank"
+        rel="noopener"
+        class={styles.navItem}
+      >
+        <span class={styles.menuIcon} set:html={githubSvg} />
+        GitHub
+      </a>
+    </nav>
   </div>
 </header>
 
