@@ -5,9 +5,10 @@ import * as styles from './Link.styles'
 
 interface Props extends HTMLAttributes<'a'> {}
 
-const { class: className, ...props } = Astro.props
+const props = {
+  ...Astro.props,
+  class: mergeStyle(styles.link, Astro.props.class),
+}
 ---
 
-<a class={mergeStyle(styles.link, className)} {...props}>
-  <slot />
-</a>
+<a {...props}><slot /></a>
