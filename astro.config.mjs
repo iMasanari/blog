@@ -11,6 +11,12 @@ export default defineConfig({
   site: 'https://blog.imasanari.dev',
   integrations: [
     mdx({
+      remarkRehype: {
+        footnoteLabelTagName: 'hr',
+        footnoteLabel: ' ',
+        footnoteBackLabel: () => /** @type {any}*/(null),
+        footnoteLabelProperties: {},
+      },
       remarkPlugins: [remarkCodeWrapper],
       shikiConfig: {
         theme: 'github-light',
@@ -21,8 +27,8 @@ export default defineConfig({
   vite: {
     plugins: [
       molcss({
-        content: 'src/**/*.{astro,ts}',
-        include: /\.(astro|ts)$/,
+        content: 'src/**/*.ts',
+        include: /\.ts$/,
       }),
     ],
     optimizeDeps: {
