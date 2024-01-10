@@ -12,23 +12,24 @@
     "test:tsc": "tsc -p . --noEmit"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.0.1",
-    "@astrojs/sitemap": "^3.0.3",
+    "@astrojs/mdx": "^2.0.3",
+    "@astrojs/sitemap": "^3.0.4",
     "@resvg/resvg-js": "^2.6.0",
-    "astro": "^4.0.6",
+    "astro": "^4.0.8",
     "astro-icon": "^0.8.2",
     "budoux": "^0.6.1",
-    "molcss": "^0.0.6",
+    "molcss": "^0.1.0",
     "opentype.js": "^1.3.4",
     "satori": "^0.10.11",
     "unist-util-visit-parents": "^6.0.1"
   },
   "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
     "@types/opentype.js": "^1.3.8",
     "autoprefixer": "^10.4.16",
     "textlint": "^13.4.1",
     "textlint-rule-preset-japanese": "^9.0.0",
-    "textlint-rule-preset-jtf-style": "^2.3.13",
+    "textlint-rule-preset-jtf-style": "^2.3.14",
     "typescript": "^5.3.3"
   }
 }
