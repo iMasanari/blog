@@ -10,7 +10,7 @@ const { pathname } = Astro.url
 const Title = pathname === '/' ? 'h1' : 'div'
 ---
 
-<header class={`js-header ${styles.header}`}>
+<header class={styles.header} data-header>
   <div class={styles.headerContent}>
     <div class={styles.siteTitle}>
       <Title class={styles.title}>
@@ -51,9 +51,7 @@ const Title = pathname === '/' ? 'h1' : 'div'
 </header>
 
 <script>
-  import * as styles from './Header.styles'
-
-  const header = document.querySelector('.js-header')!
+  const header = document.querySelector<HTMLElement>('[data-header]')!
   const headerHeight = 64 // header.getBoundingClientRect().height
 
   let prevScrollPos = 0
@@ -67,9 +65,9 @@ const Title = pathname === '/' ? 'h1' : 'div'
 
     if (visible !== prevVisible) {
       if (visible) {
-        header.classList.remove(styles.headerHidden)
+        header.dataset.header = ''
       } else {
-        header.classList.add(styles.headerHidden)
+        header.dataset.header = 'hidden'
       }
 
       prevVisible = visible

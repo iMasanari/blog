@@ -8,10 +8,10 @@ export const header = css`
   background-color: rgb(226 232 240 / 0.3);
   backdrop-filter: blur(8px);
   transition: transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
-`
 
-export const headerHidden = css`
-  transform: translateY(-100%);
+  &[data-header=hidden] {
+    transform: translateY(-100%);
+  }
 `
 
 export const headerContent = css`
