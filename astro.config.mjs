@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import { babel } from '@rollup/plugin-babel'
 import { defineConfig } from 'astro/config'
+import icon from 'astro-icon'
 import { remarkCodeWrapper } from './scripts/remark-plugin'
 
 const require = createRequire(import.meta.url)
@@ -26,12 +27,15 @@ export default defineConfig({
         theme: 'github-light',
       },
     }),
+    icon({
+      iconDir: 'src/assets/svg',
+    }),
     sitemap(),
   ],
   vite: {
     plugins: [
       babel({
-        extensions: ['.js', '.jsx', '.ts', 'tsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.astro'],
         babelHelpers: 'bundled',
         plugins: [
           ['molcss/babel-plugin', {

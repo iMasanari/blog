@@ -8,10 +8,10 @@ export const header = css`
   background-color: rgb(226 232 240 / 0.3);
   backdrop-filter: blur(8px);
   transition: transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
-`
 
-export const headerHidden = css`
-  transform: translateY(-100%);
+  &[data-header=hidden] {
+    transform: translateY(-100%);
+  }
 `
 
 export const headerContent = css`
@@ -74,9 +74,4 @@ export const menuIcon = css`
   margin-right: 0.25rem;
   width: 1.5rem /* 24px */;
   height: 1.5rem /* 24px */;
-
-  & svg {
-    width: 100%;
-    height: 100%;
-  }
 `

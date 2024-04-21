@@ -1,7 +1,5 @@
 ---
-import qiitaSvg from '#src/assets/svg/qiita.svg?raw'
-import zennSvg from '#src/assets/svg/zenn.svg?raw'
-import githubSvg from '#src/assets/svg/github.svg?raw'
+import { Icon } from 'astro-icon/components'
 import { SITE_NAME } from '#src/constants'
 import * as styles from './Header.styles'
 
@@ -10,7 +8,7 @@ const { pathname } = Astro.url
 const Title = pathname === '/' ? 'h1' : 'div'
 ---
 
-<header class={`js-header ${styles.header}`}>
+<header class={styles.header} data-header>
   <div class={styles.headerContent}>
     <div class={styles.siteTitle}>
       <Title class={styles.title}>
@@ -25,7 +23,7 @@ const Title = pathname === '/' ? 'h1' : 'div'
         rel="noopener"
         class={styles.navItem}
       >
-        <span class={styles.menuIcon} set:html={qiitaSvg} />
+        <Icon name="qiita" class={styles.menuIcon} />
         Qiita
       </a>
       <a
@@ -34,7 +32,7 @@ const Title = pathname === '/' ? 'h1' : 'div'
         rel="noopener"
         class={styles.navItem}
       >
-        <span class={styles.menuIcon} set:html={zennSvg} />
+        <Icon name="zenn" class={styles.menuIcon} />
         Zenn
       </a>
       <a
@@ -43,7 +41,7 @@ const Title = pathname === '/' ? 'h1' : 'div'
         rel="noopener"
         class={styles.navItem}
       >
-        <span class={styles.menuIcon} set:html={githubSvg} />
+        <Icon name="github" class={styles.menuIcon} />
         GitHub
       </a>
     </nav>
@@ -51,9 +49,7 @@ const Title = pathname === '/' ? 'h1' : 'div'
 </header>
 
 <script>
-  import * as styles from './Header.styles'
-
-  const header = document.querySelector('.js-header')!
+  const header = document.querySelector<HTMLElement>('[data-header]')!
   const headerHeight = 64 // header.getBoundingClientRect().height
 
   let prevScrollPos = 0
@@ -67,9 +63,9 @@ const Title = pathname === '/' ? 'h1' : 'div'
 
     if (visible !== prevVisible) {
       if (visible) {
-        header.classList.remove(styles.headerHidden)
+        header.dataset.header = ''
       } else {
-        header.classList.add(styles.headerHidden)
+        header.dataset.header = 'hidden'
       }
 
       prevVisible = visible

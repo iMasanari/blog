@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import { css, mergeStyle } from 'molcss'
+import { createProps } from './Span.logic'
+
+type Props = HTMLAttributes<'span'>
+
+const props = createProps(Astro.props)
+---
+
+<span {...props}><slot /></span>
