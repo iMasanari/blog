@@ -74,9 +74,4 @@ export const menuIcon = css`
   margin-right: 0.25rem;
   width: 1.5rem /* 24px */;
   height: 1.5rem /* 24px */;
-
-  & svg {
-    width: 100%;
-    height: 100%;
-  }
 `

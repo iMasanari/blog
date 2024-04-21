@@ -1,7 +1,5 @@
 ---
-import qiitaSvg from '#src/assets/svg/qiita.svg?raw'
-import zennSvg from '#src/assets/svg/zenn.svg?raw'
-import githubSvg from '#src/assets/svg/github.svg?raw'
+import { Icon } from 'astro-icon/components'
 import { SITE_NAME } from '#src/constants'
 import * as styles from './Header.styles'
 
@@ -25,7 +23,7 @@ const Title = pathname === '/' ? 'h1' : 'div'
         rel="noopener"
         class={styles.navItem}
       >
-        <span class={styles.menuIcon} set:html={qiitaSvg} />
+        <Icon name="qiita" class={styles.menuIcon} />
         Qiita
       </a>
       <a
@@ -34,7 +32,7 @@ const Title = pathname === '/' ? 'h1' : 'div'
         rel="noopener"
         class={styles.navItem}
       >
-        <span class={styles.menuIcon} set:html={zennSvg} />
+        <Icon name="zenn" class={styles.menuIcon} />
         Zenn
       </a>
       <a
@@ -43,7 +41,7 @@ const Title = pathname === '/' ? 'h1' : 'div'
         rel="noopener"
         class={styles.navItem}
       >
-        <span class={styles.menuIcon} set:html={githubSvg} />
+        <Icon name="github" class={styles.menuIcon} />
         GitHub
       </a>
     </nav>

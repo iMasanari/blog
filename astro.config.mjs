@@ -27,7 +27,9 @@ export default defineConfig({
         theme: 'github-light',
       },
     }),
-    icon(),
+    icon({
+      iconDir: 'src/assets/svg',
+    }),
     sitemap(),
   ],
   vite: {
