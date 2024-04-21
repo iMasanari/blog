@@ -31,7 +31,7 @@ export default defineConfig({
   vite: {
     plugins: [
       babel({
-        extensions: ['.js', '.jsx', '.ts', 'tsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.astro'],
         babelHelpers: 'bundled',
         plugins: [
           ['molcss/babel-plugin', {

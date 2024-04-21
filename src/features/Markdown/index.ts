@@ -8,6 +8,7 @@ import H4 from './components/H4.astro'
 import Ol from './components/Ol.astro'
 import P from './components/P.astro'
 import Pre from './components/Pre.astro'
+import Span from './components/Span.astro'
 import Ul from './components/Ul.astro'
 
 export const components = {
@@ -21,5 +22,6 @@ export const components = {
   blockquote: Blockquote,
   ul: Ul,
   ol: Ol,
+  span: Span,
   'app-code-wrapper': CodeWrapper,
 }
