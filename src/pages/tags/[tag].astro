@@ -25,6 +25,6 @@ interface Props {
 const { tag, posts } = Astro.props
 ---
 
-<Layout title={`${tag} | ${SITE_NAME}`} description={`「${tag}」のページ。`}>
+<Layout title={`${tag} | ${SITE_NAME}`} description={`「${tag}」のページ。`} noindex>
   <TagsPage tag={tag} posts={posts} />
 </Layout>
