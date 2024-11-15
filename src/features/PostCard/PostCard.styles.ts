@@ -11,7 +11,12 @@ export const postCard = css`
 
 export const postCardLink = css`
   transition: box-shadow cubic-bezier(0.4, 0, 0.2, 1) 150ms;
-  
+
+  box-shadow: 2px 2px 4px #bebebe,
+    -2px -2px 4px #fff,
+    inset 0 0 0 #bebebe,
+    inset 0 0 0 #fff;
+
   &:has(.title:hover) {
     box-shadow: 0 0 0 #bebebe,
       0 0 0 #fff,

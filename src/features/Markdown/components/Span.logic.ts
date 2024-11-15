@@ -11,7 +11,9 @@ const styleClassNameRecord = new Map<`${string}:${string}`, string>([
   ['color:#D73A49', css`color: #d73a49;`],
   ['color:#6A737D', css`color: #6a737d;`],
   ['color:#E36209', css`color: #e36209;`],
-  ['userSelect:none', css`user-select:none;`],
+  ['userSelect:none', css`user-select: none;`],
+  ['fontWeight:bold', css`font-weight: bold;`],
+  ['fontStyle:italic', css`font-style: italic;`],
 ])
 
 export const createProps = (props: HTMLAttributes<'span'>) => {

@@ -3,12 +3,13 @@ export interface Props {
   title: string
   description: string
   ogpImage?: string
+  noindex?: boolean
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
 const defaultOgpImage = '/images/icon.jpg'
-const { title, description, ogpImage = defaultOgpImage } = Astro.props
+const { title, description, ogpImage = defaultOgpImage, noindex } = Astro.props
 ---
 
 <meta charset="utf-8" />
@@ -27,3 +28,4 @@ const { title, description, ogpImage = defaultOgpImage } = Astro.props
   property="twitter:card"
   content={ogpImage == defaultOgpImage ? 'summary' : 'summary_large_image'}
 />
+{noindex && <meta name="robots" content="noindex">}
